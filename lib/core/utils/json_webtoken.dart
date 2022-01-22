@@ -1,6 +1,7 @@
 
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
-import 'package:pandorora_app/core/constants/keys.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class JwtManager {
   final dynamic _data;
@@ -11,7 +12,7 @@ class JwtManager {
 
   String signJwt() {
     int _expiredTime = 500;
-    String _secretKey = Keys.secretKey; // dotenv.env['JWT_SECRET_KEY'] as String;
+    String _secretKey =dotenv.env['JWT_SECRET_KEY'] as String;
     String token = _jwt.sign(SecretKey(_secretKey),
         expiresIn: Duration(seconds: _expiredTime));
         

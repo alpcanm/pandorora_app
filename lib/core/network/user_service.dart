@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:pandorora_app/core/constants/service_consts.dart';
-import 'package:pandorora_app/core/models/user_model.dart';
+
+import '../constants/service_consts.dart';
+import '../models/user_model.dart';
 
 class UserService {
   final Dio _dio = Dio();

@@ -61,11 +61,11 @@ class AppRouter extends _i7.RootStackRouter {
 
   @override
   List<_i7.RouteConfig> get routes => [
-        _i7.RouteConfig(SplashRoute.name, path: '/'),
+        _i7.RouteConfig(SplashRoute.name, path: ''),
         _i7.RouteConfig(LoginRoute.name, path: '/'),
-        _i7.RouteConfig(HomeRoute.name, path: '/', guards: [authGuard]),
+        _i7.RouteConfig(HomeRoute.name, path: '', guards: [authGuard]),
         _i7.RouteConfig(ProfileRoute.name,
-            path: '/profile-page', guards: [authGuard]),
+            path: 'profile-page', guards: [authGuard]),
         _i7.RouteConfig(NotLoginRoute.name, path: '/not-login-page'),
         _i7.RouteConfig(RegisterRoute.name, path: '/register-page')
       ];
@@ -74,7 +74,7 @@ class AppRouter extends _i7.RootStackRouter {
 /// generated route for
 /// [_i1.SplashPage]
 class SplashRoute extends _i7.PageRouteInfo<void> {
-  const SplashRoute() : super(SplashRoute.name, path: '/');
+  const SplashRoute() : super(SplashRoute.name, path: '');
 
   static const String name = 'SplashRoute';
 }
@@ -90,7 +90,7 @@ class LoginRoute extends _i7.PageRouteInfo<void> {
 /// generated route for
 /// [_i3.HomePage]
 class HomeRoute extends _i7.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '/');
+  const HomeRoute() : super(HomeRoute.name, path: '');
 
   static const String name = 'HomeRoute';
 }
@@ -98,7 +98,7 @@ class HomeRoute extends _i7.PageRouteInfo<void> {
 /// generated route for
 /// [_i4.ProfilePage]
 class ProfileRoute extends _i7.PageRouteInfo<void> {
-  const ProfileRoute() : super(ProfileRoute.name, path: '/profile-page');
+  const ProfileRoute() : super(ProfileRoute.name, path: 'profile-page');
 
   static const String name = 'ProfileRoute';
 }

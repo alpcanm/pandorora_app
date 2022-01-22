@@ -28,14 +28,15 @@ dependencies:
   #tools
   dart_jsonwebtoken: ^2.4.0  
   equatable: ^2.0.3
-
+  flutter_dotenv: ^5.0.2
+  formz: ^0.4.1  
   #state management
   flutter_bloc: ^8.0.1
 
   #firebase_auth_rest
   firebase_auth_rest:
     path: modules/firebase_auth_rest
-    
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
@@ -51,5 +52,7 @@ dev_dependencies:
 
 flutter:
 
-
+  assets:
+ 
+    - .env
   uses-material-design: true

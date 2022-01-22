@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pandorora_app/core/constants/service_consts.dart';
+import '../constants/service_consts.dart';
 
 class InitService {
   final Dio _dio = Dio();
