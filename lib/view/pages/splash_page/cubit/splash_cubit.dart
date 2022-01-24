@@ -13,9 +13,15 @@ class SplashCubit extends Cubit<SplashState> {
 
   Future<void> initalFunction() async {
     await Hive.initFlutter();
+
     setupGetIt();
     List<Future> futures = [dotenv.load(fileName: ".env"), getIt.allReady()];
     await Future.wait(futures);
     emit(SplashCompleted());
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }

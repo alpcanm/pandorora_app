@@ -10,7 +10,9 @@ part 'loginpage_state.dart';
 class LoginpageCubit extends Cubit<LoginpageState> {
   final AuthRepository _authRepository = getIt<AuthRepository>();
   final _globalRepository = getIt<GlobalRepository>();
-  LoginpageCubit() : super(LoginpageInitial());
+  LoginpageCubit() : super(LoginpageInitial()){
+    print('Login cubit açıldı');
+  }
   final mailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -35,6 +37,7 @@ class LoginpageCubit extends Cubit<LoginpageState> {
   Future<void> close() {
     mailController.dispose();
     passwordController.dispose();
+    print('login cubit kapandı');
     return super.close();
   }
 }

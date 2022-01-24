@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import '../../feature/repositories/auth_repository.dart';
 import '../../feature/repositories/global_repository.dart';
 

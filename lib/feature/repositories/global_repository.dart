@@ -1,4 +1,5 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
+import 'package:pandorora_app/core/models/user_model.dart';
 
 import '../../core/constants/keys.dart';
 import '../../core/network/init_service.dart';
@@ -9,7 +10,7 @@ class GlobalRepository {
   String? _firebaseApiKey;
   String? get firebaseApiKey => _firebaseApiKey;
   String? errorMessage;
-
+  User? user;
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();
   }

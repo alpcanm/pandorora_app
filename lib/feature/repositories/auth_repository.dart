@@ -32,13 +32,6 @@ class AuthRepository implements IAuthRepository {
 
   AuthStatus get authGuardStatus => _authStatus;
 
-  final _statusController = StreamController<AuthStatus>()
-    ..sink.add(AuthStatus.unknown);
-
-  Stream<AuthStatus> get authStatus async* {
-    yield* _statusController.stream;
-  }
-
   @override
   Future<User?> tryGetCurrentUser() async {
     String? _token;
@@ -81,6 +74,7 @@ class AuthRepository implements IAuthRepository {
         await _globalRepo.tokenCache.addToBox(_token);
 
         _statusLogger(AuthStatus.progressAuthenticated);
+
         return true;
       } else {
         return false;
@@ -112,15 +106,17 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  cancelStream() async {}
+
   @override
   Future<bool> signOut() async {
-    await _globalRepo.tokenCache.clearBox();
     _statusLogger(AuthStatus.unauthenticated);
+    await _globalRepo.tokenCache.clearBox();
     return true;
   }
 
   void _statusLogger(AuthStatus value) {
-    _statusController.add(value);
+    _authStatus = value;
     _authStatus = value;
   }
 }

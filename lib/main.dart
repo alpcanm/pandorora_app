@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'core/navigation/auth_guard.dart';
 import 'core/navigation/navigation_manager.gr.dart';
 
-main() async {
+main() {
   runApp(PandororaApp());
 }
 

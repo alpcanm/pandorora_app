@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pandorora_app/feature/global_view_models/auth/auth_bloc.dart';
 import 'package:pandorora_app/view/widgets/_print_message.dart';
 
 import '../../../../core/constants/navigation_consts.dart';
@@ -24,24 +25,28 @@ class LoginForm extends StatelessWidget {
           PrintMessage.showFailed(context, state.errorMessage);
         }
       },
-      child: Form(
-        key: _loginpageCubit.formKey,
-        child: Center(
-          child: Column(
-            children: [
-              _Head(),
-              CustomTextFormField(
-                controller: _loginpageCubit.mailController,
-              ),
-              CustomTextFormField(
-                controller: _loginpageCubit.passwordController,
-              ),
-              _SignInButton(
-                loginpageCubit: _loginpageCubit,
-              ),
-              _SignUpButton()
-            ],
-          ),
+      child: form(_loginpageCubit),
+    );
+  }
+
+  Form form(LoginpageCubit _loginpageCubit) {
+    return Form(
+      key: _loginpageCubit.formKey,
+      child: Center(
+        child: Column(
+          children: [
+            _Head(),
+            CustomTextFormField(
+              controller: _loginpageCubit.mailController,
+            ),
+            CustomTextFormField(
+              controller: _loginpageCubit.passwordController,
+            ),
+            _SignInButton(
+              loginpageCubit: _loginpageCubit,
+            ),
+            _SignUpButton()
+          ],
         ),
       ),
     );
@@ -86,10 +91,11 @@ class _SignInButton extends StatelessWidget {
               onPressed: state
                       is LoginpageCompleted // Giriş başarılıysa buton pasife düşecek.
                   ? null
-                  : () =>
-                      loginpageCubit.formKey.currentState!.validate() == true
-                          ? loginpageCubit.signIn()
-                          : null,
+                  : () => loginpageCubit.formKey.currentState!.validate() ==
+                          true
+                      ? loginpageCubit.signIn().then((value) =>
+                          context.read<AuthBloc>().add(AuthTryGetCurrentUser()))
+                      : null,
               child: Text(ViewText.SIGN_IN));
         }
       },
