@@ -7,6 +7,15 @@ abstract class LoginpageState extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginpageDefault extends LoginpageState {}
+class LoginpageInitial extends LoginpageState {}
 
 class LoginpageLoading extends LoginpageState {}
+
+class LoginpageCompleted extends LoginpageState {}
+
+class LoginpageError extends LoginpageState {
+  final String? errorMessage;
+  const LoginpageError({
+    this.errorMessage,
+  });
+}

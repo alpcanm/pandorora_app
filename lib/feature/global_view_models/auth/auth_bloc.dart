@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
+import '../../../core/utils/locator_get_it.dart';
 import '../../../core/models/user_model.dart';
 import '../../repositories/auth_repository.dart';
 
@@ -33,5 +33,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (_user != null) {
       emit(AuthAuthenticated(_user));
     }
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }

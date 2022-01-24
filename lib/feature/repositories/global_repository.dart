@@ -8,6 +8,7 @@ class GlobalRepository {
   final InitService _initService = InitService();
   String? _firebaseApiKey;
   String? get firebaseApiKey => _firebaseApiKey;
+  String? errorMessage;
 
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();

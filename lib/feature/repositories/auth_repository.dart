@@ -26,12 +26,15 @@ abstract class IAuthRepository {
 }
 
 class AuthRepository implements IAuthRepository {
-  final _initRepository = getIt<GlobalRepository>();
+  final _globalRepo = getIt<GlobalRepository>();
   final _userDBService = UserService();
   AuthStatus _authStatus = AuthStatus.unknown;
+
   AuthStatus get authGuardStatus => _authStatus;
+
   final _statusController = StreamController<AuthStatus>()
     ..sink.add(AuthStatus.unknown);
+
   Stream<AuthStatus> get authStatus async* {
     yield* _statusController.stream;
   }
@@ -40,8 +43,8 @@ class AuthRepository implements IAuthRepository {
   Future<User?> tryGetCurrentUser() async {
     String? _token;
 
-    if (_initRepository.tokenCache.isNotEmpty(Keys.token) == true) {
-      _token = _initRepository.tokenCache.getValues(Keys.token)?.first;
+    if (_globalRepo.tokenCache.isNotEmpty(Keys.token) == true) {
+      _token = _globalRepo.tokenCache.getValues(Keys.token)?.first;
     }
 
     if (_token != null) {
@@ -52,13 +55,13 @@ class AuthRepository implements IAuthRepository {
 
           return _result;
         } else {
-          await _initRepository.tokenCache.clearBox();
+          await _globalRepo.tokenCache.clearBox();
           _statusLogger(AuthStatus.unauthenticated);
 
           return null;
         }
       } catch (e) {
-        await _initRepository.tokenCache.clearBox();
+        await _globalRepo.tokenCache.clearBox();
       }
     } else {
       _statusLogger(AuthStatus.unauthenticated);
@@ -68,17 +71,22 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<bool> signIn({required String mail, required String password}) async {
-    String? _localId = await _initRepository.authService
-        .signInAndGetUid(mail: mail, password: password);
-    if (_localId != null) {
-      String _token = JwtManager({'uid': _localId}).signJwt();
+    try {
+      String? _localId = await _globalRepo.authService
+          .signInAndGetUid(mail: mail, password: password);
+      if (_localId != null) {
+        String _token = JwtManager({'uid': _localId}).signJwt();
 
-      await _initRepository.tokenCache.clearBox();
-      await _initRepository.tokenCache.addToBox(_token);
+        await _globalRepo.tokenCache.clearBox();
+        await _globalRepo.tokenCache.addToBox(_token);
 
-      _statusLogger(AuthStatus.progressAuthenticated);
-      return true;
-    } else {
+        _statusLogger(AuthStatus.progressAuthenticated);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      _globalRepo.errorMessage = e.toString();
       return false;
     }
   }
@@ -89,7 +97,7 @@ class AuthRepository implements IAuthRepository {
       required String surname,
       required String mail,
       required String password}) async {
-    String? _loacalId = await _initRepository.authService
+    String? _loacalId = await _globalRepo.authService
         .signUpAndGetUid(mail: mail, password: password);
     if (_loacalId != null) {
       bool _dbSignUp = await _userDBService.signUp(
@@ -106,7 +114,7 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<bool> signOut() async {
-    await _initRepository.tokenCache.clearBox();
+    await _globalRepo.tokenCache.clearBox();
     _statusLogger(AuthStatus.unauthenticated);
     return true;
   }
