@@ -44,7 +44,7 @@ class UserService {
         return false;
       }
     } catch (e) {
-      return false;
+      rethrow;
     }
   }
 }

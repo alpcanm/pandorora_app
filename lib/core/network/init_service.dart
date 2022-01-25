@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 import '../constants/service_consts.dart';
 
 class InitService {

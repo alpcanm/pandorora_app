@@ -29,7 +29,8 @@ class AuthRepository implements IAuthRepository {
   final _globalRepo = getIt<GlobalRepository>();
   final _userDBService = UserService();
   AuthStatus _authStatus = AuthStatus.unknown;
-
+  String? _errorMessage;
+  String? get errorMessage => _errorMessage;
   AuthStatus get authGuardStatus => _authStatus;
 
   @override
@@ -80,7 +81,7 @@ class AuthRepository implements IAuthRepository {
         return false;
       }
     } catch (e) {
-      _globalRepo.errorMessage = e.toString();
+      _errorMessage = e.toString();
       return false;
     }
   }
@@ -91,17 +92,22 @@ class AuthRepository implements IAuthRepository {
       required String surname,
       required String mail,
       required String password}) async {
-    String? _loacalId = await _globalRepo.authService
-        .signUpAndGetUid(mail: mail, password: password);
-    if (_loacalId != null) {
-      bool _dbSignUp = await _userDBService.signUp(
-          uid: _loacalId, name: name, surname: surname, mail: mail);
-      if (_dbSignUp) {
-        return true;
+    try {
+      String? _loacalId = await _globalRepo.authService
+          .signUpAndGetUid(mail: mail, password: password);
+      if (_loacalId != null) {
+        bool _dbSignUp = await _userDBService.signUp(
+            uid: _loacalId, name: name, surname: surname, mail: mail);
+        if (_dbSignUp) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
-    } else {
+    } catch (e) {
+      _errorMessage = e.toString();
       return false;
     }
   }

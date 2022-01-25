@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubit/registerpage_cubit.dart';
+import 'register_form.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -8,14 +11,16 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // final TextEditingController _nameController = TextEditingController();
-  // final TextEditingController _surnameController = TextEditingController();
-  // final TextEditingController _mailController = TextEditingController();
-  // final TextEditingController _phoneNumberController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
-  // final TextEditingController _rePasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Register Page"),
+      ),
+      body: BlocProvider(
+        create: (context) => RegisterpageCubit(),
+        child: const RegisterForm(),
+      ),
+    );
   }
 }

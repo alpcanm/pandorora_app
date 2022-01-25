@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pandorora_app/core/navigation/navigation_manager.gr.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
+import '../../widgets/components/custom_app_bar.dart';
 
-import 'package:pandorora_app/feature/repositories/auth_repository.dart';
-import 'package:pandorora_app/feature/repositories/global_repository.dart';
-import 'package:auto_route/auto_route.dart';
+import '../../../core/utils/locator_get_it.dart';
+
+import '../../../feature/repositories/global_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,17 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                getIt<AuthRepository>().signOut().then(
-                    (value) => context.router.replaceAll([const AuthControllerRoute()]));
-              },
-              icon: Icon(Icons.exit_to_app))
-        ],
-      ),
+      appBar: CustomAppBar(context),
       body: Text(getIt<GlobalRepository>().user?.uid ?? "boş"),
     );
   }

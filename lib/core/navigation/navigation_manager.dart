@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pandorora_app/view/pages/home_page/home_page.dart';
-import 'package:pandorora_app/view/pages/splash_page/splash_body.dart';
-import 'package:pandorora_app/view/pages/splash_page/splash_page.dart';
+import '../../view/pages/home_page/home_page.dart';
+import '../../view/pages/splash_page/splash_body.dart';
+import '../../view/pages/splash_page/splash_page.dart';
 import '../constants/navigation_consts.dart';
 import 'auth_guard.dart';
 import '../../view/pages/authentication_pages/login_page/login_page.dart';

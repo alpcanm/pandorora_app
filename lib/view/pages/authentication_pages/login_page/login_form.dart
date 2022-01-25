@@ -1,20 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pandorora_app/feature/global_view_models/auth/auth_bloc.dart';
-import 'package:pandorora_app/view/widgets/_print_message.dart';
+import 'package:pandorora_app/view/widgets/widget_consts.dart';
+import '../../../widgets/_/_cutom_text_form_field.dart';
+import '../../../widgets/_/_print_message.dart';
+import '../../../../feature/global_view_models/auth/auth_bloc.dart';
 
 import '../../../../core/constants/navigation_consts.dart';
 
 import '../../../constants/view_texts.dart';
-import '../../../widgets/_cutom_text_form_field.dart';
+
 import 'cubit/loginpage_cubit.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({
+  LoginForm({
     Key? key,
   }) : super(key: key);
 
+  final _transparentDivider = WC.tpDivider;
   @override
   Widget build(BuildContext context) {
     final _loginpageCubit = context.read<LoginpageCubit>();
@@ -32,21 +35,27 @@ class LoginForm extends StatelessWidget {
   Form form(LoginpageCubit _loginpageCubit) {
     return Form(
       key: _loginpageCubit.formKey,
-      child: Center(
-        child: Column(
-          children: [
-            _Head(),
-            CustomTextFormField(
-              controller: _loginpageCubit.mailController,
-            ),
-            CustomTextFormField(
-              controller: _loginpageCubit.passwordController,
-            ),
-            _SignInButton(
-              loginpageCubit: _loginpageCubit,
-            ),
-            _SignUpButton()
-          ],
+      child: WC.paddingAll(
+        child: Center(
+          child: Column(
+            children: [
+              _Head(),
+              _transparentDivider,
+              CustomTextFormField(
+                controller: _loginpageCubit.mailController,
+              ),
+              _transparentDivider,
+              CustomTextFormField(
+                controller: _loginpageCubit.passwordController,
+              ),
+              _transparentDivider,
+              _SignInButton(
+                loginpageCubit: _loginpageCubit,
+              ),
+              _transparentDivider,
+              _SignUpButton()
+            ],
+          ),
         ),
       ),
     );
@@ -64,7 +73,7 @@ class _Head extends StatelessWidget {
           size: 72,
         ),
         Text(
-          ViewText.LOGIN_TITLE,
+          LoginPageText.LOGIN_TITLE,
           style: Theme.of(context).textTheme.headline4,
         )
       ],
@@ -96,7 +105,7 @@ class _SignInButton extends StatelessWidget {
                       ? loginpageCubit.signIn().then((value) =>
                           context.read<AuthBloc>().add(AuthTryGetCurrentUser()))
                       : null,
-              child: Text(ViewText.SIGN_IN));
+              child: const Text(LoginPageText.SIGN_IN));
         }
       },
     );
@@ -109,6 +118,6 @@ class _SignUpButton extends StatelessWidget {
     return ElevatedButton(
         onPressed: () =>
             context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
-        child: Text(ViewText.SIGN_UP));
+        child: const Text(LoginPageText.SIGN_UP));
   }
 }
