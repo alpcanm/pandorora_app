@@ -15,7 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register Page"),
+        title: const Text("Register Page"),
       ),
       body: BlocProvider(
         create: (context) => RegisterpageCubit(),

@@ -10,19 +10,17 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository _authRepository = getIt<AuthRepository>();
   AuthBloc() : super(const AuthUnknown()) {
     on<AuthTryGetCurrentUser>(_tryGetCurrentUser);
-
     add(AuthTryGetCurrentUser());
   }
 
   Future<void> _tryGetCurrentUser(
       AuthTryGetCurrentUser event, Emitter<AuthState> emit) async {
-    User? _user = await _authRepository.tryGetCurrentUser();
-    if (_user != null) {
-      getIt<GlobalRepository>().user = _user;
-      emit(AuthAuthenticated(_user));
+    final _repo = getIt<GlobalRepository>();
+    await _repo.tryGetCurrentUser();
+    if (_repo.user != null) {
+      emit(AuthAuthenticated(_repo.user!));
     } else {
       emit(const AuthUnauthenticated());
     }

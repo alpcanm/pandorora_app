@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+
 import '../../../../../core/utils/locator_get_it.dart';
 import '../../../../../feature/repositories/auth_repository.dart';
 
@@ -31,15 +32,7 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
     }
   }
 
-  String? passValidator(String? value) {
-    if (value != null && value.isEmpty) {
-      return 'Empty field';
-    } else if (value != null && value.length < 6) {
-      return 'Must be greated than 6';
-    } else {
-      return null;
-    }
-  }
+
 
   String? confirmPasswordValidator(String? value) {
     if (value != null && value.isEmpty) {
@@ -51,25 +44,5 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
     }
   }
 
-  String? phoneValidator(String? value) {
-    if (value == null || value.isEmpty || value.length != 10) {
-      return 'Must not be empty. Must be 10 digits';
-    }
-    return null;
-  }
 
-  String? mailValidator(String? value) {
-    if (value != null || value!.isNotEmpty) {
-      bool _check = RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(value);
-      if (_check) {
-        return null;
-      } else {
-        return "It's not an email";
-      }
-    } else {
-      return null;
-    }
-  }
 }

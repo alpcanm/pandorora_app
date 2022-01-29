@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => context.router.replace(const ProfileRoute()),
+          onPressed: () => context.router.replace(const EmptyRouterRoute()),
           icon: const Icon(
             Icons.person,
           ),

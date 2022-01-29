@@ -1,10 +1,12 @@
 import 'package:country_phone_picker/country_phone_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/view/widgets/_/_custom_text_form_field.dart';
 import 'package:pandorora_app/view/widgets/_/_print_message.dart';
+import 'package:pandorora_app/view/widgets/_/_validators.dart';
+
 import '../../../constants/view_texts.dart';
 import 'cubit/registerpage_cubit.dart';
 
-import '../../../widgets/_/_cutom_text_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../widgets/widget_consts.dart';
 
@@ -44,7 +46,7 @@ class _RegisterFormState extends State<RegisterForm> {
               _transparentDivider,
               CustomTextFormField(
                   labelText: RegisterPageText.MAIL,
-                  customValidator: _registerpageCubit.mailValidator,
+                  customValidator: Validators.mailValidator,
                   controller: _registerpageCubit.mailController),
               _transparentDivider,
               _PhoneCode(
@@ -54,7 +56,7 @@ class _RegisterFormState extends State<RegisterForm> {
               _transparentDivider,
               CustomTextFormField(
                   labelText: RegisterPageText.PASSWORD,
-                  customValidator: _registerpageCubit.passValidator,
+                  customValidator: Validators.passwordValidator,
                   obscureText: true,
                   controller: _registerpageCubit.passwordController),
               _transparentDivider,
@@ -86,7 +88,7 @@ class _PhoneCode extends StatelessWidget {
         const VerticalDivider(),
         CustomTextFormField(
             labelText: RegisterPageText.PHONE,
-            customValidator: registerpageCubit.phoneValidator,
+            customValidator: Validators.phoneValidator,
             controller: registerpageCubit.phoneController)
       ],
     );

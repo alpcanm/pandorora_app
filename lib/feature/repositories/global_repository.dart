@@ -1,4 +1,6 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
+import 'package:pandorora_app/core/utils/locator_get_it.dart';
+import 'package:pandorora_app/feature/repositories/auth_repository.dart';
 
 import '../../core/constants/keys.dart';
 import '../../core/models/user_model.dart';
@@ -10,7 +12,9 @@ class GlobalRepository {
   String? _firebaseApiKey;
   String? get firebaseApiKey => _firebaseApiKey;
 
-  User? user;
+  User? _user;
+  User? get user => _user;
+
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();
   }
@@ -24,5 +28,9 @@ class GlobalRepository {
   late AuthService authService;
   void authServiceInit() {
     authService = AuthService(firebaseApiKey!);
+  }
+
+  Future<void> tryGetCurrentUser() async {
+    _user = await getIt<AuthRepository>().tryGetCurrentUser();
   }
 }

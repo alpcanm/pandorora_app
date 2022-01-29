@@ -17,6 +17,8 @@ enum AuthStatus {
 abstract class IAuthRepository {
   Future<User?> tryGetCurrentUser();
   Future<bool> signOut();
+  Future<bool> update(
+      {String? name, String? surname, String? mail, String? drawNickName});
   Future<bool> signIn({required String mail, required String password});
   Future<bool> signUp(
       {required String name,
@@ -124,5 +126,16 @@ class AuthRepository implements IAuthRepository {
   void _statusLogger(AuthStatus value) {
     _authStatus = value;
     _authStatus = value;
+  }
+
+  @override
+  Future<bool> update(
+      {String? name,
+      String? surname,
+      String? mail,
+      String? drawNickName}) async {
+    await Future.delayed(Duration(seconds: 2));
+    print("update fonksiyon tetiklendi");
+    return true;
   }
 }

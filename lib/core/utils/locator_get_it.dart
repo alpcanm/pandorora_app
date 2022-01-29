@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import '../../view/pages/profile_page/bloc/profilepage_bloc.dart';
 
 import '../../feature/repositories/auth_repository.dart';
 import '../../feature/repositories/global_repository.dart';
@@ -14,4 +15,5 @@ void setupGetIt() async {
     return _result;
   });
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
+  getIt.registerLazySingleton<ProfilepageBloc>(() => ProfilepageBloc());
 }
