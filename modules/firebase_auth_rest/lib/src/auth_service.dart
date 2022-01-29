@@ -32,6 +32,45 @@ class AuthService {
     }
   }
 
+  Future<String?> signInAndGetIdToken(
+      {required String mail, required String password}) async {
+    try {
+      Map _data = {
+        "email": mail,
+        "password": password,
+        "returnSecureToken": true
+      };
+      Response _response = await _dio.post(_restURI.signInUri, data: _data);
+      if (_response.statusCode == 200) {
+        return _response.data['idToken'];
+      } else {
+        return null;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> changePassword(
+      {required String idToken, required String newPassword}) async {
+    try {
+      Map _data = {
+        "idToken": idToken,
+        "password": newPassword,
+        "returnSecureToken": true
+      };
+      Response _response =
+          await _dio.post(_restURI.changePassword, data: _data);
+      if (_response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<String?> signUpAndGetUid(
       {required String mail, required String password}) async {
     try {

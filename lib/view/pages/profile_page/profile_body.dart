@@ -22,9 +22,9 @@ class _ProfileBodyState extends State<ProfileBody> {
     super.dispose();
   }
 
+  final _button = ProfilePageButton();
   @override
   Widget build(BuildContext context) {
-    final _button = ProfilePageButton();
     return ListView(
       children: [
         const ProfileExpansionTile(),

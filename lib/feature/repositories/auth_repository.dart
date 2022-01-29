@@ -7,24 +7,12 @@ import '../../core/utils/json_webtoken.dart';
 import '../../core/utils/locator_get_it.dart';
 import 'global_repository.dart';
 
-enum AuthStatus {
-  unknown,
-  authenticated,
-  progressAuthenticated,
-  unauthenticated
-}
+enum AuthStatus { unknown, authenticated, unauthenticated }
 
 abstract class IAuthRepository {
   Future<User?> tryGetCurrentUser();
   Future<bool> signOut();
-  Future<bool> update(
-      {String? name, String? surname, String? mail, String? drawNickName});
   Future<bool> signIn({required String mail, required String password});
-  Future<bool> signUp(
-      {required String name,
-      required String surname,
-      required String mail,
-      required String password});
 }
 
 class AuthRepository implements IAuthRepository {
@@ -72,12 +60,8 @@ class AuthRepository implements IAuthRepository {
           .signInAndGetUid(mail: mail, password: password);
       if (_localId != null) {
         String _token = JwtManager({'uid': _localId}).signJwt();
-
         await _globalRepo.tokenCache.clearBox();
         await _globalRepo.tokenCache.addToBox(_token);
-
-        _statusLogger(AuthStatus.progressAuthenticated);
-
         return true;
       } else {
         return false;
@@ -89,34 +73,6 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<bool> signUp(
-      {required String name,
-      required String surname,
-      required String mail,
-      required String password}) async {
-    try {
-      String? _loacalId = await _globalRepo.authService
-          .signUpAndGetUid(mail: mail, password: password);
-      if (_loacalId != null) {
-        bool _dbSignUp = await _userDBService.signUp(
-            uid: _loacalId, name: name, surname: surname, mail: mail);
-        if (_dbSignUp) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    } catch (e) {
-      _errorMessage = e.toString();
-      return false;
-    }
-  }
-
-  cancelStream() async {}
-
-  @override
   Future<bool> signOut() async {
     _statusLogger(AuthStatus.unauthenticated);
     await _globalRepo.tokenCache.clearBox();
@@ -126,16 +82,5 @@ class AuthRepository implements IAuthRepository {
   void _statusLogger(AuthStatus value) {
     _authStatus = value;
     _authStatus = value;
-  }
-
-  @override
-  Future<bool> update(
-      {String? name,
-      String? surname,
-      String? mail,
-      String? drawNickName}) async {
-    await Future.delayed(Duration(seconds: 2));
-    print("update fonksiyon tetiklendi");
-    return true;
   }
 }

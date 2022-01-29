@@ -3,9 +3,10 @@ class FirebaseURI {
   final String _firebaseApiKey;
   late String signInUri;
   late String signUpUri;
-
+  late String changePassword;
   FirebaseURI(this._firebaseApiKey) {
     signInUri = '/accounts:signInWithPassword?key=$_firebaseApiKey';
     signUpUri = '/accounts:signUp?key=$_firebaseApiKey';
+    changePassword = '/accounts:update?key=$_firebaseApiKey';
   }
 }

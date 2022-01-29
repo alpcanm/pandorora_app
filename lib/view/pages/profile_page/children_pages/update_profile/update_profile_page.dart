@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pandorora_app/view/widgets/_/_custom_text_form_field.dart';
-import '../../../../widgets/widget_consts.dart';
+import '../../../../widgets/_/_widget_consts.dart';
 
 import 'cubit/updateprofile_cubit.dart';
 

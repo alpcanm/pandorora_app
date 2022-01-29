@@ -5,7 +5,7 @@ import 'package:pandorora_app/view/widgets/_/_custom_text_form_field.dart';
 import 'package:pandorora_app/view/widgets/_/_print_message.dart';
 import 'package:pandorora_app/view/widgets/_/_validators.dart';
 
-import '../../../widgets/widget_consts.dart';
+import '../../../widgets/_/_widget_consts.dart';
 import '../../../../feature/global_view_models/auth/auth_bloc.dart';
 
 import '../../../../core/constants/navigation_consts.dart';
@@ -15,7 +15,7 @@ import '../../../constants/view_texts.dart';
 import 'cubit/loginpage_cubit.dart';
 
 class LoginForm extends StatelessWidget {
-  LoginForm({
+  const LoginForm({
     Key? key,
   }) : super(key: key);
 

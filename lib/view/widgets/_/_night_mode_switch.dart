@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widget_consts.dart';
+import '_widget_consts.dart';
 
 class NightModeSwitch extends StatefulWidget {
   const NightModeSwitch({Key? key}) : super(key: key);

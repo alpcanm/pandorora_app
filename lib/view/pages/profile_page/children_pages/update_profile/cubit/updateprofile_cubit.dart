@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/feature/repositories/user_operations_repository.dart';
 import '../../../../../../core/models/user_model.dart';
 import '../../../../../../core/utils/locator_get_it.dart';
-import '../../../../../../feature/repositories/auth_repository.dart';
 import '../../../../../../feature/repositories/global_repository.dart';
 import '../../../bloc/profilepage_bloc.dart';
 
@@ -11,7 +11,7 @@ part 'updateprofile_state.dart';
 
 class UpdateprofileCubit extends Cubit<UpdateprofileState> {
   static final User _user = getIt<GlobalRepository>().user!;
-  final _authRepository = getIt<AuthRepository>();
+  final _userOperationRepo = getIt<UserOperationsRepository>();
   final _profilePageBloc = getIt<ProfilepageBloc>();
   UpdateprofileCubit() : super(UpdateprofileInitial());
 
@@ -48,7 +48,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
   update() async {
     if (formKey.currentState!.validate() && _checkField) {
       emit(UpdateprofileLoading());
-      bool _result = await _authRepository.update(
+      bool _result = await _userOperationRepo.update(
           drawNickName: drawNickController.text.trim(),
           mail: mailController.text.trim(),
           name: nameController.text.trim(),
@@ -57,7 +57,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
         _profilePageBloc.add(ProfilepageGetUpdatedUser());
         emit(UpdateprofileCompleted());
       } else {
-        emit(UpdateprofileError(errorMessage: _authRepository.errorMessage));
+        emit(UpdateprofileError(errorMessage: _userOperationRepo.errorMessage));
       }
     }
   }

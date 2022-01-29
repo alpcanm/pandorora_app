@@ -8,7 +8,7 @@ import '../../../constants/view_texts.dart';
 import 'cubit/registerpage_cubit.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../widgets/widget_consts.dart';
+import '../../../widgets/_/_widget_consts.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _transparentDivider = WC.tpDivider;
-  final _countryPhonePicker = CountryPhonePicker();
+  final _countryPhonePicker =  CountryPhonePicker();
   @override
   void dispose() {
     _countryPhonePicker.close();
