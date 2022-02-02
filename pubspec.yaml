@@ -29,10 +29,12 @@ dependencies:
   dart_jsonwebtoken: ^2.4.0  
   equatable: ^2.0.3
   flutter_dotenv: ^5.0.2
-  formz: ^0.4.1  
+ 
   #state management
   flutter_bloc: ^8.0.1
 
+  #UI
+  google_fonts: ^2.2.0
 
   #MY_MODULES---------------------
   

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/view/widgets/_/_night_mode_switch.dart';
+import 'package:pandorora_app/view/widgets/components/log_out_button.dart';
 import '../../../core/constants/navigation_consts.dart';
 import '../../../core/utils/locator_get_it.dart';
 import '_components/_text_button.dart';
@@ -48,20 +48,14 @@ class _ProfileBodyState extends State<ProfileBody> {
             onPressed: () => context.router.navigateNamed(
                 RouteConsts.PROFILE_PAGE +
                     "/" +
-                    RouteConsts.CHANGE_PHONE_NUMBER_PAGE)),
-        _button.iconButton(
-            text: 'Payment method',
-            icon: Icons.payment,
-            onPressed: () => context.router.navigateNamed(
-                RouteConsts.PROFILE_PAGE +
-                    "/" +
-                    RouteConsts.PAYMENT_METHOD_PAGE)),
+                    RouteConsts.VERIFY_PHONE_PAGE)),
         _button.iconButton(
             text: 'Contact us',
             icon: Icons.chat,
             onPressed: () => context.router.navigateNamed(
                 RouteConsts.PROFILE_PAGE + "/" + RouteConsts.CONTACT_US_PAGE)),
-        const NightModeSwitch()
+   
+        LogOutButton()
       ],
     );
   }

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/view/pages/home_page/home_body.dart';
 import '../../widgets/components/custom_app_bar.dart';
-
-import '../../../core/utils/locator_get_it.dart';
-
-import '../../../feature/repositories/global_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(context),
-      body: Text(getIt<GlobalRepository>().user?.uid ?? "boş"),
+      body:const HomeBody(),
     );
   }
 }

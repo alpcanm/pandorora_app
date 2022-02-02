@@ -40,6 +40,8 @@ class LoginForm extends StatelessWidget {
       child: WC.paddingAll(
         child: Center(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
               _Head(),
               _transparentDivider,
@@ -57,6 +59,7 @@ class LoginForm extends StatelessWidget {
               _SignInButton(
                 loginpageCubit: _loginpageCubit,
               ),
+              _transparentDivider,
               _SignUpButton()
             ],
           ),
@@ -73,12 +76,10 @@ class _Head extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const FlutterLogo(
-          size: 72,
-        ),
+        const FlutterLogo(size: 72),
         Text(
           LoginPageText.LOGIN_TITLE,
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headline1,
         )
       ],
     );

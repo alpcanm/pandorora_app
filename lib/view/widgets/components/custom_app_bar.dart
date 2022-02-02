@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/navigation/navigation_manager.gr.dart';
-import '../../../core/utils/locator_get_it.dart';
-import '../../../feature/repositories/auth_repository.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar(
@@ -20,25 +18,24 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: IconButton(
         icon: const Icon(Icons.home),
         onPressed: () {
-          context.router.replace(const HomeRoute());
+          context.router.replace(const HomeMainRoute());
         },
       ),
       actions: [
         IconButton(
-          onPressed: () => context.router.replace(const EmptyRouterRoute()),
+          onPressed: () => context.router.replace(const ConsoleRoute()),
+          icon: const Icon(
+            Icons.now_widgets,
+          ),
+          splashRadius: 18,
+        ),
+        IconButton(
+          onPressed: () => context.router.replace(const ProfileMainRoute()),
           icon: const Icon(
             Icons.person,
           ),
           splashRadius: 18,
         ),
-        IconButton(
-          onPressed: () => getIt<AuthRepository>().signOut().then((value) =>
-              context.router.replaceAll([const AuthControllerRoute()])),
-          icon: const Icon(
-            Icons.exit_to_app,
-          ),
-          splashRadius: 18,
-        )
       ],
     );
   }

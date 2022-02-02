@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ChangePhoneNumberPage extends StatelessWidget {
-  const ChangePhoneNumberPage({Key? key}) : super(key: key);
+class PhoneVerifyPage extends StatelessWidget {
+  const PhoneVerifyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

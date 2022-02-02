@@ -11,7 +11,7 @@ class JwtManager {
   }
 
   String signJwt() {
-    int _expiredTime = 500;
+    int _expiredTime = 1500;
     String _secretKey =dotenv.env['JWT_SECRET_KEY'] as String;
     String token = _jwt.sign(SecretKey(_secretKey),
         expiresIn: Duration(seconds: _expiredTime));
