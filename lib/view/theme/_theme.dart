@@ -5,7 +5,6 @@ class ToDoTheme {
   static TextTheme lightTextTheme = TextTheme(
     bodyText2: GoogleFonts.openSans(
       fontSize: 14.0,
-      fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
     bodyText1: GoogleFonts.openSans(
@@ -33,12 +32,6 @@ class ToDoTheme {
     ),
     subtitle1: GoogleFonts.openSans(
       fontSize: 20.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black,
-    ),
-    subtitle2: GoogleFonts.openSans(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
   );

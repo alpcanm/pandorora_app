@@ -23,6 +23,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
+          onPressed: () => context.router.replace(const SearchRoute()),
+          icon: const Icon(
+            Icons.search,
+          ),
+          splashRadius: 18,
+        ),
+        IconButton(
           onPressed: () => context.router.replace(const ConsoleRoute()),
           icon: const Icon(
             Icons.now_widgets,

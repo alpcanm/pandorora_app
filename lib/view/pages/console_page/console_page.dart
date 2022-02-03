@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/view/widgets/components/custom_app_bar.dart';
+import 'console_body.dart';
+import '../../widgets/components/custom_app_bar.dart';
 
 class ConsolePage extends StatelessWidget {
   const ConsolePage({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class ConsolePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(context),
+      body: const ConsoleBody(),
     );
   }
 }

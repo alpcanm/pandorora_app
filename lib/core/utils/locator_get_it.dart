@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:pandorora_app/feature/repositories/user_operations_repository.dart';
+import 'package:pandorora_app/feature/repositories/product_repository.dart';
+import '../../feature/repositories/user_operations_repository.dart';
 import '../../view/pages/profile_page/bloc/profilepage_bloc.dart';
 
 import '../../feature/repositories/auth_repository.dart';
@@ -16,6 +17,7 @@ void setupGetIt() async {
     return _result;
   });
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
+  getIt.registerLazySingleton<ProductRepository>(() => ProductRepository());
   getIt.registerLazySingleton<ProfilepageBloc>(() => ProfilepageBloc());
   getIt.registerLazySingleton<UserOperationsRepository>(
       () => UserOperationsRepository());

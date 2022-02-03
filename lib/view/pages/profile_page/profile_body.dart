@@ -1,12 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/view/widgets/components/log_out_button.dart';
+
 import '../../../core/constants/navigation_consts.dart';
 import '../../../core/utils/locator_get_it.dart';
-import '_components/_text_button.dart';
-import 'package:auto_route/auto_route.dart';
-import 'bloc/profilepage_bloc.dart';
-
+import '../../widgets/components/log_out_button.dart';
 import '_components/_expansion_tile.dart';
+import '_components/_text_button.dart';
+import 'bloc/profilepage_bloc.dart';
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({Key? key}) : super(key: key);

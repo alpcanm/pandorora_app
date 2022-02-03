@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
-import 'package:pandorora_app/feature/repositories/global_repository.dart';
-import 'package:pandorora_app/feature/repositories/user_operations_repository.dart';
+import '../../../../../../core/utils/locator_get_it.dart';
+import '../../../../../../feature/repositories/global_repository.dart';
+import '../../../../../../feature/repositories/user_operations_repository.dart';
 
 part 'changepassword_event.dart';
 part 'changepassword_state.dart';

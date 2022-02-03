@@ -1,6 +1,6 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
-import 'package:pandorora_app/feature/repositories/auth_repository.dart';
+import '../../core/utils/locator_get_it.dart';
+import 'auth_repository.dart';
 
 import '../../core/constants/keys.dart';
 import '../../core/models/user_model.dart';

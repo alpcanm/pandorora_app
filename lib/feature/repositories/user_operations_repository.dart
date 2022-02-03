@@ -1,5 +1,5 @@
-import 'package:pandorora_app/core/network/user_service.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
+import '../../core/network/user_service.dart';
+import '../../core/utils/locator_get_it.dart';
 
 import 'global_repository.dart';
 

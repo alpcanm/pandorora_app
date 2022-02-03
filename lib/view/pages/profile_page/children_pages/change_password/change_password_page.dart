@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pandorora_app/view/pages/profile_page/children_pages/change_password/bloc/changepassword_bloc.dart';
-import 'package:pandorora_app/view/widgets/_/_custom_text_form_field.dart';
-import 'package:pandorora_app/view/widgets/_/_print_message.dart';
-import 'package:pandorora_app/view/widgets/_/_validators.dart';
-import 'package:pandorora_app/view/widgets/_/_widget_consts.dart';
+import 'bloc/changepassword_bloc.dart';
+import '../../../../widgets/_/_custom_text_form_field.dart';
+import '../../../../widgets/_/_print_message.dart';
+import '../../../../widgets/_/_validators.dart';
+import '../../../../widgets/_/_widget_consts.dart';
 
 class ChangePasswordPage extends StatelessWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);

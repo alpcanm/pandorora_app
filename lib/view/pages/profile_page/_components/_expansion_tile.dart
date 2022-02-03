@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/utils/locator_get_it.dart';
 import '../bloc/profilepage_bloc.dart';
 

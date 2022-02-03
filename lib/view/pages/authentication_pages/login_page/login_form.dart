@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pandorora_app/view/widgets/_/_custom_text_form_field.dart';
-import 'package:pandorora_app/view/widgets/_/_print_message.dart';
-import 'package:pandorora_app/view/widgets/_/_validators.dart';
+import '../../../widgets/_/_custom_text_form_field.dart';
+import '../../../widgets/_/_print_message.dart';
+import '../../../widgets/_/_validators.dart';
 
 import '../../../widgets/_/_widget_consts.dart';
 import '../../../../feature/global_view_models/auth/auth_bloc.dart';
