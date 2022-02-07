@@ -3,7 +3,6 @@ import 'package:pandorora_app/view/pages/home_page/child_page/product_page.dart'
 import '../../view/pages/console_page/console_page.dart';
 
 import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart';
-import '../../view/pages/search_page/search_page.dart';
 
 import '../../view/pages/profile_page/children_pages/change_password/change_password_page.dart';
 
@@ -52,8 +51,6 @@ import '../../view/pages/profile_page/profile_page.dart';
     ),
     AutoRoute(
         page: ConsolePage, path: RouteConsts.CONSOLE_PAGE, guards: [AuthGuard]),
-    AutoRoute(
-        page: SearchPage, path: RouteConsts.SEARCH_PAGE, guards: [AuthGuard]),
     AutoRoute(
         page: AuthController,
         path: RouteConsts.CONTROLLER_PAGE,

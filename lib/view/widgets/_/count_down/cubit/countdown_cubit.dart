@@ -13,15 +13,15 @@ class CountdownCubit extends Cubit<CountdownState> {
   }
 
   setTime() {
-    final _result = _timeBetween(drawDateTime);
+    final _result = _countDownCalculator(drawDateTime);
     emit(CountdownState(_result.day, _result.hour, _result.minute));
   }
-  
-  DateTime _timeBetween(DateTime futureTime) {
-    final _drawDate = DateTime(futureTime.year, futureTime.month,
-        futureTime.day, futureTime.hour, futureTime.minute);
+
+  DateTime _countDownCalculator(DateTime value) {
+    final _futureDate = DateTime(value.year, value.month,
+        value.day, value.hour, value.minute);
     final _now = DateTime.now();
-    final _minutes = (_drawDate.difference(_now).inMinutes).round();
+    final _minutes = _futureDate.difference(_now).inMinutes;
     final _hours = _minutes / 60;
     final _calculatedDday = (_hours / 24).floor();
     final _calculatedHour = (_hours - _calculatedDday * 24).floor();

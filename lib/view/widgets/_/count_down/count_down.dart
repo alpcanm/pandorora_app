@@ -3,9 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit/countdown_cubit.dart';
 
+class CountDownArea extends StatelessWidget {
+  const CountDownArea({
+    Key? key,
+    required this.dateTime,
+  }) : super(key: key);
+  final DateTime dateTime;
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (ctx) => CountdownCubit(dateTime),
+      child: const _CountDown(),
+    );
+  }
+}
 
-class CountDown extends StatelessWidget {
-  const CountDown({Key? key}) : super(key: key);
+class _CountDown extends StatelessWidget {
+  const _CountDown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

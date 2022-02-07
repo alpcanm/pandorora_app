@@ -108,12 +108,9 @@ class ProductCard extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                                flex: 15,
-                                child: BlocProvider(
-                                  create: (context) =>
-                                      CountdownCubit(_product.drawDate!),
-                                  child: const CountDown(),
-                                ))
+                              flex: 15,
+                              child:  CountDownArea(dateTime: _product.drawDate!,),
+                            )
                           ],
                         ),
                       ),
