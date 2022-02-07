@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/view/pages/home_page/components/product_card.dart';
+import 'package:pandorora_app/core/models/product.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({Key? key}) : super(key: key);
-
+  const ProductPage(Product product, {Key? key})
+      : _product = product,
+        super(key: key);
+  final Product _product;
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.width;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //backgroundColor:  Colors.grey, Eğer katılmışsa gri renk olacak
-        onPressed: () {},
-        child: Text(
+        backgroundColor: _product.isApplied == false ? Colors.grey : null,
+        onPressed: _product.isApplied == true ? () {} : null,
+        child: const Text(
           'Katıl',
           style: TextStyle(color: Colors.yellow),
         ),
@@ -25,7 +28,7 @@ class ProductPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Çamaşır Deterjanı',
+              _product.title ?? "",
               style: Theme.of(context).textTheme.headline3,
             ),
           ),
@@ -33,19 +36,19 @@ class ProductPage extends StatelessWidget {
               width: _height,
               child: Stack(
                 children: [
-                  Image.network(imageURL),
+                  Image.network(_product.photoURL ?? ""),
                   Text(
-                    'Copy ref Id',
+                    'Ref: ${_product.productId}',
                     style: Theme.of(context).textTheme.bodyText1,
                   ),
                 ],
               )),
-          Divider(),
+          const Divider(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 'İzle',
                 style: TextStyle(color: Colors.purple),
               ),

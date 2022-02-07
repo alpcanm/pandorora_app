@@ -99,7 +99,7 @@ class _SignInButton extends StatelessWidget {
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         if (state is LoginpageLoading) {
-          return const CircularProgressIndicator();
+          return const Center(child:  CircularProgressIndicator());
         } else {
           return ElevatedButton(
               onPressed: state

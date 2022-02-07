@@ -2,17 +2,19 @@ class Product {
   String? productId;
   String? title;
   String? comment;
-  DateTime? date;
+  DateTime? drawDate;
   String? photoURL;
-  bool? isCompleted;
-  int? differentApply;
-
-  Product(
-      {this.productId,
-      this.title,
-      this.comment,
-      this.date,
-      this.photoURL,
-      this.isCompleted,
-      this.differentApply});
+  bool? isExpired;
+  bool? isApplied;
+  String? tag;
+  Product({
+    this.productId,
+    this.title,
+    this.comment,
+    this.drawDate,
+    this.photoURL,
+    this.isExpired,
+    this.isApplied,
+    this.tag,
+  });
 }

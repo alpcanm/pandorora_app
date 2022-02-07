@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../home_page/components/product_card.dart';
-
 class ConsoleCard extends StatelessWidget {
   const ConsoleCard({Key? key}) : super(key: key);
 
@@ -10,7 +8,7 @@ class ConsoleCard extends StatelessWidget {
     return Card(
       elevation: 5,
       child: ListTile(
-        leading: Image.network(imageURL),
+        leading: Image.network("imageURL"),
         title: const Text('Çamaşır Deterjanı'),
         subtitle: const Text('15.03.2022 - 15:25'),
         trailing: IconButton(

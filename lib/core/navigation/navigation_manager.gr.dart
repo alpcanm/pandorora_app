@@ -19,8 +19,8 @@ import '../../view/pages/authentication_pages/not_login_page.dart' as _i7;
 import '../../view/pages/authentication_pages/register_page/register_page.dart'
     as _i8;
 import '../../view/pages/console_page/console_page.dart' as _i3;
-import '../../view/pages/home_page/home_page.dart' as _i14;
 import '../../view/pages/home_page/child_page/product_page.dart' as _i15;
+import '../../view/pages/home_page/home_page.dart' as _i14;
 import '../../view/pages/profile_page/children_pages/change_password/change_password_page.dart'
     as _i12;
 import '../../view/pages/profile_page/children_pages/contact_us/contact_us_page.dart'
@@ -33,6 +33,7 @@ import '../../view/pages/profile_page/profile_page.dart' as _i9;
 import '../../view/pages/search_page/search_page.dart' as _i4;
 import '../../view/pages/splash_page/splash_body.dart' as _i5;
 import '../../view/pages/splash_page/splash_page.dart' as _i1;
+import '../models/product.dart' as _i18;
 import 'auth_guard.dart' as _i17;
 
 class AppRouter extends _i2.RootStackRouter {
@@ -106,8 +107,10 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData, child: const _i14.HomePage());
     },
     ProductRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i15.ProductPage());
+          routeData: routeData,
+          child: _i15.ProductPage(args.product, key: args.key));
     }
   };
 
@@ -276,8 +279,24 @@ class HomeRoute extends _i2.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.ProductPage]
-class ProductRoute extends _i2.PageRouteInfo<void> {
-  const ProductRoute() : super(ProductRoute.name, path: 'product-page');
+class ProductRoute extends _i2.PageRouteInfo<ProductRouteArgs> {
+  ProductRoute({required _i18.Product product, _i16.Key? key})
+      : super(ProductRoute.name,
+            path: 'product-page',
+            args: ProductRouteArgs(product: product, key: key));
 
   static const String name = 'ProductRoute';
+}
+
+class ProductRouteArgs {
+  const ProductRouteArgs({required this.product, this.key});
+
+  final _i18.Product product;
+
+  final _i16.Key? key;
+
+  @override
+  String toString() {
+    return 'ProductRouteArgs{product: $product, key: $key}';
+  }
 }
