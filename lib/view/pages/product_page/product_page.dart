@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pandorora_app/core/models/product.dart';
 
+import '../../widgets/components/applied_checker.dart';
+
 class ProductPage extends StatelessWidget {
   const ProductPage(Product product, {Key? key})
       : _product = product,
@@ -9,11 +11,11 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.width;
-
+    bool _isApplied = Checker.applyCheck(_product.productId ?? "");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _product.isApplied == false ? Colors.grey : null,
-        onPressed: _product.isApplied == true ? () {} : null,
+        backgroundColor: _isApplied == true ? Colors.grey : null,
+        onPressed: _isApplied ? null : () {},
         child: const Text(
           'Katıl',
           style: TextStyle(color: Colors.yellow),

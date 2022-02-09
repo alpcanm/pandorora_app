@@ -1,10 +1,12 @@
 part of 'product_bloc.dart';
 
-abstract class ProductEvent extends Equatable {
-  const ProductEvent();
+abstract class HomeEvent extends Equatable {
+  const HomeEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class ProductFetched extends ProductEvent {}
+class HomeFetched extends HomeEvent {}
+
+class HomeSearched extends HomeEvent {}

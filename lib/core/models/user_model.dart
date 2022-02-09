@@ -11,7 +11,7 @@ class User {
   String? password;
   bool? mailVerified;
   String? drawNickName;
-
+  List<String?>? appliedDraws;
   int? tickets;
 
   User({
@@ -24,8 +24,9 @@ class User {
     this.photoURL,
     this.password,
     this.mailVerified,
-    this.tickets,
     this.drawNickName,
+    this.appliedDraws,
+    this.tickets,
   });
 
   Map<String, dynamic> toMap() {
@@ -41,6 +42,7 @@ class User {
       'mail_verified': mailVerified,
       'tickets': tickets,
       'draw_nick_name': drawNickName,
+      'applied_draws': appliedDraws,
     };
   }
 
@@ -57,11 +59,11 @@ class User {
       mailVerified: map['mailVerified'],
       tickets: map['tickets'],
       drawNickName: map['draw_nick_name'],
+      appliedDraws: map['applied_draws'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
-
 }

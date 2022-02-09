@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pandorora_app/view/pages/home_page/child_page/product_page.dart';
+import 'package:pandorora_app/view/pages/product_page/product_page.dart';
 import '../../view/pages/console_page/console_page.dart';
 
 import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart';
@@ -40,15 +40,11 @@ import '../../view/pages/profile_page/profile_page.dart';
           AutoRoute(page: PhoneVerifyPage, path: RouteConsts.VERIFY_PHONE_PAGE)
         ]),
     AutoRoute(
-      page: EmptyRouterPage,
-      path: RouteConsts.HOME_PAGE,
-      name: RouteConsts.HOME_MAIN_ROUTE,
-      guards: [AuthGuard],
-      children: [
-        AutoRoute(page: HomePage, path: ''),
-        AutoRoute(page: ProductPage, path: RouteConsts.PRODUCT_PAGE),
-      ],
-    ),
+        page: HomePage,
+        name: RouteConsts.HOME_MAIN_ROUTE,
+        path: RouteConsts.HOME_PAGE,
+        guards: [AuthGuard]),
+    AutoRoute(page: ProductPage, path: RouteConsts.PRODUCT_PAGE),
     AutoRoute(
         page: ConsolePage, path: RouteConsts.CONSOLE_PAGE, guards: [AuthGuard]),
     AutoRoute(

@@ -9,7 +9,7 @@ class ConsolePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(context),
-      body: const ConsoleBody(),
+      body:  ConsoleBody(),
     );
   }
 }

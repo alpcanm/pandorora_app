@@ -92,7 +92,7 @@ class _CountDownCard extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(0.0)),
       ),
-      margin: const EdgeInsets.all(1),
+      margin: const EdgeInsets.all(3),
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Column(

@@ -5,8 +5,8 @@ class Product {
   DateTime? drawDate;
   String? photoURL;
   bool? isExpired;
-  bool? isApplied;
   String? tag;
+  String? drawURL;
   Product({
     this.productId,
     this.title,
@@ -14,7 +14,7 @@ class Product {
     this.drawDate,
     this.photoURL,
     this.isExpired,
-    this.isApplied,
     this.tag,
+    this.drawURL,
   });
 }

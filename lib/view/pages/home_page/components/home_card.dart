@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pandorora_app/core/models/product.dart';
+import 'package:pandorora_app/core/utils/locator_get_it.dart';
+import 'package:pandorora_app/feature/repositories/global_repository.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
-import 'package:pandorora_app/view/widgets/_/count_down/cubit/countdown_cubit.dart';
+import 'package:pandorora_app/view/widgets/components/applied_checker.dart';
 
 import '../../../../core/navigation/navigation_manager.gr.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key, required Product product})
+class HomeCard extends StatelessWidget {
+  const HomeCard({Key? key, required Product product})
       : _product = product,
         super(key: key);
 
@@ -35,6 +36,7 @@ class ProductCard extends StatelessWidget {
   }
 
   Expanded header(BuildContext context) {
+    bool _isApplied = Checker.applyCheck(_product.productId ?? "");
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -50,7 +52,7 @@ class ProductCard extends StatelessWidget {
                   .copyWith(fontSize: 14, color: Colors.yellow),
             ),
             Text(
-              _product.isApplied! ? "Katıldın" : "",
+              _isApplied ? "Katıldın" : "",
               style: Theme.of(context)
                   .textTheme
                   .headline4!
@@ -109,7 +111,9 @@ class ProductCard extends StatelessWidget {
                             ),
                             Expanded(
                               flex: 15,
-                              child:  CountDownArea(dateTime: _product.drawDate!,),
+                              child: CountDownArea(
+                                dateTime: _product.drawDate!,
+                              ),
                             )
                           ],
                         ),

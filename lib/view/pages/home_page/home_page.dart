@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(context),
       body: BlocProvider(
-        create: (context) => ProductBloc(),
+        create: (context) => HomeBloc(),
         child: const HomeBody(),
       ),
     );

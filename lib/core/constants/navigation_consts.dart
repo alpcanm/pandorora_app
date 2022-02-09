@@ -13,7 +13,7 @@ class RouteConsts {
   static const String CONTROLLER_PAGE = '/controller-page';
 
   static const String HOME_MAIN_ROUTE = 'HomeMainRoute';
-  static const String PRODUCT_PAGE = 'product-page';
+  static const String PRODUCT_PAGE = '/product-page';
 
   static const String PROFILE_MAIN_ROUTE = 'ProfileMainRoute';
   static const String UPDATE_PROFILE_PAGE = 'update-profile-page';
