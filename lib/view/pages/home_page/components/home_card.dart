@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pandorora_app/core/models/product.dart';
-import 'package:pandorora_app/core/utils/locator_get_it.dart';
-import 'package:pandorora_app/feature/repositories/global_repository.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
 import 'package:pandorora_app/view/widgets/components/applied_checker.dart';
 

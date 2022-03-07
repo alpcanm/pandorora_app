@@ -47,10 +47,9 @@ class AuthRepository implements IAuthRepository {
       } catch (e) {
         await _globalRepo.tokenCache.clearBox();
       }
-    } else {
-      _statusLogger(AuthStatus.unauthenticated);
-      return null;
     }
+    _statusLogger(AuthStatus.unauthenticated);
+    return null;
   }
 
   @override

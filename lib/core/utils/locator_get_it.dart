@@ -14,6 +14,7 @@ void setupGetIt() async {
     await _result.tokenInit();
     await _result.getFirebaseApiKey();
     _result.authServiceInit();
+
     return _result;
   });
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());

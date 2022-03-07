@@ -41,7 +41,7 @@ class ToDoTheme {
   static ThemeData light() {
     return ThemeData(
         floatingActionButtonTheme:
-            FloatingActionButtonThemeData(backgroundColor: _primary),
+            const FloatingActionButtonThemeData(backgroundColor: _primary),
         appBarTheme: const AppBarTheme(
           foregroundColor: _secondary,
           backgroundColor: _primary,

@@ -5,7 +5,7 @@ class User {
   String? name;
   String? surname;
   String? mail;
-  DateTime? createdAt;
+
   String? phoneNumber;
   String? photoURL;
   String? password;
@@ -19,7 +19,6 @@ class User {
     this.name,
     this.surname,
     this.mail,
-    this.createdAt,
     this.phoneNumber,
     this.photoURL,
     this.password,
@@ -35,7 +34,6 @@ class User {
       'name': name,
       'surname': surname,
       'mail': mail,
-      'created_at': createdAt.toString(),
       'phone_number': phoneNumber,
       'photo_url': photoURL,
       'password': password,
@@ -52,7 +50,6 @@ class User {
       name: map['name'],
       surname: map['surname'],
       mail: map['mail'],
-      createdAt: DateTime.tryParse(map['created_at']),
       phoneNumber: map['phone_number'],
       photoURL: map['photo_url'],
       password: map['password'],
@@ -66,4 +63,9 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'User(uid: $uid, name: $name, surname: $surname, mail: $mail, phoneNumber: $phoneNumber, photoURL: $photoURL, password: $password, mailVerified: $mailVerified, drawNickName: $drawNickName, appliedDraws: $appliedDraws, tickets: $tickets)';
+  }
 }

@@ -6,11 +6,13 @@ import 'global_repository.dart';
 abstract class IUserOperationsRepository {
   Future<bool> update(
       {String? name, String? surname, String? mail, String? drawNickName});
-  Future<bool> signUp(
-      {required String name,
-      required String surname,
-      required String mail,
-      required String password});
+  Future<bool> signUp({
+    required String name,
+    required String surname,
+    required String mail,
+    required String password,
+    required String phoneNumber,
+  });
   Future<bool> updateMail({
     required String uid,
     required String mail,
@@ -49,13 +51,18 @@ class UserOperationsRepository implements IUserOperationsRepository {
       {required String name,
       required String surname,
       required String mail,
+      required String phoneNumber,
       required String password}) async {
     try {
       String? _loacalId = await _globalRepo.authService
           .signUpAndGetUid(mail: mail, password: password);
       if (_loacalId != null) {
         bool _dbSignUp = await _userDBService.signUp(
-            uid: _loacalId, name: name, surname: surname, mail: mail);
+            uid: _loacalId,
+            name: name,
+            surname: surname,
+            mail: mail,
+            phoneNumber: phoneNumber);
         if (_dbSignUp) {
           return true;
         } else {

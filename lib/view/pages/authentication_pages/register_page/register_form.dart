@@ -19,7 +19,7 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   final _transparentDivider = WC.tpDivider;
-  final _countryPhonePicker =  CountryPhonePicker();
+  final _countryPhonePicker = CountryPhonePicker();
   @override
   void dispose() {
     _countryPhonePicker.close();

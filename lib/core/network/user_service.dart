@@ -10,6 +10,7 @@ abstract class IUserService {
     required String name,
     required String surname,
     required String mail,
+    required String phoneNumber,
   });
   Future<bool> updateMail({
     required String uid,
@@ -48,18 +49,13 @@ class UserService implements IUserService {
     required String name,
     required String surname,
     required String mail,
+    required String phoneNumber
   }) async {
     try {
-      User _data = User(
-          mail: mail,
-          createdAt: DateTime.now(),
-          name: name,
-          surname: surname,
-          uid: uid);
-
+      User _data = User(name: name, surname: surname, mail: mail, uid: uid,phoneNumber:phoneNumber);
       Response _response =
           await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
-      if (_response.statusCode == 200) {
+      if (_response.statusCode == 201) {
         return true;
       } else {
         return false;

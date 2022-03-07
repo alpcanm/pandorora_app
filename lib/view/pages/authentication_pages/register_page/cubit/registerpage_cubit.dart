@@ -24,7 +24,8 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
         name: nameController.text,
         surname: surnameController.text,
         mail: mailController.text,
-        password: passwordController.text);
+        password: passwordController.text,
+        phoneNumber: phoneController.text);
     if (_result) {
       emit(RegisterpageCompleted());
     } else {

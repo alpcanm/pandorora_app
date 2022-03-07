@@ -18,6 +18,7 @@ class SplashCubit extends Cubit<SplashState> {
     setupGetIt();
     List<Future> futures = [dotenv.load(fileName: ".env"), getIt.allReady()];
     await Future.wait(futures);
+   
     emit(SplashCompleted());
   }
 
