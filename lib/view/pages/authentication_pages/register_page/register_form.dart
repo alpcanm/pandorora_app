@@ -105,6 +105,8 @@ class _SubmitButton extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterpageError) {
           PrintMessage.showFailed(context, state.errorMessage);
+        } else if (state is RegisterpageCompleted) {
+          PrintMessage.showSucces(context);
         }
       },
       child: ElevatedButton(

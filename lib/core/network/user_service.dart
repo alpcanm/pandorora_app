@@ -36,7 +36,8 @@ class UserService implements IUserService {
     _dio.options.headers['authorization'] = 'Bearer $token';
     Response _response = await _dio.get(ServerConsts.USERS_PATH);
     if (_response.statusCode == 200) {
-      User _user = User.fromMap(_response.data);
+    
+      User _user = User.fromMap((_response.data as Map)['body']['data'] );
       return _user;
     } else {
       return null;
