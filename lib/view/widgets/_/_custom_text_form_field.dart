@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
     this.icon,
     this.onChanged,
     this.customValidator,
+    this.maxLengt,
   }) : super(key: key);
   final TextEditingController controller;
   final String? labelText;
@@ -17,10 +18,12 @@ class CustomTextFormField extends StatelessWidget {
   final IconData? icon;
   final Function(String? value)? onChanged;
   final String? Function(String? value)? customValidator;
+  final int? maxLengt;
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: TextFormField(
+        maxLength: maxLengt,
         onChanged: onChanged,
         obscureText: obscureText ?? false,
         controller: controller,

@@ -1,4 +1,4 @@
-import 'package:pandorora_app/core/models/product.dart';
+import '../models/product.dart';
 
 class ProductService {
   Future<List<Product>> homeProducts(bool pagination, {Map? filters}) {

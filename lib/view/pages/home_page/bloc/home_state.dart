@@ -1,4 +1,4 @@
-part of 'product_bloc.dart';
+part of 'home_bloc.dart';
 
 enum HomeStatus { initial, loading, success, failure }
 
@@ -33,3 +33,5 @@ class HomeState extends Equatable {
   @override
   List<Object> get props => [status, products, hasReachedMax];
 }
+
+

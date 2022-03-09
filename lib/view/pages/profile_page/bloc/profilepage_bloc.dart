@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/locator_get_it.dart';
 import '../../../../feature/repositories/auth_repository.dart';

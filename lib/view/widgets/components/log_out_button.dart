@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/navigation/navigation_manager.gr.dart';
 import '../../../core/utils/locator_get_it.dart';
 import '../../../feature/repositories/auth_repository.dart';

@@ -10,7 +10,6 @@ main() {
 
 class PandororaApp extends StatelessWidget {
   PandororaApp({Key? key}) : super(key: key);
-
   final _appRouter = AppRouter(authGuard: AuthGuard());
   @override
   Widget build(BuildContext context) {

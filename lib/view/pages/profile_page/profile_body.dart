@@ -54,8 +54,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             icon: Icons.chat,
             onPressed: () => context.router.navigateNamed(
                 RouteConsts.PROFILE_PAGE + "/" + RouteConsts.CONTACT_US_PAGE)),
-   
-        LogOutButton()
+        const LogOutButton()
       ],
     );
   }

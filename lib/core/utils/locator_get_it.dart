@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:pandorora_app/feature/repositories/product_repository.dart';
+import '../../feature/repositories/product_repository.dart';
 import '../../feature/repositories/user_operations_repository.dart';
 import '../../view/pages/profile_page/bloc/profilepage_bloc.dart';
 

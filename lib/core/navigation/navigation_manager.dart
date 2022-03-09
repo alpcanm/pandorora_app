@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pandorora_app/view/pages/product_page/product_page.dart';
+import '../../view/pages/product_page/product_page.dart';
 import '../../view/pages/console_page/console_page.dart';
 
 import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart';

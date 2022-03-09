@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../feature/repositories/user_operations_repository.dart';
+
 import '../../../../../../core/models/user_model.dart';
 import '../../../../../../core/utils/locator_get_it.dart';
 import '../../../../../../feature/repositories/global_repository.dart';
+import '../../../../../../feature/repositories/user_operations_repository.dart';
 import '../../../bloc/profilepage_bloc.dart';
 
 part 'updateprofile_state.dart';

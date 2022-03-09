@@ -1,4 +1,4 @@
-part of 'product_bloc.dart';
+part of 'home_bloc.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -9,4 +9,7 @@ abstract class HomeEvent extends Equatable {
 
 class HomeFetched extends HomeEvent {}
 
-class HomeSearched extends HomeEvent {}
+class HomeSearched extends HomeEvent {
+  final List<String> tags;
+  const HomeSearched(this.tags);
+}

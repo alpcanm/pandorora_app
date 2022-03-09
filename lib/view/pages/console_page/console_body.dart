@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/core/models/product.dart';
-import 'package:pandorora_app/view/pages/home_page/home_body.dart';
+import '../../../core/models/product.dart';
 import 'components/consoler_card.dart';
+
+String imageURL =
+    'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2139&q=80';
 
 class ConsoleBody extends StatelessWidget {
   ConsoleBody({Key? key}) : super(key: key);

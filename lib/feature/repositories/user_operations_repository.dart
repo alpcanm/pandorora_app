@@ -41,7 +41,7 @@ class UserOperationsRepository implements IUserOperationsRepository {
       String? surname,
       String? mail,
       String? drawNickName}) async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     return true;
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/core/models/product.dart';
 
+import '../../../core/models/product.dart';
 import '../../widgets/components/applied_checker.dart';
 
 class ProductPage extends StatelessWidget {

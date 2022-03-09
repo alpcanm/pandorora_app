@@ -33,7 +33,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: Form(
         key: _registerpageCubit.formKey,
         child: WC.paddingAll(
-          child: Column(
+          child: ListView(
             children: [
               _countryPhonePicker.dropdownWidget,
               CustomTextFormField(
@@ -88,6 +88,7 @@ class _PhoneCode extends StatelessWidget {
         const VerticalDivider(),
         CustomTextFormField(
             labelText: RegisterPageText.PHONE,
+            maxLengt: 10,
             customValidator: Validators.phoneValidator,
             controller: registerpageCubit.phoneController)
       ],

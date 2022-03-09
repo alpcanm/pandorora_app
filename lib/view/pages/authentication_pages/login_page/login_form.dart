@@ -39,9 +39,7 @@ class LoginForm extends StatelessWidget {
       key: _loginpageCubit.formKey,
       child: WC.paddingAll(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
+          child: ListView(
             children: [
               _Head(),
               _transparentDivider,
