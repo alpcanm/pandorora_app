@@ -4,7 +4,7 @@ class Product {
   String? productId;
   String? title;
   String? comment;
-  DateTime? drawDate;
+  int? drawDate;
   String? photoURL;
   bool? isExpired;
   String? tag;
@@ -25,7 +25,7 @@ class Product {
       'product_id': productId,
       'title': title,
       'comment': comment,
-      'draw_date': drawDate?.millisecondsSinceEpoch,
+      'draw_date': drawDate,
       'photo_url': photoURL,
       'is_expired': isExpired,
       'tag': tag,
@@ -38,9 +38,7 @@ class Product {
       productId: map['product_id'],
       title: map['title'],
       comment: map['comment'],
-      drawDate: map['draw_date'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['drawDate'])
-          : null,
+      drawDate: map['draw_date'],
       photoURL: map['photo_url'],
       isExpired: map['is_expired'],
       tag: map['tag'],

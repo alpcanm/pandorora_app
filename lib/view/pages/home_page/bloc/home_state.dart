@@ -7,31 +7,32 @@ class HomeState extends Equatable {
     this.status = HomeStatus.initial,
     this.products = const <Product>[],
     this.hasReachedMax = false,
+    this.lastDrawTime = 0,
+    this.isFiltered = false,
   });
 
   final HomeStatus status;
   final List<Product> products;
   final bool hasReachedMax;
-
+  final int lastDrawTime;
+  final bool isFiltered;
   HomeState copyWith({
     HomeStatus? status,
     List<Product>? products,
     bool? hasReachedMax,
+    bool? isFiltered,
+    int? lastDrawTime,
   }) {
     return HomeState(
       status: status ?? this.status,
       products: products ?? this.products,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      lastDrawTime: lastDrawTime ?? this.lastDrawTime,
+      isFiltered: isFiltered ?? this.isFiltered,
     );
   }
 
   @override
-  String toString() {
-    return '''PostState { status: $status, hasReachedMax: $hasReachedMax, posts: ${products.length} }''';
-  }
-
-  @override
-  List<Object> get props => [status, products, hasReachedMax];
+  List<Object> get props =>
+      [status, products, hasReachedMax, lastDrawTime, isFiltered];
 }
-
-

@@ -29,7 +29,8 @@ dependencies:
   dart_jsonwebtoken: ^2.4.1
   equatable: ^2.0.3
   flutter_dotenv: ^5.0.2
-  
+  bloc_concurrency: ^0.2.0
+  stream_transform: ^2.0.0
   #state management
   flutter_bloc: ^8.0.1
 

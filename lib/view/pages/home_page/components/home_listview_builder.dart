@@ -36,6 +36,7 @@ class _MoreButton extends StatelessWidget {
     return TextButton(
         onPressed: () {
           context.read<HomeBloc>().add(HomeFetched());
+          // _bloc.add(HomeFilteredFetched(getIt<TagList>().filters));
         },
         child: const Text('Daha fazla'));
   }

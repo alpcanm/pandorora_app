@@ -9,7 +9,8 @@ abstract class HomeEvent extends Equatable {
 
 class HomeFetched extends HomeEvent {}
 
-class HomeSearched extends HomeEvent {
-  final List<String> tags;
-  const HomeSearched(this.tags);
+class HomeFilteredFetched extends HomeEvent {
+  final List<String> filters;
+
+  const HomeFilteredFetched(this.filters);
 }

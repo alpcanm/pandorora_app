@@ -87,7 +87,7 @@ class _BottomCardStack extends StatelessWidget {
                   Expanded(
                     flex: 15,
                     child: CountDownArea(
-                      dateTime: product.drawDate!,
+                      dateTime: product.drawDate!.toDate,
                     ),
                   )
                 ],

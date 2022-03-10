@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/core/extension/int_extension.dart';
 
 import '../../../../core/models/product.dart';
 import '../../../widgets/_/count_down/count_down.dart';
@@ -22,7 +23,8 @@ class ConsoleCard extends StatelessWidget {
         subtitle: Text(product.comment ?? "",
             maxLines: 1, overflow: TextOverflow.ellipsis),
         trailing: SizedBox(
-            width: 100, child: CountDownArea(dateTime: product.drawDate!)),
+            width: 100,
+            child: CountDownArea(dateTime: product.drawDate!.toDate)),
       ),
     );
   }

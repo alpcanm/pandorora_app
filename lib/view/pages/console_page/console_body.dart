@@ -31,11 +31,7 @@ class ConsoleBody extends StatelessWidget {
         final _product = Product(
           comment:
               "AçıklamaAçıklamaAç   amaamaıklamaAçıkla  maAçıklama  çıklamaAçıklama",
-          drawDate: DateTime(
-            2022,
-            2,
-            28,
-          ),
+          drawDate: 1273618726398,
           isExpired: false,
           photoURL: imageURL,
           productId: "516516546514",
@@ -55,11 +51,7 @@ class ConsoleBody extends StatelessWidget {
       itemBuilder: (context, index) {
         final _product = Product(
           comment: "Açıklama",
-          drawDate: DateTime(
-            2022,
-            2,
-            28,
-          ),
+          drawDate: 182379182637,
           isExpired: false,
           photoURL: imageURL,
           productId: "516516546514",
