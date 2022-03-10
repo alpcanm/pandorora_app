@@ -17,8 +17,8 @@ class _HomeFilters extends StatelessWidget {
           TextButton.icon(
               onPressed: () {
                 context
-                    .read<HomeBloc>()
-                    .add(HomeFilteredFetched(getIt<TagList>().filters));
+                    .read<PaginationBloc>()
+                    .add(PaginationFilteredPatch(getIt<TagList>().filters));
               },
               icon: const Icon(Icons.search),
               label: const Text('Ara'))

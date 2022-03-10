@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pandorora_app/core/models/product.dart';
 import 'package:pandorora_app/core/utils/locator_get_it.dart';
-import 'package:pandorora_app/view/pages/home_page/bloc/home_bloc.dart';
+import 'package:pandorora_app/view/pages/home_page/bloc/pagination_bloc.dart';
 
 import 'components/home_filters/tag_list.dart';
 import 'components/product_card/product_card.dart';
@@ -17,11 +17,11 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<PaginationBloc, PaginationState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
         // print(state);
-        if (state.status == HomeStatus.loading) {
+        if (state.status == PaginationStatus.loading) {
           return const Center(child: CircularProgressIndicator());
         }
         return _HomeListViewBuilder(productList: state.products);

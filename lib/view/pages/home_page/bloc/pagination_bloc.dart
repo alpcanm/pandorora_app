@@ -6,8 +6,8 @@ import '../../../../core/models/product.dart';
 import '../../../../core/utils/locator_get_it.dart';
 import '../../../../feature/repositories/product_repository.dart';
 
-part 'home_event.dart';
-part 'home_state.dart';
+part 'pagination_event.dart';
+part 'pagination_state.dart';
 
 const throttleDuration = Duration(seconds: 1);
 EventTransformer<E> throttleDroppable<E>(Duration duration) {
@@ -16,23 +16,23 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
   };
 }
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const HomeState()) {
-    on<HomeFetched>(
+class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
+  PaginationBloc() : super(const PaginationState()) {
+    on<PaginationAllFetched>(
       _onProductFetched,
-      transformer: throttleDroppable<HomeFetched>(throttleDuration),
+      transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
-    on<HomeFilteredFetched>(
+    on<PaginationFilteredPatch>(
       _onFilteredSearch,
-      transformer: throttleDroppable<HomeFilteredFetched>(throttleDuration),
+      transformer: throttleDroppable<PaginationFilteredPatch>(throttleDuration),
     );
-    add(HomeFetched());
+    add(PaginationAllFetched());
   }
 
   Future<void> _onFilteredSearch(
-      HomeFilteredFetched event, Emitter<HomeState> emit) async {
+      PaginationFilteredPatch event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
-    if (state.status == HomeStatus.initial) {
+    if (state.status == PaginationStatus.initial) {
       final _products = await _fetchProducts(
           DateTime.now().millisecondsSinceEpoch,
           filters: event.filters);
@@ -41,7 +41,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           state.copyWith(
               hasReachedMax: false,
               products: _products,
-              status: HomeStatus.success,
+              status: PaginationStatus.success,
               lastDrawTime: _products.last.drawDate,
               isFiltered: true),
         );
@@ -54,7 +54,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       emit(
         state.copyWith(
-            status: HomeStatus.success,
+            status: PaginationStatus.success,
             hasReachedMax: false,
             products: List.of(state.products)..addAll(_prodcuts),
             lastDrawTime: _prodcuts.last.drawDate,
@@ -64,38 +64,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _onProductFetched(
-      HomeFetched event, Emitter<HomeState> emit) async {
-    print("debug1");
+      PaginationAllFetched event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
-    if (state.status == HomeStatus.initial) {
-      print("debug2");
-
-      final _products =
-          await _fetchProducts(DateTime.now().millisecondsSinceEpoch);
+    if (state.status == PaginationStatus.initial) {
+      final _products = await _fetchProducts(5);
       if (_products!.isNotEmpty) {
-        print("debug5");
-
         return emit(
           state.copyWith(
             hasReachedMax: false,
             products: _products,
-            status: HomeStatus.success,
+            status: PaginationStatus.success,
             lastDrawTime: _products.last.drawDate,
           ),
         );
       }
     }
-    final _prodcuts = await _fetchProducts(state.lastDrawTime);
-    if (_prodcuts!.isEmpty) {
-      print("debug3");
-
+    final List<Product>? _prodcuts = await _fetchProducts(state.lastDrawTime);
+    if (_prodcuts == null || _prodcuts.isEmpty) {
       emit(state.copyWith(hasReachedMax: true));
     } else {
-      print("debug4");
-
       emit(
         state.copyWith(
-            status: HomeStatus.success,
+            status: PaginationStatus.success,
             hasReachedMax: false,
             products: List.of(state.products)..addAll(_prodcuts),
             lastDrawTime: _prodcuts.last.drawDate),
@@ -105,8 +95,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<List<Product>?>? _fetchProducts(int startAtLastDrawTime,
       {List<String>? filters}) async {
-    print("FETCH");
-
     return await getIt<ProductRepository>()
         .getProducts(startAtLastDrawTime, filters: filters);
   }

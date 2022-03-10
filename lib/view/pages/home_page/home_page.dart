@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import '../../widgets/components/custom_app_bar.dart';
-import 'bloc/home_bloc.dart';
+import 'bloc/pagination_bloc.dart';
 import 'home_body.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(context),
       body: BlocProvider(
-        create: (context) => HomeBloc(),
+        create: (context) => PaginationBloc(),
         child: const HomeBody(),
       ),
     );

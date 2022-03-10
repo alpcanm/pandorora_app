@@ -12,9 +12,10 @@ class ProductService {
   }
 
   Future<List?> getAllProducts(int startIndex) async {
-    Response _response = await _dio.get(ServerConsts.PRODUCTS_PATH, queryParameters: {"gt": "10"});
+    Response _response = await _dio.get(ServerConsts.PRODUCTS_PATH,
+        queryParameters: {"gt": startIndex.toString()});
     if (_response.statusCode == 200) {
-      return _response.data["body"]["data"] as List;
+      return _response.data["body"]["data"];
     } else {
       return null;
     }
