@@ -5,34 +5,34 @@ enum PaginationStatus { initial, loading, success, failure }
 class PaginationState extends Equatable {
   const PaginationState({
     this.status = PaginationStatus.initial,
-    this.products = const <Product>[],
+    this.raffles = const <Raffle>[],
     this.hasReachedMax = false,
-    this.lastDrawTime = 0,
+    this.lastRaffleTime = 0,
     this.isFiltered = false,
   });
 
   final PaginationStatus status;
-  final List<Product> products;
+  final List<Raffle> raffles;
   final bool hasReachedMax;
-  final int lastDrawTime;
+  final int lastRaffleTime;
   final bool isFiltered;
   PaginationState copyWith({
     PaginationStatus? status,
-    List<Product>? products,
+    List<Raffle>? raffles,
     bool? hasReachedMax,
     bool? isFiltered,
-    int? lastDrawTime,
+    int? lastRaffleTime,
   }) {
     return PaginationState(
       status: status ?? this.status,
-      products: products ?? this.products,
+      raffles: raffles ?? this.raffles,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-      lastDrawTime: lastDrawTime ?? this.lastDrawTime,
+      lastRaffleTime: lastRaffleTime ?? this.lastRaffleTime,
       isFiltered: isFiltered ?? this.isFiltered,
     );
   }
 
   @override
   List<Object> get props =>
-      [status, products, hasReachedMax, lastDrawTime, isFiltered];
+      [status, raffles, hasReachedMax, lastRaffleTime, isFiltered];
 }

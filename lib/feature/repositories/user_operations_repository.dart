@@ -5,7 +5,7 @@ import 'global_repository.dart';
 
 abstract class IUserOperationsRepository {
   Future<bool> update(
-      {String? name, String? surname, String? mail, String? drawNickName});
+      {String? name, String? surname, String? mail, String? raffleNickName});
   Future<bool> signUp({
     required String name,
     required String surname,
@@ -21,7 +21,7 @@ abstract class IUserOperationsRepository {
     required String uid,
     String? name,
     String? surname,
-    String? drawNickName,
+    String? raffleNickName,
   });
 
   Future<bool> changePassword(
@@ -40,7 +40,7 @@ class UserOperationsRepository implements IUserOperationsRepository {
       {String? name,
       String? surname,
       String? mail,
-      String? drawNickName}) async {
+      String? raffleNickName}) async {
     await Future.delayed(const Duration(seconds: 2));
 
     return true;
@@ -88,7 +88,7 @@ class UserOperationsRepository implements IUserOperationsRepository {
       {required String uid,
       String? name,
       String? surname,
-      String? drawNickName}) {
+      String? raffleNickName}) {
     // TODO: implement updateUserData
     throw UnimplementedError();
   }

@@ -20,7 +20,6 @@ import '../../view/pages/authentication_pages/register_page/register_page.dart'
     as _i9;
 import '../../view/pages/console_page/console_page.dart' as _i5;
 import '../../view/pages/home_page/home_page.dart' as _i3;
-import '../../view/pages/product_page/product_page.dart' as _i4;
 import '../../view/pages/profile_page/children_pages/change_password/change_password_page.dart'
     as _i13;
 import '../../view/pages/profile_page/children_pages/contact_us/contact_us_page.dart'
@@ -30,9 +29,10 @@ import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_ver
 import '../../view/pages/profile_page/children_pages/update_profile/update_profile_page.dart'
     as _i11;
 import '../../view/pages/profile_page/profile_page.dart' as _i10;
+import '../../view/pages/raffle_page/raffle_page.dart' as _i4;
 import '../../view/pages/splash_page/splash_body.dart' as _i6;
 import '../../view/pages/splash_page/splash_page.dart' as _i1;
-import '../models/product.dart' as _i17;
+import '../models/raffle.dart' as _i17;
 import 'auth_guard.dart' as _i16;
 
 class AppRouter extends _i2.RootStackRouter {
@@ -57,11 +57,11 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.HomePage());
     },
-    ProductRoute.name: (routeData) {
-      final args = routeData.argsAs<ProductRouteArgs>();
+    RaffleRoute.name: (routeData) {
+      final args = routeData.argsAs<RaffleRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i4.ProductPage(args.product, key: args.key));
+          child: _i4.RafflePage(args.raffle, key: args.key));
     },
     ConsoleRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -124,7 +124,7 @@ class AppRouter extends _i2.RootStackRouter {
         ]),
         _i2.RouteConfig(HomeMainRoute.name,
             path: '/home-page', guards: [authGuard]),
-        _i2.RouteConfig(ProductRoute.name, path: '/product-page'),
+        _i2.RouteConfig(RaffleRoute.name, path: '/raffle-page'),
         _i2.RouteConfig(ConsoleRoute.name,
             path: '/console-page', guards: [authGuard]),
         _i2.RouteConfig(AuthControllerRoute.name, path: '/controller-page'),
@@ -161,26 +161,26 @@ class HomeMainRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.ProductPage]
-class ProductRoute extends _i2.PageRouteInfo<ProductRouteArgs> {
-  ProductRoute({required _i17.Product product, _i15.Key? key})
-      : super(ProductRoute.name,
-            path: '/product-page',
-            args: ProductRouteArgs(product: product, key: key));
+/// [_i4.RafflePage]
+class RaffleRoute extends _i2.PageRouteInfo<RaffleRouteArgs> {
+  RaffleRoute({required _i17.Raffle raffle, _i15.Key? key})
+      : super(RaffleRoute.name,
+            path: '/raffle-page',
+            args: RaffleRouteArgs(raffle: raffle, key: key));
 
-  static const String name = 'ProductRoute';
+  static const String name = 'RaffleRoute';
 }
 
-class ProductRouteArgs {
-  const ProductRouteArgs({required this.product, this.key});
+class RaffleRouteArgs {
+  const RaffleRouteArgs({required this.raffle, this.key});
 
-  final _i17.Product product;
+  final _i17.Raffle raffle;
 
   final _i15.Key? key;
 
   @override
   String toString() {
-    return 'ProductRouteArgs{product: $product, key: $key}';
+    return 'RaffleRouteArgs{raffle: $raffle, key: $key}';
   }
 }
 

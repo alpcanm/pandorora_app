@@ -10,8 +10,8 @@ class User {
   String? photoURL;
   String? password;
   bool? mailVerified;
-  String? drawNickName;
-  List<String?>? appliedDraws;
+  String? subscribeNickName;
+  List<String?>? subscribedRaffles;
   int? tickets;
 
   User({
@@ -23,8 +23,8 @@ class User {
     this.photoURL,
     this.password,
     this.mailVerified,
-    this.drawNickName,
-    this.appliedDraws,
+    this.subscribeNickName,
+    this.subscribedRaffles,
     this.tickets,
   });
 
@@ -39,8 +39,8 @@ class User {
       'password': password,
       'mail_verified': mailVerified,
       'tickets': tickets,
-      'draw_nick_name': drawNickName,
-      'applied_draws': appliedDraws,
+      'subscribe_nick_name': subscribeNickName,
+      'subscribed_raffles': subscribedRaffles,
     };
   }
 
@@ -55,17 +55,12 @@ class User {
       password: map['password'],
       mailVerified: map['mailVerified'],
       tickets: map['tickets'],
-      drawNickName: map['draw_nick_name'],
-      appliedDraws: map['applied_draws'],
+      subscribeNickName: map['subscribe_nick_name'],
+      subscribedRaffles: map['subscribed_raffles'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'User(uid: $uid, name: $name, surname: $surname, mail: $mail, phoneNumber: $phoneNumber, photoURL: $photoURL, password: $password, mailVerified: $mailVerified, drawNickName: $drawNickName, appliedDraws: $appliedDraws, tickets: $tickets)';
-  }
 }

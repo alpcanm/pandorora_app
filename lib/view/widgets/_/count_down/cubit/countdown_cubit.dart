@@ -4,16 +4,16 @@ import 'package:equatable/equatable.dart';
 part 'countdown_state.dart';
 
 class CountdownCubit extends Cubit<CountdownState> {
-  final DateTime drawDateTime;
+  final DateTime raffleDateTime;
 
   CountdownCubit(
-    this.drawDateTime,
+    this.raffleDateTime,
   ) : super(const CountdownState(0, 0, 0)) {
     setTime();
   }
 
   setTime() {
-    final _result = _countDownCalculator(drawDateTime);
+    final _result = _countDownCalculator(raffleDateTime);
     emit(CountdownState(_result.day, _result.hour, _result.minute));
   }
 

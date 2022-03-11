@@ -1,24 +1,24 @@
-library product_card;
+library raffle_card;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pandorora_app/core/extension/context_extension.dart';
 import 'package:pandorora_app/core/extension/int_extension.dart';
-import 'package:pandorora_app/core/models/product.dart';
+import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
 import 'package:pandorora_app/view/widgets/components/applied_checker.dart';
 
 import '../../../../../core/navigation/navigation_manager.gr.dart';
 
-part 'components/product_card_body.dart';
-part 'components/product_card_header.dart';
+part 'components/raffle_card_body.dart';
+part 'components/raffle_card_header.dart';
 
-class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key, required Product product})
-      : _product = product,
+class RaffleCard extends StatelessWidget {
+  const RaffleCard({Key? key, required Raffle raffle})
+      : _raffle = raffle,
         super(key: key);
 
-  final Product _product;
+  final Raffle _raffle;
   final _cardMargin = const EdgeInsets.only(left: 21, right: 21, top: 13);
 
   @override
@@ -31,8 +31,8 @@ class ProductCard extends StatelessWidget {
           margin: _cardMargin,
           child: Column(
             children: [
-              _ProductCardHeader(product: _product),
-              _ProductCardBody(product: _product),
+              _RaffleCardHeader(raffle: _raffle),
+              _RaffleCardBody(raffle: _raffle),
             ],
           ),
           elevation: 4),

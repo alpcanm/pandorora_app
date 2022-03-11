@@ -2,9 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
-import '../../../../core/models/product.dart';
+import '../../../../core/models/raffle.dart';
 import '../../../../core/utils/locator_get_it.dart';
-import '../../../../feature/repositories/product_repository.dart';
+import '../../../../feature/repositories/raffle_repository.dart';
 
 part 'pagination_event.dart';
 part 'pagination_state.dart';
@@ -19,7 +19,7 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
   PaginationBloc() : super(const PaginationState()) {
     on<PaginationAllFetched>(
-      _onProductFetched,
+      _onRaffleFetched,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
     on<PaginationFilteredPatch>(
@@ -33,22 +33,22 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       PaginationFilteredPatch event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == PaginationStatus.initial) {
-      final _products = await _fetchProducts(
+      final _raffles = await _fetchRaffles(
           DateTime.now().millisecondsSinceEpoch,
           filters: event.filters);
-      if (_products!.isNotEmpty) {
+      if (_raffles!.isNotEmpty) {
         return emit(
           state.copyWith(
               hasReachedMax: false,
-              products: _products,
+              raffles: _raffles,
               status: PaginationStatus.success,
-              lastDrawTime: _products.last.drawDate,
+              lastRaffleTime: _raffles.last.date,
               isFiltered: true),
         );
       }
     }
     final _prodcuts =
-        await _fetchProducts(state.lastDrawTime, filters: event.filters);
+        await _fetchRaffles(state.lastRaffleTime, filters: event.filters);
     if (_prodcuts!.isEmpty) {
       emit(state.copyWith(hasReachedMax: true));
     } else {
@@ -56,30 +56,30 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
         state.copyWith(
             status: PaginationStatus.success,
             hasReachedMax: false,
-            products: List.of(state.products)..addAll(_prodcuts),
-            lastDrawTime: _prodcuts.last.drawDate,
+            raffles: List.of(state.raffles)..addAll(_prodcuts),
+            lastRaffleTime: _prodcuts.last.date,
             isFiltered: true),
       );
     }
   }
 
-  Future<void> _onProductFetched(
+  Future<void> _onRaffleFetched(
       PaginationAllFetched event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == PaginationStatus.initial) {
-      final _products = await _fetchProducts(5);
-      if (_products!.isNotEmpty) {
+      final _raffles = await _fetchRaffles(5);
+      if (_raffles!.isNotEmpty) {
         return emit(
           state.copyWith(
             hasReachedMax: false,
-            products: _products,
+            raffles: _raffles,
             status: PaginationStatus.success,
-            lastDrawTime: _products.last.drawDate,
+            lastRaffleTime: _raffles.last.date,
           ),
         );
       }
     }
-    final List<Product>? _prodcuts = await _fetchProducts(state.lastDrawTime);
+    final List<Raffle>? _prodcuts = await _fetchRaffles(state.lastRaffleTime);
     if (_prodcuts == null || _prodcuts.isEmpty) {
       emit(state.copyWith(hasReachedMax: true));
     } else {
@@ -87,15 +87,15 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
         state.copyWith(
             status: PaginationStatus.success,
             hasReachedMax: false,
-            products: List.of(state.products)..addAll(_prodcuts),
-            lastDrawTime: _prodcuts.last.drawDate),
+            raffles: List.of(state.raffles)..addAll(_prodcuts),
+            lastRaffleTime: _prodcuts.last.date),
       );
     }
   }
 
-  Future<List<Product>?>? _fetchProducts(int startAtLastDrawTime,
+  Future<List<Raffle>?>? _fetchRaffles(int startAtLastRaffleTime,
       {List<String>? filters}) async {
-    return await getIt<ProductRepository>()
-        .getProducts(startAtLastDrawTime, filters: filters);
+    return await getIt<RaffleRepository>()
+        .getRaffles(startAtLastRaffleTime, filters: filters);
   }
 }

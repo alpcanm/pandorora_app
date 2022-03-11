@@ -46,9 +46,9 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
               ),
               _tpDivider,
               CustomTextFormField(
-                labelText: "Draw Nick",
+                labelText: "Raffle Nick",
                 onChanged: _cubit.onFieldChanged,
-                controller: _cubit.drawNickController,
+                controller: _cubit.raffleNickController,
               ),
               _tpDivider,
               CustomTextFormField(

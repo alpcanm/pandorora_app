@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../core/models/product.dart';
+import '../../../core/models/raffle.dart';
 import 'components/consoler_card.dart';
 
 String imageURL =
@@ -18,48 +18,48 @@ class ConsoleBody extends StatelessWidget {
           child: PageView(
             controller: _pageViewController,
             scrollDirection: Axis.horizontal,
-            children: [futureProducts(), pastProducts()],
+            children: [futureraffles(), postRaffles()],
           ),
         ),
       ],
     );
   }
 
-  ListView futureProducts() {
+  ListView futureraffles() {
     return ListView.builder(
       itemBuilder: (context, index) {
-        final _product = Product(
+        final _raffle = Raffle(
           comment:
               "AçıklamaAçıklamaAç   amaamaıklamaAçıkla  maAçıklama  çıklamaAçıklama",
-          drawDate: 1273618726398,
+          date: 1273618726398,
           isExpired: false,
           photoURL: imageURL,
-          productId: "516516546514",
+          raffleId: "516516546514",
           title: "Razer Mouse",
           tag: "#Mutfak malzemesi",
         );
 
-        return ConsoleCard(_product);
+        return ConsoleCard(_raffle);
       },
       itemCount: 4,
       shrinkWrap: true,
     );
   }
 
-  ListView pastProducts() {
+  ListView postRaffles() {
     return ListView.builder(
       itemBuilder: (context, index) {
-        final _product = Product(
+        final _raffle = Raffle(
           comment: "Açıklama",
-          drawDate: 182379182637,
+          date: 182379182637,
           isExpired: false,
           photoURL: imageURL,
-          productId: "516516546514",
+          raffleId: "516516546514",
           title: "Klavye Mouse",
           tag: "#Mutfak malzemesi",
         );
 
-        return ConsoleCard(_product);
+        return ConsoleCard(_raffle);
       },
       itemCount: 4,
       shrinkWrap: true,

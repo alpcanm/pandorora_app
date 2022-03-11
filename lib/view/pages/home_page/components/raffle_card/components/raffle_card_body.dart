@@ -1,21 +1,21 @@
-part of product_card;
+part of raffle_card;
 
-class _ProductCardBody extends StatelessWidget {
-  const _ProductCardBody({
+class _RaffleCardBody extends StatelessWidget {
+  const _RaffleCardBody({
     Key? key,
-    required this.product,
+    required this.raffle,
   }) : super(key: key);
-  final Product product;
+  final Raffle raffle;
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: 9,
       child: InkWell(
-        onTap: () => context.router.push(ProductRoute(product: product)),
+        onTap: () => context.router.push(RaffleRoute(raffle: raffle)),
         child: Stack(
           children: [
-            _PhotoStack(product: product),
-            _BottomCardStack(product: product),
+            _PhotoStack(raffle: raffle),
+            _BottomCardStack(raffle: raffle),
           ],
         ),
       ),
@@ -26,10 +26,10 @@ class _ProductCardBody extends StatelessWidget {
 class _PhotoStack extends StatelessWidget {
   const _PhotoStack({
     Key? key,
-    required this.product,
+    required this.raffle,
   }) : super(key: key);
 
-  final Product product;
+  final Raffle raffle;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _PhotoStack extends StatelessWidget {
       child: Align(
         alignment: Alignment.topCenter,
         child: Image.network(
-          product.photoURL ?? "",
+          raffle.photoURL ?? "",
           fit: BoxFit.cover,
           height: double.infinity,
           width: double.infinity,
@@ -50,10 +50,10 @@ class _PhotoStack extends StatelessWidget {
 class _BottomCardStack extends StatelessWidget {
   const _BottomCardStack({
     Key? key,
-    required this.product,
+    required this.raffle,
   }) : super(key: key);
 
-  final Product product;
+  final Raffle raffle;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _BottomCardStack extends StatelessWidget {
                     flex: 15,
                     child: Center(
                       child: Text(
-                        product.title ?? "",
+                        raffle.title ?? "",
                         style: Theme.of(context)
                             .textTheme
                             .headline4!
@@ -87,7 +87,7 @@ class _BottomCardStack extends StatelessWidget {
                   Expanded(
                     flex: 15,
                     child: CountDownArea(
-                      dateTime: product.drawDate!.toDate,
+                      dateTime: raffle.date!.toDate,
                     ),
                   )
                 ],

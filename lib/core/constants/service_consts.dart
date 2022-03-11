@@ -4,5 +4,5 @@ class ServerConsts {
   // static String SERVER_BASE_URL = 'http://localhost:3000'; //Web için
   static String API_PATH = '/api-key';
   static String USERS_PATH = '/users';
-  static String PRODUCTS_PATH = '/products';
+  static String RAFFLE_PATH = '/raffles';
 }

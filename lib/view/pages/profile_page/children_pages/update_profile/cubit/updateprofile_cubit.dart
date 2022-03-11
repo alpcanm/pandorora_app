@@ -20,8 +20,8 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
       TextEditingController(text: _user.name);
   final TextEditingController surnameController =
       TextEditingController(text: _user.surname);
-  final TextEditingController drawNickController =
-      TextEditingController(text: _user.drawNickName);
+  final TextEditingController raffleNickController =
+      TextEditingController(text: _user.subscribeNickName);
   final TextEditingController mailController =
       TextEditingController(text: _user.mail);
   final formKey = GlobalKey<FormState>();
@@ -30,7 +30,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
     // Eğer hiç bir alanı değiştirmemişse false dönecek
     if (nameController.text.trim() == _user.name &&
         surnameController.text.trim() == _user.surname &&
-        drawNickController.text.trim() == _user.drawNickName &&
+        raffleNickController.text.trim() == _user.subscribeNickName &&
         mailController.text.trim() == _user.mail) {
       return false;
     } else {
@@ -50,7 +50,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
     if (formKey.currentState!.validate() && _checkField) {
       emit(UpdateprofileLoading());
       bool _result = await _userOperationRepo.update(
-          drawNickName: drawNickController.text.trim(),
+          raffleNickName: raffleNickController.text.trim(),
           mail: mailController.text.trim(),
           name: nameController.text.trim(),
           surname: surnameController.text.trim());
@@ -67,7 +67,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
   Future<void> close() {
     nameController.dispose();
     surnameController.dispose();
-    drawNickController.dispose();
+    raffleNickController.dispose();
     mailController.dispose();
     return super.close();
   }

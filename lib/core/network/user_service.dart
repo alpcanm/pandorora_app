@@ -20,7 +20,7 @@ abstract class IUserService {
     required String uid,
     String? name,
     String? surname,
-    String? drawNickName,
+    String? raffleNickName,
   });
 }
 
@@ -77,7 +77,7 @@ class UserService implements IUserService {
       {required String uid,
       String? name,
       String? surname,
-      String? drawNickName}) {
+      String? raffleNickName}) {
     // TODO: implement updateUserData
     throw UnimplementedError();
   }

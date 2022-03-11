@@ -1,18 +1,18 @@
 import 'package:dio/dio.dart';
 
 import '../constants/service_consts.dart';
-import '../models/product.dart';
+import '../models/raffle.dart';
 
-class ProductService {
+class RaffleService {
   final Dio _dio = Dio();
   final BaseOptions _baseOptions =
       BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
-  ProductService() {
+  RaffleService() {
     _dio.options = _baseOptions;
   }
 
-  Future<List?> getAllProducts(int startIndex) async {
-    Response _response = await _dio.get(ServerConsts.PRODUCTS_PATH,
+  Future<List?> getAllRaffles(int startIndex) async {
+    Response _response = await _dio.get(ServerConsts.RAFFLE_PATH,
         queryParameters: {"gt": startIndex.toString()});
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
@@ -21,14 +21,14 @@ class ProductService {
     }
   }
 
-  Future<List<Product>>? getFilteredProducts(
+  Future<List<Raffle>>? getFilteredRaffles(
       int startIndex, List<String> filters) {}
 
-  Future<List<Product>> myFutureProducts(bool pagination, String userId) {
+  Future<List<Raffle>> myFutureRaffles(bool pagination, String userId) {
     throw UnimplementedError();
   }
 
-  Future<List<Product>> myPastProducts(bool pagination, String userId) {
+  Future<List<Raffle>> myPastRaffles(bool pagination, String userId) {
     throw UnimplementedError();
   }
 }

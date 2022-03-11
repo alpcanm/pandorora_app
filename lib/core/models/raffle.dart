@@ -1,53 +1,52 @@
 import 'dart:convert';
 
-class Product {
-  String? productId;
+class Raffle {
+  String? raffleId;
   String? title;
   String? comment;
-  int? drawDate;
+  int? date;
   String? photoURL;
   bool? isExpired;
   String? tag;
-  String? drawURL;
-  Product({
-    this.productId,
+  String? url;
+  Raffle({
+    this.raffleId,
     this.title,
     this.comment,
-    this.drawDate,
+    this.date,
     this.photoURL,
     this.isExpired,
     this.tag,
-    this.drawURL,
+    this.url,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'product_id': productId,
+      'raffle_id': raffleId,
       'title': title,
       'comment': comment,
-      'draw_date': drawDate,
+      'date': date,
       'photo_url': photoURL,
       'is_expired': isExpired,
       'tag': tag,
-      'draw_url': drawURL,
+      'url': url,
     };
   }
 
-  factory Product.fromMap(Map<String, dynamic> map) {
-    return Product(
-      productId: map['product_id'],
+  factory Raffle.fromMap(Map<String, dynamic> map) {
+    return Raffle(
+      raffleId: map['raffle_id'],
       title: map['title'],
       comment: map['comment'],
-      drawDate: map['draw_date'],
+      date: map['date'],
       photoURL: map['photo_url'],
       isExpired: map['is_expired'],
       tag: map['tag'],
-      drawURL: map['draw_url'],
+      url: map['url'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source));
+  factory Raffle.fromJson(String source) => Raffle.fromMap(json.decode(source));
 }
