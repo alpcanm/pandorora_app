@@ -19,24 +19,33 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
   PaginationBloc() : super(const PaginationState()) {
     on<PaginationAllFetched>(
-      _onRaffleFetched,
+      onAllFetched,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
     on<PaginationFilteredPatch>(
       _onFilteredSearch,
       transformer: throttleDroppable<PaginationFilteredPatch>(throttleDuration),
     );
+    on<PaginationSwtiched>(_onSwitched);
     add(PaginationAllFetched());
+  }
+
+  void _onSwitched(PaginationSwtiched event, Emitter<PaginationState> emit) {
+    emit(state.copyWith(
+      status: PaginationStatus.initial,
+    ));
   }
 
   Future<void> _onFilteredSearch(
       PaginationFilteredPatch event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == PaginationStatus.initial) {
-      final _raffles = await _fetchRaffles(
-          DateTime.now().millisecondsSinceEpoch,
-          filters: event.filters);
-      if (_raffles!.isNotEmpty) {
+      emit(state.copyWith(
+          hasReachedMax: false,
+          status: PaginationStatus.loading,
+          isFiltered: true));
+      final _raffles = await _fetchRaffles(12, filters: event.filters);
+      if (_raffles != null && _raffles.isNotEmpty) {
         return emit(
           state.copyWith(
               hasReachedMax: false,
@@ -45,11 +54,15 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
               lastRaffleTime: _raffles.last.date,
               isFiltered: true),
         );
+      } else {
+        return emit(
+          state.copyWith(status: PaginationStatus.failure),
+        );
       }
     }
     final _prodcuts =
         await _fetchRaffles(state.lastRaffleTime, filters: event.filters);
-    if (_prodcuts!.isEmpty) {
+    if (_prodcuts == null || _prodcuts.isEmpty) {
       emit(state.copyWith(hasReachedMax: true));
     } else {
       emit(
@@ -63,10 +76,14 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
     }
   }
 
-  Future<void> _onRaffleFetched(
+  Future<void> onAllFetched(
       PaginationAllFetched event, Emitter<PaginationState> emit) async {
     if (state.hasReachedMax) return;
     if (state.status == PaginationStatus.initial) {
+      emit(state.copyWith(
+          hasReachedMax: false,
+          status: PaginationStatus.loading,
+          isFiltered: false));
       final _raffles = await _fetchRaffles(5);
       if (_raffles!.isNotEmpty) {
         return emit(

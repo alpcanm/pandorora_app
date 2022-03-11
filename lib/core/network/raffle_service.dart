@@ -21,8 +21,18 @@ class RaffleService {
     }
   }
 
-  Future<List<Raffle>>? getFilteredRaffles(
-      int startIndex, List<String> filters) {}
+  Future<List?> getFilteredRaffles(
+      int startIndex, List<String> filters) async {
+    String tagQuery = filters.toString().replaceAll(" ", "");
+
+    Response _response = await _dio
+        .get(ServerConsts.RAFFLE_PATH + '?gt=$startIndex&tags=$tagQuery');
+    if (_response.statusCode == 200) {
+      return _response.data["body"]["data"];
+    } else {
+      return null;
+    }
+  }
 
   Future<List<Raffle>> myFutureRaffles(bool pagination, String userId) {
     throw UnimplementedError();

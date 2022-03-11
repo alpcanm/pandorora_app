@@ -35,8 +35,13 @@ class _MoreButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          context.read<PaginationBloc>().add(PaginationAllFetched());
-          // _bloc.add(HomeFilteredFetched(getIt<TagList>().filters));
+          if (getIt<TagList>().filters.isNotEmpty) {
+            context
+                .read<PaginationBloc>()
+                .add(PaginationFilteredPatch(getIt<TagList>().filters));
+          } else {
+            context.read<PaginationBloc>().add(PaginationAllFetched());
+          }
         },
         child: const Text('Daha fazla'));
   }

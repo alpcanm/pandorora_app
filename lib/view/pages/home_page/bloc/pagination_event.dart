@@ -9,6 +9,8 @@ abstract class PaginationEvent extends Equatable {
 
 class PaginationAllFetched extends PaginationEvent {}
 
+class PaginationSwtiched extends PaginationEvent {}
+
 class PaginationFilteredPatch extends PaginationEvent {
   final List<String> filters;
 

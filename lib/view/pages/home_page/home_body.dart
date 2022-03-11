@@ -20,6 +20,12 @@ class HomeBody extends StatelessWidget {
     return BlocBuilder<PaginationBloc, PaginationState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
+        print(state);
+        if (state.status == PaginationStatus.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.status == PaginationStatus.failure) {
+          return const Center(child: Text("Veri yok"));
+        }
         return _HomeListViewBuilder(raffleList: state.raffles);
       },
     );
