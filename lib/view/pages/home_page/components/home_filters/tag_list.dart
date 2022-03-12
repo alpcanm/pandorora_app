@@ -13,5 +13,5 @@ class TagList {
     };
   }
 
-  List<String> filters = [];
+  Set<String> filters = {};
 }

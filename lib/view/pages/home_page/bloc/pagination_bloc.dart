@@ -9,7 +9,8 @@ import '../../../../feature/repositories/raffle_repository.dart';
 part 'pagination_event.dart';
 part 'pagination_state.dart';
 
-const throttleDuration = Duration(seconds: 1);
+const int _currentDate = 0;
+const throttleDuration = Duration(milliseconds: 250);
 EventTransformer<E> throttleDroppable<E>(Duration duration) {
   return (events, mapper) {
     return droppable<E>().call(events.throttle(duration), mapper);
@@ -26,25 +27,26 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       _onFilteredSearch,
       transformer: throttleDroppable<PaginationFilteredPatch>(throttleDuration),
     );
-    on<PaginationSwtiched>(_onSwitched);
-    add(PaginationAllFetched());
-  }
 
-  void _onSwitched(PaginationSwtiched event, Emitter<PaginationState> emit) {
-    emit(state.copyWith(
-      status: PaginationStatus.initial,
-    ));
+    add(const PaginationAllFetched());
   }
 
   Future<void> _onFilteredSearch(
       PaginationFilteredPatch event, Emitter<PaginationState> emit) async {
+    if (event.status == PaginationStatus.initial) {
+      emit(
+        state.copyWith(
+            lastRaffleTime: _currentDate,
+            hasReachedMax: false,
+            status: PaginationStatus.initial,
+            isFiltered: true),
+      );
+    }
+
     if (state.hasReachedMax) return;
     if (state.status == PaginationStatus.initial) {
-      emit(state.copyWith(
-          hasReachedMax: false,
-          status: PaginationStatus.loading,
-          isFiltered: true));
-      final _raffles = await _fetchRaffles(12, filters: event.filters);
+      final _raffles =
+          await _fetchRaffles(state.lastRaffleTime, filters: event.filters);
       if (_raffles != null && _raffles.isNotEmpty) {
         return emit(
           state.copyWith(
@@ -78,13 +80,25 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
 
   Future<void> onAllFetched(
       PaginationAllFetched event, Emitter<PaginationState> emit) async {
+    if (event.status == PaginationStatus.initial) {
+      emit(
+        state.copyWith(
+            lastRaffleTime: _currentDate,
+            hasReachedMax: false,
+            status: PaginationStatus.initial,
+            isFiltered: true,
+            raffles: []),
+      );
+    }
     if (state.hasReachedMax) return;
-    if (state.status == PaginationStatus.initial) {
+    if (state.status == PaginationStatus.initial ||
+        event.status == PaginationStatus.initial) {
       emit(state.copyWith(
           hasReachedMax: false,
+          lastRaffleTime: _currentDate,
           status: PaginationStatus.loading,
           isFiltered: false));
-      final _raffles = await _fetchRaffles(5);
+      final _raffles = await _fetchRaffles(state.lastRaffleTime);
       if (_raffles!.isNotEmpty) {
         return emit(
           state.copyWith(
@@ -111,7 +125,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
   }
 
   Future<List<Raffle>?>? _fetchRaffles(int startAtLastRaffleTime,
-      {List<String>? filters}) async {
+      {Set<String>? filters}) async {
     return await getIt<RaffleRepository>()
         .getRaffles(startAtLastRaffleTime, filters: filters);
   }

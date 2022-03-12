@@ -29,46 +29,44 @@ class _RegisterFormState extends State<RegisterForm> {
   @override
   Widget build(BuildContext context) {
     final _registerpageCubit = context.read<RegisterpageCubit>();
-    return Center(
-      child: Form(
-        key: _registerpageCubit.formKey,
-        child: WC.paddingAll(
-          child: ListView(
-            children: [
-              _countryPhonePicker.dropdownWidget,
-              CustomTextFormField(
-                  labelText: RegisterPageText.NAME,
-                  controller: _registerpageCubit.nameController),
-              _transparentDivider,
-              CustomTextFormField(
-                  labelText: RegisterPageText.SURNAME,
-                  controller: _registerpageCubit.surnameController),
-              _transparentDivider,
-              CustomTextFormField(
-                  labelText: RegisterPageText.MAIL,
-                  customValidator: Validators.mailValidator,
-                  controller: _registerpageCubit.mailController),
-              _transparentDivider,
-              _PhoneCode(
-                _countryPhonePicker.valueTextWidget,
-                registerpageCubit: _registerpageCubit,
-              ),
-              _transparentDivider,
-              CustomTextFormField(
-                  labelText: RegisterPageText.PASSWORD,
-                  customValidator: Validators.passwordValidator,
-                  obscureText: true,
-                  controller: _registerpageCubit.passwordController),
-              _transparentDivider,
-              CustomTextFormField(
-                  labelText: RegisterPageText.CONFIRM_PASSWORD,
-                  obscureText: true,
-                  customValidator: _registerpageCubit.confirmPasswordValidator,
-                  controller: _registerpageCubit.confirmPassowrdController),
-              _transparentDivider,
-              const _SubmitButton()
-            ],
-          ),
+    return Form(
+      key: _registerpageCubit.formKey,
+      child: WC.paddingAll(
+        child: ListView(
+          children: [
+            _countryPhonePicker.dropdownWidget,
+            CustomTextFormField(
+                labelText: RegisterPageText.NAME,
+                controller: _registerpageCubit.nameController),
+            _transparentDivider,
+            CustomTextFormField(
+                labelText: RegisterPageText.SURNAME,
+                controller: _registerpageCubit.surnameController),
+            _transparentDivider,
+            CustomTextFormField(
+                labelText: RegisterPageText.MAIL,
+                customValidator: Validators.mailValidator,
+                controller: _registerpageCubit.mailController),
+            _transparentDivider,
+            _PhoneCode(
+              _countryPhonePicker.valueTextWidget,
+              registerpageCubit: _registerpageCubit,
+            ),
+            _transparentDivider,
+            CustomTextFormField(
+                labelText: RegisterPageText.PASSWORD,
+                customValidator: Validators.passwordValidator,
+                obscureText: true,
+                controller: _registerpageCubit.passwordController),
+            _transparentDivider,
+            CustomTextFormField(
+                labelText: RegisterPageText.CONFIRM_PASSWORD,
+                obscureText: true,
+                customValidator: _registerpageCubit.confirmPasswordValidator,
+                controller: _registerpageCubit.confirmPassowrdController),
+            _transparentDivider,
+            const _SubmitButton()
+          ],
         ),
       ),
     );
@@ -86,11 +84,13 @@ class _PhoneCode extends StatelessWidget {
       children: [
         phoneCode,
         const VerticalDivider(),
-        CustomTextFormField(
-            labelText: RegisterPageText.PHONE,
-            maxLengt: 10,
-            customValidator: Validators.phoneValidator,
-            controller: registerpageCubit.phoneController)
+        Flexible(
+          child: CustomTextFormField(
+              labelText: RegisterPageText.PHONE,
+              maxLengt: 10,
+              customValidator: Validators.phoneValidator,
+              controller: registerpageCubit.phoneController),
+        )
       ],
     );
   }

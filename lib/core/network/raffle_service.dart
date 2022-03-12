@@ -21,12 +21,13 @@ class RaffleService {
     }
   }
 
-  Future<List?> getFilteredRaffles(
-      int startIndex, List<String> filters) async {
-    String tagQuery = filters.toString().replaceAll(" ", "");
+  Future<List?> getFilteredRaffles(int startIndex, Set<String> filters) async {
+    String tagQuery1 = filters.toString().replaceAll(" ", "");
+    String tagQuery2 = tagQuery1.toString().replaceAll("{", "");
+    String tagQuery3 = tagQuery2.toString().replaceAll("}", "");
 
     Response _response = await _dio
-        .get(ServerConsts.RAFFLE_PATH + '?gt=$startIndex&tags=$tagQuery');
+        .get(ServerConsts.RAFFLE_PATH + '?gt=$startIndex&tags=$tagQuery3');
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
     } else {

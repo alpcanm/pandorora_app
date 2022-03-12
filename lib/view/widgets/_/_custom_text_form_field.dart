@@ -21,26 +21,24 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLengt;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: TextFormField(
-        maxLength: maxLengt,
-        onChanged: onChanged,
-        obscureText: obscureText ?? false,
-        controller: controller,
-        validator: (customValidator != null)
-            ? customValidator
-            : (value) {
-                if (value != null && value.isEmpty) {
-                  return _errorMessage;
-                } else {
-                  return null;
-                }
-              },
-        decoration: InputDecoration(
-          icon: icon != null ? Icon(icon) : null,
-          label: labelText != null ? Text(labelText!) : null,
-          border: const OutlineInputBorder(),
-        ),
+    return TextFormField(
+      maxLength: maxLengt,
+      onChanged: onChanged,
+      obscureText: obscureText ?? false,
+      controller: controller,
+      validator: (customValidator != null)
+          ? customValidator
+          : (value) {
+              if (value != null && value.isEmpty) {
+                return _errorMessage;
+              } else {
+                return null;
+              }
+            },
+      decoration: InputDecoration(
+        icon: icon != null ? Icon(icon) : null,
+        label: labelText != null ? Text(labelText!) : null,
+        border: const OutlineInputBorder(),
       ),
     );
   }

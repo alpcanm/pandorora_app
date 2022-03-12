@@ -30,36 +30,32 @@ class LoginForm extends StatelessWidget {
           PrintMessage.showFailed(context, state.errorMessage);
         }
       },
-      child: form(_loginpageCubit),
-    );
-  }
-
-  Form form(LoginpageCubit _loginpageCubit) {
-    return Form(
-      key: _loginpageCubit.formKey,
-      child: WC.paddingAll(
-        child: Center(
-          child: ListView(
-            children: [
-              _Head(),
-              _transparentDivider,
-              CustomTextFormField(
-                customValidator: Validators.mailValidator,
-                controller: _loginpageCubit.mailController,
-              ),
-              _transparentDivider,
-              CustomTextFormField(
-                obscureText: true,
-                customValidator: Validators.passwordValidator,
-                controller: _loginpageCubit.passwordController,
-              ),
-              _transparentDivider,
-              _SignInButton(
-                loginpageCubit: _loginpageCubit,
-              ),
-              _transparentDivider,
-              _SignUpButton()
-            ],
+      child: Form(
+        key: _loginpageCubit.formKey,
+        child: WC.paddingAll(
+          child: Center(
+            child: ListView(
+              children: [
+                _Head(),
+                _transparentDivider,
+                CustomTextFormField(
+                  customValidator: Validators.mailValidator,
+                  controller: _loginpageCubit.mailController,
+                ),
+                _transparentDivider,
+                CustomTextFormField(
+                  obscureText: true,
+                  customValidator: Validators.passwordValidator,
+                  controller: _loginpageCubit.passwordController,
+                ),
+                _transparentDivider,
+                _SignInButton(
+                  loginpageCubit: _loginpageCubit,
+                ),
+                _transparentDivider,
+                _SignUpButton()
+              ],
+            ),
           ),
         ),
       ),

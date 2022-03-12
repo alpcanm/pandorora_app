@@ -1,6 +1,6 @@
 part of 'pagination_bloc.dart';
 
-enum PaginationStatus { initial, loading, success, failure }
+enum PaginationStatus { initial, loading, success, failure ,completed}
 
 class PaginationState extends Equatable {
   const PaginationState({

@@ -7,12 +7,15 @@ abstract class PaginationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PaginationAllFetched extends PaginationEvent {}
+class PaginationAllFetched extends PaginationEvent {
+  final PaginationStatus? status;
 
-class PaginationSwtiched extends PaginationEvent {}
+  const PaginationAllFetched({this.status});
+}
 
 class PaginationFilteredPatch extends PaginationEvent {
-  final List<String> filters;
+  final Set<String> filters;
+  final PaginationStatus? status;
 
-  const PaginationFilteredPatch(this.filters);
+  const PaginationFilteredPatch(this.filters,{this.status});
 }

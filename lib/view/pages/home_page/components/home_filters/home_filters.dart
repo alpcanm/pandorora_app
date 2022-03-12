@@ -9,28 +9,27 @@ class _HomeFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ExpansionTile(
-        onExpansionChanged: (value) {
-          if (value == false) {
-            getIt<TagList>().filters.clear();
-          }
-        },
+        onExpansionChanged: (value) {},
         title: const Text('Filtreler'),
         children: <Widget>[
           Wrap(
             children: TagList.tags.keys
-                .map((e) => _TagCard(
-                      TagList.tags[e],
-                      onPressed: () {
-                        getIt<TagList>().filters.add(e);
-                      },
+                .map((key) => _TagCard(
+                      TagList.tags[key],
+                      key,
                     ))
                 .toList(),
           ),
           TextButton.icon(
               onPressed: () {
-                final _bloc = context.read<PaginationBloc>();
-                _bloc.add(PaginationSwtiched());
-                _bloc.add(PaginationFilteredPatch(getIt<TagList>().filters));
+                final _bloc = getIt<PaginationBloc>();
+                if (getIt<TagList>().filters.isNotEmpty) {
+                  _bloc.add(PaginationFilteredPatch(getIt<TagList>().filters,
+                      status: PaginationStatus.initial));
+                } else {
+                  _bloc.add(const PaginationAllFetched(
+                      status: PaginationStatus.initial));
+                }
               },
               icon: const Icon(Icons.search),
               label: const Text('Ara'))
@@ -42,28 +41,42 @@ class _HomeFilters extends StatelessWidget {
 
 class _TagCard extends StatefulWidget {
   const _TagCard(
-    this.tagValue, {
-    required this.onPressed,
+    this.tagValue,
+    this.tagKey, {
     Key? key,
   }) : super(key: key);
   final String tagValue;
-  final Function onPressed;
+  final String tagKey;
+
   @override
   State<_TagCard> createState() => _TagCardState();
 }
 
 class _TagCardState extends State<_TagCard> {
-  bool _isSelected = false;
   @override
   Widget build(BuildContext context) {
+    bool _isSelected = false;
+    for (String element in getIt<TagList>().filters) {
+      if (element == widget.tagKey) {
+        _isSelected = true;
+      }
+    }
     return Card(
       color: _isSelected ? Colors.purple : Colors.blueGrey,
       child: InkWell(
         onTap: () {
-          setState(() {
-            _isSelected = !_isSelected;
-          });
-          widget.onPressed();
+          bool _isInThere = false;
+          for (String element in getIt<TagList>().filters) {
+            if (element == widget.tagKey) {
+              _isInThere = true;
+            }
+          }
+          if (_isInThere) {
+            getIt<TagList>().filters.remove(widget.tagKey);
+          } else {
+            getIt<TagList>().filters.add(widget.tagKey);
+          }
+          setState(() {});
         },
         child: Padding(
           padding: const EdgeInsets.all(3.0),

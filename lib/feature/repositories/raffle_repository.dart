@@ -3,7 +3,7 @@ import 'package:pandorora_app/core/network/raffle_service.dart';
 import '../../core/models/raffle.dart';
 
 abstract class IRaffleRepository {
-  Future<List<Raffle>?> getRaffles(int startIndex, {List<String>? filters});
+  Future<List<Raffle>?> getRaffles(int startIndex, {Set<String>? filters});
   Future<List<Raffle>> myFutureRaffles(String userId);
   Future<List<Raffle>> myPastRaffles(String userId);
 }
@@ -13,7 +13,7 @@ class RaffleRepository implements IRaffleRepository {
 
   @override
   Future<List<Raffle>?> getRaffles(int startIndex,
-      {List<String>? filters}) async {
+      {Set<String>? filters}) async {
     if (filters != null) {
       return _getFilteredRaffles(startIndex, filters);
     }
@@ -21,7 +21,7 @@ class RaffleRepository implements IRaffleRepository {
   }
 
   Future<List<Raffle>?> _getFilteredRaffles(
-      int startIndex, List<String> filters) async {
+      int startIndex, Set<String> filters) async {
     List<Raffle> _result = [];
 
     if (filters.isNotEmpty) {

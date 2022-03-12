@@ -22,9 +22,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: const Icon(Icons.home),
         onPressed: () {
           context.router.replace(const HomeMainRoute());
-          getIt<TagList>().filters.clear();
-          getIt<PaginationBloc>().add(PaginationSwtiched());
-          getIt<PaginationBloc>().add(PaginationAllFetched());
         },
       ),
       actions: [
