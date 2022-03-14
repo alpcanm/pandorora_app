@@ -8,6 +8,7 @@ import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
 
 import '../../../../../core/navigation/navigation_manager.gr.dart';
+import '../../../../widgets/components/raffle_checker.dart';
 
 part 'components/raffle_card_body.dart';
 part 'components/raffle_card_header.dart';

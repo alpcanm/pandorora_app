@@ -51,7 +51,7 @@ class MyRafflesBody extends StatelessWidget {
                     ListView.builder(
                       itemBuilder: (context, index) {
                         return MyRafflesCard(
-                            snapshot.data!.futureRaffleList[index]);
+                            snapshot.data!.futureRaffleList.elementAt(index));
                       },
                       itemCount: snapshot.data!.futureRaffleList.length,
                       shrinkWrap: true,
@@ -59,7 +59,7 @@ class MyRafflesBody extends StatelessWidget {
                     ListView.builder(
                       itemBuilder: (context, index) {
                         return MyRafflesCard(
-                            snapshot.data!.pastRaffleList[index]);
+                            snapshot.data!.pastRaffleList.elementAt(index));
                       },
                       itemCount: snapshot.data!.pastRaffleList.length,
                       shrinkWrap: true,

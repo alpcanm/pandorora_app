@@ -8,6 +8,7 @@ class _RaffleCardHeader extends StatelessWidget {
   final Raffle raffle;
   @override
   Widget build(BuildContext context) {
+    final _isActive = RaffleChecker.checker(raffle.raffleId!);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(2.0),
@@ -23,8 +24,7 @@ class _RaffleCardHeader extends StatelessWidget {
                   .copyWith(fontSize: 14, color: Colors.yellow),
             ),
             Text(
-              //TODO: DÜzeltilecek
-              false ? "Katıldın" : "",
+              _isActive ? "Katıldın" : "",
               style: Theme.of(context)
                   .textTheme
                   .headline4!

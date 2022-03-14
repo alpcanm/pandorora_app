@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../constants/service_consts.dart';
-import '../models/raffle.dart';
+import '../models/subscriber_model.dart';
 
 class RaffleService {
   final Dio _dio = Dio();
@@ -42,6 +42,25 @@ class RaffleService {
       return _response.data["body"]["data"];
     } else {
       return null;
+    }
+  }
+
+  Future<bool> subscribeARaffle(
+      {required String raffleId,
+      required String userId,
+      required String subscriberName,
+      required int date}) async {
+    SubscriberModel _data = SubscriberModel(
+        subscribeDate: date,
+        subscriberId: userId,
+        subscriberName: subscriberName);
+    Response _response = await _dio.post(
+        ServerConsts.RAFFLE_PATH_ADDTO + '?rfid=$raffleId&uid=$userId',
+        data: _data.toJson());
+    if (_response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

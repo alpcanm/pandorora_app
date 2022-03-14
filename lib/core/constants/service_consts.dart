@@ -5,4 +5,5 @@ class ServerConsts {
   static String API_PATH = '/api-key';
   static String USERS_PATH = '/users';
   static String RAFFLE_PATH = '/raffles';
+  static String RAFFLE_PATH_ADDTO = '/raffles-addto';
 }

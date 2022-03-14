@@ -25,9 +25,12 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
     );
     on<PaginationFilteredFetched>(
       _onFilteredSearch,
-      transformer: throttleDroppable<PaginationFilteredFetched>(throttleDuration),
+      transformer:
+          throttleDroppable<PaginationFilteredFetched>(throttleDuration),
     );
-    add(const PaginationAllFetched());
+    getIt<RaffleRepository>().myRaffles().then((e) {
+      add(const PaginationAllFetched());
+    });
   }
 
   Future<void> _onFilteredSearch(

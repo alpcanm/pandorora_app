@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/feature/repositories/raffle_repository.dart';
 
 import '../../../core/models/raffle.dart';
-
+import '../../../core/utils/locator_get_it.dart';
+import '../../widgets/components/raffle_checker.dart';
 
 class RafflePage extends StatelessWidget {
   const RafflePage(Raffle raffle, {Key? key})
@@ -11,12 +13,16 @@ class RafflePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.width;
-
+    final _isActive = RaffleChecker.checker(_raffle.raffleId!);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        //TODO: düzeltilecek
-        backgroundColor: false == true ? Colors.grey : null,
-        onPressed: false ? null : () {},
+        backgroundColor: _isActive == true ? Colors.grey : null,
+        onPressed: _isActive
+            ? null
+            : () {
+                getIt<RaffleRepository>()
+                    .subscribeARaffle(_raffle.raffleId!, _raffle.date!);
+              },
         child: const Text(
           'Katıl',
           style: TextStyle(color: Colors.yellow),

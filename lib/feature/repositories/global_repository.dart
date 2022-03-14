@@ -1,4 +1,5 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
+import 'package:pandorora_app/core/models/users_raffle_list.dart';
 import '../../core/utils/locator_get_it.dart';
 import 'auth_repository.dart';
 
@@ -14,6 +15,8 @@ class GlobalRepository {
 
   User? _user;
   User? get user => _user;
+
+  UsersRaffleList usersRaffleList=UsersRaffleList();
 
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();
