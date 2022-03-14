@@ -23,13 +23,11 @@ class _HomeFilters extends StatelessWidget {
           TextButton.icon(
               onPressed: () {
                 final _bloc = getIt<PaginationBloc>();
-                if (getIt<TagList>().filters.isNotEmpty) {
-                  _bloc.add(PaginationFilteredFetched(getIt<TagList>().filters,
-                      status: PaginationStatus.initial));
-                } else {
-                  _bloc.add(const PaginationAllFetched(
-                      status: PaginationStatus.initial));
-                }
+                _bloc.add(
+                  PaginationAllFetched(
+                      filters: getIt<TagList>().filters,
+                      status: PaginationStatus.initial),
+                );
               },
               icon: const Icon(Icons.search),
               label: const Text('Ara'))

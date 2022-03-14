@@ -11,28 +11,27 @@ class RaffleService {
     _dio.options = _baseOptions;
   }
 
-  Future<List?> getAllRaffles(int startIndex) async {
+  Future<dynamic> getRaffles(int startIndex, {Set<String>? filters}) async {
+    //filtreyi replace ediyoruz.
+    final String _query = _replaceFilter(filters);
+    // queryParameters a parametrelerimizi atıyoruz. ve isteğimizi gönderiyoruz.
     Response _response = await _dio.get(ServerConsts.RAFFLE_PATH,
-        queryParameters: {"gt": startIndex.toString()});
+        queryParameters: {"gt": startIndex, "tags": _query});
+    //Gelence cevap 200 status code ise response modelimize göre içindeki datayı çekiyoruz.
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
-    } else {
-      return null;
     }
+    return null;
   }
 
-  Future<List?> getFilteredRaffles(int startIndex, Set<String> filters) async {
-    String tagQuery1 = filters.toString().replaceAll(" ", "");
-    String tagQuery2 = tagQuery1.toString().replaceAll("{", "");
-    String tagQuery3 = tagQuery2.toString().replaceAll("}", "");
-
-    Response _response = await _dio
-        .get(ServerConsts.RAFFLE_PATH + '?gt=$startIndex&tags=$tagQuery3');
-    if (_response.statusCode == 200) {
-      return _response.data["body"]["data"];
-    } else {
-      return null;
+  String _replaceFilter(Set<String>? filters) {
+    if (filters == null) {
+      return "";
     }
+    String primarySplit = filters.toString().replaceAll(" ", "");
+    String secondarySplit = primarySplit.toString().replaceAll("{", "");
+    String query = secondarySplit.toString().replaceAll("}", "");
+    return query;
   }
 
   Future<dynamic> myRaffles(String userId) async {

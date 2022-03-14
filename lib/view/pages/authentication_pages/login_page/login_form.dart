@@ -6,12 +6,12 @@ import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
 
 import '../../../widgets/_/_widget_consts.dart';
-import '../../../../feature/global_view_models/auth/auth_bloc.dart';
 
 import '../../../../core/constants/navigation_consts.dart';
 
 import '../../../constants/view_texts.dart';
 
+import '../../splash_page/auth_bloc/auth_bloc.dart';
 import 'cubit/loginpage_cubit.dart';
 
 class LoginForm extends StatelessWidget {

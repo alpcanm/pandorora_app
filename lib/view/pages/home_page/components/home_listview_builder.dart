@@ -37,20 +37,12 @@ class _MoreButton extends StatelessWidget {
     return BlocBuilder(
       bloc: _bloc,
       builder: (context, PaginationState state) {
-        if (state.status == PaginationStatus.loading) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return TextButton(
-            onPressed: () {
-              if (getIt<TagList>().filters.isNotEmpty) {
-                _bloc.add(PaginationFilteredFetched(getIt<TagList>().filters));
-              } else {
-                _bloc.add(const PaginationAllFetched());
-              }
-            },
-            child: const Text('Daha fazla'),
-          );
-        }
+        return TextButton(
+          onPressed: () {
+            _bloc.add(PaginationAllFetched(filters: getIt<TagList>().filters));
+          },
+          child: const Text('Daha fazla'),
+        );
       },
     );
   }

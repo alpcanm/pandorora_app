@@ -18,117 +18,75 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
+  final _raffleRepo = getIt<RaffleRepository>();
   PaginationBloc() : super(const PaginationState()) {
     on<PaginationAllFetched>(
-      onAllFetched,
+      _onPaginationFetch,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
-    on<PaginationFilteredFetched>(
-      _onFilteredSearch,
-      transformer:
-          throttleDroppable<PaginationFilteredFetched>(throttleDuration),
-    );
+
     getIt<RaffleRepository>().myRaffles().then((e) {
       add(const PaginationAllFetched());
     });
   }
-
-  Future<void> _onFilteredSearch(
-      PaginationFilteredFetched event, Emitter<PaginationState> emit) async {
+  Future<void> _onPaginationFetch(
+      PaginationAllFetched event, Emitter<PaginationState> emit) async {
+    // eğer filtreli arama yaparsak her şeyi sıfırlamamız gerekiyor bu yüzden event.status=initial veriyoruz.
+    //Bruası sadece filtreli aramalarda bir kere çalışacak.
     if (event.status == PaginationStatus.initial) {
       emit(
         state.copyWith(
+            raffles: [],
             lastRaffleTime: _currentDate,
             hasReachedMax: false,
             status: PaginationStatus.initial,
             isFiltered: true),
       );
     }
-
+    //tüm gelen başka veri yoksa direkt metoddan çıkacak.
     if (state.hasReachedMax) return;
+    // PaginationFetch ilk tetiklendiğinde burası çalışacak
     if (state.status == PaginationStatus.initial) {
-      final _raffles =
-          await _fetchRaffles(state.lastRaffleTime, filters: event.filters);
+      final _raffles = await _raffleRepo.getRaffles(state.lastRaffleTime,
+          filters: event.filters);
+
       if (_raffles != null && _raffles.isNotEmpty) {
+        //gelen verileri içeriye atacak ve metodu sonlandıracak.
         return emit(
           state.copyWith(
               hasReachedMax: false,
+              //gelen _products ı olduğu gibi içeriye atıyoruz.
               raffles: _raffles,
               status: PaginationStatus.success,
+              // _products içerisindeki son verinin tarihini de içeriye atıyoruz.
+              //Daha sonra bu son veriye göre greater parametresi değişiyor.
               lastRaffleTime: _raffles.last.date,
               isFiltered: true),
         );
       } else {
+        //gelen veri null ise failure dönecek
         return emit(
           state.copyWith(status: PaginationStatus.failure),
         );
       }
     }
-    final _prodcuts =
-        await _fetchRaffles(state.lastRaffleTime, filters: event.filters);
-    if (_prodcuts == null || _prodcuts.isEmpty) {
+    //verileri repodan istiyoruz.
+    final _products = await _raffleRepo.getRaffles(state.lastRaffleTime,
+        filters: event.filters);
+    if (_products == null || _products.isEmpty) {
+      // Eğer gelen veri artık boşsa hasReachedMax=true olacak ve bundan sonra istek atmayacak.
       emit(state.copyWith(hasReachedMax: true));
     } else {
+      // her "Daha Fazla" butonuna basıldığında burası tetiklenecek
       emit(
         state.copyWith(
             status: PaginationStatus.success,
             hasReachedMax: false,
-            raffles: List.of(state.raffles)..addAll(_prodcuts),
-            lastRaffleTime: _prodcuts.last.date,
+            //gelen verileri elimizde olan listeye ekliyoruz.
+            raffles: List.of(state.raffles)..addAll(_products),
+            lastRaffleTime: _products.last.date,
             isFiltered: true),
       );
     }
-  }
-
-  Future<void> onAllFetched(
-      PaginationAllFetched event, Emitter<PaginationState> emit) async {
-    if (event.status == PaginationStatus.initial) {
-      emit(
-        state.copyWith(
-            lastRaffleTime: _currentDate,
-            hasReachedMax: false,
-            status: PaginationStatus.initial,
-            isFiltered: true,
-            raffles: []),
-      );
-    }
-    if (state.hasReachedMax) return;
-    if (state.status == PaginationStatus.initial ||
-        event.status == PaginationStatus.initial) {
-      emit(state.copyWith(
-          hasReachedMax: false,
-          lastRaffleTime: _currentDate,
-          status: PaginationStatus.loading,
-          isFiltered: false));
-      final _raffles = await _fetchRaffles(state.lastRaffleTime);
-      if (_raffles!.isNotEmpty) {
-        return emit(
-          state.copyWith(
-            hasReachedMax: false,
-            raffles: _raffles,
-            status: PaginationStatus.success,
-            lastRaffleTime: _raffles.last.date,
-          ),
-        );
-      }
-    }
-    final List<Raffle>? _prodcuts = await _fetchRaffles(state.lastRaffleTime);
-    if (_prodcuts == null || _prodcuts.isEmpty) {
-      emit(state.copyWith(hasReachedMax: true));
-    } else {
-      emit(
-        state.copyWith(
-            status: PaginationStatus.success,
-            hasReachedMax: false,
-            raffles: List.of(state.raffles)..addAll(_prodcuts),
-            lastRaffleTime: _prodcuts.last.date),
-      );
-    }
-  }
-
-  Future<List<Raffle>?>? _fetchRaffles(int startAtLastRaffleTime,
-      {Set<String>? filters}) async {
-    return await getIt<RaffleRepository>()
-        .getRaffles(startAtLastRaffleTime, filters: filters);
   }
 }

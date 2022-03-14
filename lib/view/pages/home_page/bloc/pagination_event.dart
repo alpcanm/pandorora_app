@@ -9,13 +9,10 @@ abstract class PaginationEvent extends Equatable {
 
 class PaginationAllFetched extends PaginationEvent {
   final PaginationStatus? status;
-
-  const PaginationAllFetched({this.status});
+ final Set<String>? filters;
+  const PaginationAllFetched({
+    this.status,
+     this.filters,
+  });
 }
 
-class PaginationFilteredFetched extends PaginationEvent {
-  final Set<String> filters;
-  final PaginationStatus? status;
-
-  const PaginationFilteredFetched(this.filters,{this.status});
-}

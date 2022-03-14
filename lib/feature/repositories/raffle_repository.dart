@@ -12,49 +12,23 @@ abstract class IRaffleRepository {
 }
 
 class RaffleRepository implements IRaffleRepository {
-  final RaffleService _raffleService = RaffleService();
+  final RaffleService _raffleService = getIt<RaffleService>();
   final GlobalRepository _globalRepo = getIt<GlobalRepository>();
   @override
   Future<List<Raffle>?> getRaffles(int startIndex,
       {Set<String>? filters}) async {
-    if (filters != null) {
-      return _getFilteredRaffles(startIndex, filters);
-    }
-    return _getAllRaffles(startIndex);
-  }
-
-  Future<List<Raffle>?> _getFilteredRaffles(
-      int startIndex, Set<String> filters) async {
     List<Raffle> _result = [];
-
-    if (filters.isNotEmpty) {
-      List? _response =
-          await _raffleService.getFilteredRaffles(startIndex, filters);
-      if (_response != null) {
-        for (var element in _response) {
-          _result.add(Raffle.fromMap(element));
-        }
-        return _result;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  }
-
-  Future<List<Raffle>?> _getAllRaffles(int startIndex) async {
-    List<Raffle> _result = [];
-
-    List? _response = await _raffleService.getAllRaffles(startIndex);
+    //productSerivce e istek gönderilir.
+    final _response =
+        await _raffleService.getRaffles(startIndex, filters: filters);
     if (_response != null) {
-      for (var element in _response) {
-        _result.add(Raffle.fromMap(element));
+      for (var item in _response) {
+        //gelen cevap null değilse içerisindeki veriler ProductModele dönüştürülür ve liste içerisine atılır.
+        _result.add(Raffle.fromMap(item));
       }
       return _result;
-    } else {
-      return null;
     }
+    return null;
   }
 
   @override

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants/navigation_consts.dart';
-import '../../../feature/global_view_models/auth/auth_bloc.dart';
+
 import '../authentication_pages/login_page/login_page.dart';
+import 'auth_bloc/auth_bloc.dart';
 import 'cubit/splash_cubit.dart';
 
 class SplashBody extends StatelessWidget {
