@@ -43,7 +43,7 @@ class _MoreButton extends StatelessWidget {
           return TextButton(
             onPressed: () {
               if (getIt<TagList>().filters.isNotEmpty) {
-                _bloc.add(PaginationFilteredPatch(getIt<TagList>().filters));
+                _bloc.add(PaginationFilteredFetched(getIt<TagList>().filters));
               } else {
                 _bloc.add(const PaginationAllFetched());
               }

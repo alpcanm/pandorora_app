@@ -7,8 +7,8 @@ import '../../../widgets/_/count_down/count_down.dart';
 
 import '../../../../core/navigation/navigation_manager.gr.dart';
 
-class ConsoleCard extends StatelessWidget {
-  const ConsoleCard(this.raffle, {Key? key}) : super(key: key);
+class MyRafflesCard extends StatelessWidget {
+  const MyRafflesCard(this.raffle, {Key? key}) : super(key: key);
   final Raffle raffle;
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ConsoleCard extends StatelessWidget {
             maxLines: 1, overflow: TextOverflow.ellipsis),
         trailing: SizedBox(
             width: 100,
-            child: CountDownArea(dateTime: raffle.date!.toDate)),
+            child: CountDownArea(dateTime: raffle.date?.toDate ?? DateTime.now())),
       ),
     );
   }

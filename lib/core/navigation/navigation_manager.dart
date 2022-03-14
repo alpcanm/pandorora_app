@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import '../../view/pages/raffle_page/raffle_page.dart';
-import '../../view/pages/console_page/console_page.dart';
+import '../../view/pages/my_raffles_page/my_raffles_page.dart';
 
 import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart';
 
@@ -46,7 +46,7 @@ import '../../view/pages/profile_page/profile_page.dart';
         guards: [AuthGuard]),
     AutoRoute(page: RafflePage, path: RouteConsts.RAFFLE_PAGE),
     AutoRoute(
-        page: ConsolePage, path: RouteConsts.CONSOLE_PAGE, guards: [AuthGuard]),
+        page: MyRafflesPage, path: RouteConsts.CONSOLE_PAGE, guards: [AuthGuard]),
     AutoRoute(
         page: AuthController,
         path: RouteConsts.CONTROLLER_PAGE,

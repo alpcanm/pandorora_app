@@ -13,9 +13,9 @@ class PaginationAllFetched extends PaginationEvent {
   const PaginationAllFetched({this.status});
 }
 
-class PaginationFilteredPatch extends PaginationEvent {
+class PaginationFilteredFetched extends PaginationEvent {
   final Set<String> filters;
   final PaginationStatus? status;
 
-  const PaginationFilteredPatch(this.filters,{this.status});
+  const PaginationFilteredFetched(this.filters,{this.status});
 }

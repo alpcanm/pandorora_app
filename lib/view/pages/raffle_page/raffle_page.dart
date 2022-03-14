@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/models/raffle.dart';
-import '../../widgets/components/applied_checker.dart';
+
 
 class RafflePage extends StatelessWidget {
   const RafflePage(Raffle raffle, {Key? key})
@@ -11,11 +11,12 @@ class RafflePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.width;
-    bool _isApplied = Checker.applyCheck(_raffle.raffleId ?? "");
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: _isApplied == true ? Colors.grey : null,
-        onPressed: _isApplied ? null : () {},
+        //TODO: düzeltilecek
+        backgroundColor: false == true ? Colors.grey : null,
+        onPressed: false ? null : () {},
         child: const Text(
           'Katıl',
           style: TextStyle(color: Colors.yellow),

@@ -6,7 +6,6 @@ import 'package:pandorora_app/core/extension/context_extension.dart';
 import 'package:pandorora_app/core/extension/int_extension.dart';
 import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
-import 'package:pandorora_app/view/widgets/components/applied_checker.dart';
 
 import '../../../../../core/navigation/navigation_manager.gr.dart';
 

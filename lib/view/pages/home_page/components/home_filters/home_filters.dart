@@ -24,7 +24,7 @@ class _HomeFilters extends StatelessWidget {
               onPressed: () {
                 final _bloc = getIt<PaginationBloc>();
                 if (getIt<TagList>().filters.isNotEmpty) {
-                  _bloc.add(PaginationFilteredPatch(getIt<TagList>().filters,
+                  _bloc.add(PaginationFilteredFetched(getIt<TagList>().filters,
                       status: PaginationStatus.initial));
                 } else {
                   _bloc.add(const PaginationAllFetched(

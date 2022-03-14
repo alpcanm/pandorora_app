@@ -23,7 +23,8 @@ class _RaffleCardHeader extends StatelessWidget {
                   .copyWith(fontSize: 14, color: Colors.yellow),
             ),
             Text(
-              Checker.applyCheck(raffle.raffleId ?? "") ? "Katıldın" : "",
+              //TODO: DÜzeltilecek
+              false ? "Katıldın" : "",
               style: Theme.of(context)
                   .textTheme
                   .headline4!

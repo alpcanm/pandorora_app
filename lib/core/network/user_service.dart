@@ -36,8 +36,7 @@ class UserService implements IUserService {
     _dio.options.headers['authorization'] = 'Bearer $token';
     Response _response = await _dio.get(ServerConsts.USERS_PATH);
     if (_response.statusCode == 200) {
-    
-      User _user = User.fromMap((_response.data as Map)['body']['data'] );
+      User _user = User.fromMap((_response.data as Map)['body']['data']);
       return _user;
     } else {
       return null;
@@ -45,15 +44,19 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<bool> signUp({
-    required String uid,
-    required String name,
-    required String surname,
-    required String mail,
-    required String phoneNumber
-  }) async {
+  Future<bool> signUp(
+      {required String uid,
+      required String name,
+      required String surname,
+      required String mail,
+      required String phoneNumber}) async {
     try {
-      User _data = User(name: name, surname: surname, mail: mail, uid: uid,phoneNumber:phoneNumber);
+      User _data = User(
+          name: name,
+          surname: surname,
+          mail: mail,
+          uid: uid,
+          phoneNumber: phoneNumber);
       Response _response =
           await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
       if (_response.statusCode == 201) {

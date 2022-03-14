@@ -35,11 +35,13 @@ class RaffleService {
     }
   }
 
-  Future<List<Raffle>> myFutureRaffles(bool pagination, String userId) {
-    throw UnimplementedError();
-  }
-
-  Future<List<Raffle>> myPastRaffles(bool pagination, String userId) {
-    throw UnimplementedError();
+  Future<dynamic> myRaffles(String userId) async {
+    Response _response =
+        await _dio.get(ServerConsts.USERS_PATH + '/$userId?gt=0');
+    if (_response.statusCode == 200) {
+      return _response.data["body"]["data"];
+    } else {
+      return null;
+    }
   }
 }

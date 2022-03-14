@@ -1,11 +1,15 @@
+import 'dart:convert';
+
 import 'package:pandorora_app/core/network/raffle_service.dart';
+import 'package:pandorora_app/feature/repositories/global_repository.dart';
 
 import '../../core/models/raffle.dart';
+import '../../core/models/users_raffle_list.dart';
+import '../../core/utils/locator_get_it.dart';
 
 abstract class IRaffleRepository {
   Future<List<Raffle>?> getRaffles(int startIndex, {Set<String>? filters});
-  Future<List<Raffle>> myFutureRaffles(String userId);
-  Future<List<Raffle>> myPastRaffles(String userId);
+  Future<UsersRaffleList> myRaffles();
 }
 
 class RaffleRepository implements IRaffleRepository {
@@ -55,14 +59,18 @@ class RaffleRepository implements IRaffleRepository {
   }
 
   @override
-  Future<List<Raffle>> myFutureRaffles(String userId) {
-    // TODO: implement myFutureRaffles
-    throw UnimplementedError();
-  }
+  Future<UsersRaffleList> myRaffles() async {
+    var _response =
+        await _raffleService.myRaffles(getIt<GlobalRepository>().user!.uid!);
 
-  @override
-  Future<List<Raffle>> myPastRaffles(String userId) {
-    // TODO: implement myPastRaffles
-    throw UnimplementedError();
+    UsersRaffleList _notFetchedList = UsersRaffleList.fromMap(_response);
+    for (Raffle item in _notFetchedList.raffleList!) {
+      if (item.date! > DateTime.now().millisecondsSinceEpoch) {
+        _notFetchedList.futureRaffleList.add(item);
+      } else {
+        _notFetchedList.pastRaffleList.add(item);
+      }
+    }
+    return _notFetchedList;
   }
 }

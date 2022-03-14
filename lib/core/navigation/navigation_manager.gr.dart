@@ -18,8 +18,8 @@ import '../../view/pages/authentication_pages/login_page/login_page.dart'
 import '../../view/pages/authentication_pages/not_login_page.dart' as _i8;
 import '../../view/pages/authentication_pages/register_page/register_page.dart'
     as _i9;
-import '../../view/pages/console_page/console_page.dart' as _i5;
 import '../../view/pages/home_page/home_page.dart' as _i3;
+import '../../view/pages/my_raffles_page/my_raffles_page.dart' as _i5;
 import '../../view/pages/profile_page/children_pages/change_password/change_password_page.dart'
     as _i13;
 import '../../view/pages/profile_page/children_pages/contact_us/contact_us_page.dart'
@@ -63,9 +63,9 @@ class AppRouter extends _i2.RootStackRouter {
           routeData: routeData,
           child: _i4.RafflePage(args.raffle, key: args.key));
     },
-    ConsoleRoute.name: (routeData) {
+    MyRafflesRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.ConsolePage());
+          routeData: routeData, child: const _i5.MyRafflesPage());
     },
     AuthControllerRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -125,7 +125,7 @@ class AppRouter extends _i2.RootStackRouter {
         _i2.RouteConfig(HomeMainRoute.name,
             path: '/home-page', guards: [authGuard]),
         _i2.RouteConfig(RaffleRoute.name, path: '/raffle-page'),
-        _i2.RouteConfig(ConsoleRoute.name,
+        _i2.RouteConfig(MyRafflesRoute.name,
             path: '/console-page', guards: [authGuard]),
         _i2.RouteConfig(AuthControllerRoute.name, path: '/controller-page'),
         _i2.RouteConfig(LoginRoute.name, path: '/login-page'),
@@ -185,11 +185,11 @@ class RaffleRouteArgs {
 }
 
 /// generated route for
-/// [_i5.ConsolePage]
-class ConsoleRoute extends _i2.PageRouteInfo<void> {
-  const ConsoleRoute() : super(ConsoleRoute.name, path: '/console-page');
+/// [_i5.MyRafflesPage]
+class MyRafflesRoute extends _i2.PageRouteInfo<void> {
+  const MyRafflesRoute() : super(MyRafflesRoute.name, path: '/console-page');
 
-  static const String name = 'ConsoleRoute';
+  static const String name = 'MyRafflesRoute';
 }
 
 /// generated route for

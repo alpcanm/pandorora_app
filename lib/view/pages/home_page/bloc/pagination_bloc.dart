@@ -23,16 +23,15 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       onAllFetched,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
-    on<PaginationFilteredPatch>(
+    on<PaginationFilteredFetched>(
       _onFilteredSearch,
-      transformer: throttleDroppable<PaginationFilteredPatch>(throttleDuration),
+      transformer: throttleDroppable<PaginationFilteredFetched>(throttleDuration),
     );
-
     add(const PaginationAllFetched());
   }
 
   Future<void> _onFilteredSearch(
-      PaginationFilteredPatch event, Emitter<PaginationState> emit) async {
+      PaginationFilteredFetched event, Emitter<PaginationState> emit) async {
     if (event.status == PaginationStatus.initial) {
       emit(
         state.copyWith(

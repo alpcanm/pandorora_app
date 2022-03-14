@@ -11,8 +11,6 @@ class User {
   String? password;
   bool? mailVerified;
   String? subscribeNickName;
-  List<String?>? subscribedRaffles;
-  int? tickets;
 
   User({
     this.uid,
@@ -24,8 +22,6 @@ class User {
     this.password,
     this.mailVerified,
     this.subscribeNickName,
-    this.subscribedRaffles,
-    this.tickets,
   });
 
   Map<String, dynamic> toMap() {
@@ -37,10 +33,7 @@ class User {
       'phone_number': phoneNumber,
       'photo_url': photoURL,
       'password': password,
-      'mail_verified': mailVerified,
-      'tickets': tickets,
       'subscribe_nick_name': subscribeNickName,
-      'subscribed_raffles': subscribedRaffles,
     };
   }
 
@@ -54,9 +47,7 @@ class User {
       photoURL: map['photo_url'],
       password: map['password'],
       mailVerified: map['mailVerified'],
-      tickets: map['tickets'],
       subscribeNickName: map['subscribe_nick_name'],
-      subscribedRaffles: map['subscribed_raffles'],
     );
   }
 
