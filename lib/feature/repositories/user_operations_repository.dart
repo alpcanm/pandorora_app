@@ -32,7 +32,7 @@ abstract class IUserOperationsRepository {
 
 class UserOperationsRepository implements IUserOperationsRepository {
   final _globalRepo = getIt<GlobalRepository>();
-  final _userDBService =getIt<UserService>();
+  final _userDBService = getIt<UserService>();
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
   @override

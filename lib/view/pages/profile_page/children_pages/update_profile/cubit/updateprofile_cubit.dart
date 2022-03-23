@@ -21,7 +21,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
   final TextEditingController surnameController =
       TextEditingController(text: _user.surname);
   final TextEditingController raffleNickController =
-      TextEditingController(text: _user.subscribeNickName);
+      TextEditingController(text: _user.raffleNickName);
   final TextEditingController mailController =
       TextEditingController(text: _user.mail);
   final formKey = GlobalKey<FormState>();
@@ -30,7 +30,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
     // Eğer hiç bir alanı değiştirmemişse false dönecek
     if (nameController.text.trim() == _user.name &&
         surnameController.text.trim() == _user.surname &&
-        raffleNickController.text.trim() == _user.subscribeNickName &&
+        raffleNickController.text.trim() == _user.raffleNickName &&
         mailController.text.trim() == _user.mail) {
       return false;
     } else {

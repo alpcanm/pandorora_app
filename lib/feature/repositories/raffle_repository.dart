@@ -52,6 +52,6 @@ class RaffleRepository implements IRaffleRepository {
         raffleId: raffleId,
         userId: _globalRepo.user!.uid!,
         date: date,
-        subscriberName: _globalRepo.user!.subscribeNickName ?? "BOŞ ŞUAN");
+        raffleNickName: _globalRepo.user!.raffleNickName ?? "BOŞ ŞUAN");
   }
 }

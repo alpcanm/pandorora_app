@@ -10,7 +10,7 @@ class User {
   String? photoURL;
   String? password;
   bool? mailVerified;
-  String? subscribeNickName;
+  String? raffleNickName;
 
   User({
     this.uid,
@@ -21,7 +21,7 @@ class User {
     this.photoURL,
     this.password,
     this.mailVerified,
-    this.subscribeNickName,
+    this.raffleNickName,
   });
 
   Map<String, dynamic> toMap() {
@@ -33,7 +33,7 @@ class User {
       'phone_number': phoneNumber,
       'photo_url': photoURL,
       'password': password,
-      'subscribe_nick_name': subscribeNickName,
+      'raffle_nick_name': raffleNickName,
     };
   }
 
@@ -47,7 +47,7 @@ class User {
       photoURL: map['photo_url'],
       password: map['password'],
       mailVerified: map['mailVerified'],
-      subscribeNickName: map['subscribe_nick_name'],
+      raffleNickName: map['raffle_nick_name'],
     );
   }
 

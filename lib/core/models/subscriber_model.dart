@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 class SubscriberModel {
-  final String subscriberName;
+  final String raffleNickName;
   final String subscriberId;
   final int subscribeDate;
   SubscriberModel({
-    required this.subscriberName,
+    required this.raffleNickName,
     required this.subscriberId,
     required this.subscribeDate,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'subscriber_name': subscriberName,
+      'raffle_nick_name': raffleNickName,
       'subscriber_id': subscriberId,
       'subscribe_date': subscribeDate,
     };
@@ -20,7 +20,7 @@ class SubscriberModel {
 
   factory SubscriberModel.fromMap(Map<String, dynamic> map) {
     return SubscriberModel(
-      subscriberName: map['subscriber_name'] ?? '',
+      raffleNickName: map['raffle_nick_name'] ?? '',
       subscriberId: map['subscriber_id'] ?? '',
       subscribeDate: map['subscribe_date'] ?? '',
     );

@@ -47,12 +47,12 @@ class RaffleService {
   Future<bool> subscribeARaffle(
       {required String raffleId,
       required String userId,
-      required String subscriberName,
+      required String raffleNickName,
       required int date}) async {
     SubscriberModel _data = SubscriberModel(
         subscribeDate: date,
         subscriberId: userId,
-        subscriberName: subscriberName);
+        raffleNickName: raffleNickName);
     Response _response = await _dio.post(
         ServerConsts.RAFFLE_PATH_ADDTO + '?rfid=$raffleId&uid=$userId',
         data: _data.toJson());
