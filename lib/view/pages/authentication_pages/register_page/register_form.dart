@@ -18,8 +18,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final _transparentDivider = WC.tpDivider;
+  final _space = const SizedBox(height: 10);
   final _countryPhonePicker = CountryPhonePicker();
+
   @override
   void dispose() {
     _countryPhonePicker.close();
@@ -33,38 +34,40 @@ class _RegisterFormState extends State<RegisterForm> {
       key: _registerpageCubit.formKey,
       child: WC.paddingAll(
         child: ListView(
+          shrinkWrap: true,
           children: [
             _countryPhonePicker.dropdownWidget,
+            _space,
             CustomTextFormField(
                 labelText: RegisterPageText.NAME,
                 controller: _registerpageCubit.nameController),
-            _transparentDivider,
+            _space,
             CustomTextFormField(
                 labelText: RegisterPageText.SURNAME,
                 controller: _registerpageCubit.surnameController),
-            _transparentDivider,
+            _space,
             CustomTextFormField(
                 labelText: RegisterPageText.MAIL,
                 customValidator: Validators.mailValidator,
                 controller: _registerpageCubit.mailController),
-            _transparentDivider,
+            _space,
             _PhoneCode(
               _countryPhonePicker.valueTextWidget,
               registerpageCubit: _registerpageCubit,
             ),
-            _transparentDivider,
+            _space,
             CustomTextFormField(
                 labelText: RegisterPageText.PASSWORD,
                 customValidator: Validators.passwordValidator,
                 obscureText: true,
                 controller: _registerpageCubit.passwordController),
-            _transparentDivider,
+            _space,
             CustomTextFormField(
                 labelText: RegisterPageText.CONFIRM_PASSWORD,
                 obscureText: true,
                 customValidator: _registerpageCubit.confirmPasswordValidator,
                 controller: _registerpageCubit.confirmPassowrdController),
-            _transparentDivider,
+            _space,
             const _SubmitButton()
           ],
         ),

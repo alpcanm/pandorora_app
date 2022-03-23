@@ -1,45 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ToDoTheme {
-  static TextTheme lightTextTheme = TextTheme(
-    bodyText2: GoogleFonts.openSans(
-      fontSize: 14.0,
-      color: Colors.black,
-    ),
-    bodyText1: GoogleFonts.openSans(
-      fontSize: 12.0,
-    ),
-    headline1: GoogleFonts.marcellus(
-      fontSize: 32.0,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    ),
-    headline2: GoogleFonts.openSans(
-      fontSize: 21.0,
-      fontWeight: FontWeight.w700,
-      color: Colors.black,
-    ),
-    headline3: GoogleFonts.openSans(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.black,
-    ),
-    headline4: GoogleFonts.openSans(
-      fontSize: 14.0,
-      fontWeight: FontWeight.w600,
-      color: Colors.white,
-    ),
-    subtitle1: GoogleFonts.openSans(
-      fontSize: 20.0,
-      color: Colors.black,
-    ),
+  static TextTheme lightTextTheme = const TextTheme(
+    headline1: TextStyle(fontFamily: "red-hat", fontSize: 36),
+    headline6: TextStyle(fontSize: 24, color: Colors.white),
+    headline4: TextStyle(fontSize: 24, color: _cardTextColor),
   );
+  static const Color _cardTextColor = _primary;
+  static const Color _primary = Color.fromRGBO(188, 36, 60, 1);
+  static const Color _secondary = Colors.white;
 
-  static const Color _primary = Colors.purple;
-  static const Color _secondary = Colors.yellow;
+
   static ThemeData light() {
     return ThemeData(
+        primaryColor: _primary,
+       
         floatingActionButtonTheme:
             const FloatingActionButtonThemeData(backgroundColor: _primary),
         appBarTheme: const AppBarTheme(

@@ -35,8 +35,7 @@ dependencies:
   flutter_bloc: ^8.0.1
 
   #UI
-  google_fonts: ^2.3.1
-
+  
   #MY_MODULES---------------------
   
   #firebase_auth_rest
@@ -61,7 +60,12 @@ dev_dependencies:
 
 flutter:
 
+  fonts:
+    - family: red-hat
+      fonts:
+        - asset: assets/fonts/red-hat-font.ttf 
   assets:
  
     - .env
+
   uses-material-design: true

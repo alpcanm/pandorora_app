@@ -34,7 +34,9 @@ class LoginForm extends StatelessWidget {
         key: _loginpageCubit.formKey,
         child: WC.paddingAll(
           child: Center(
-            child: ListView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _Head(),
                 _transparentDivider,
@@ -66,16 +68,11 @@ class LoginForm extends StatelessWidget {
 class _Head extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const FlutterLogo(size: 72),
-        Text(
-          LoginPageText.LOGIN_TITLE,
-          style: Theme.of(context).textTheme.headline1,
-        )
-      ],
+    return Center(
+      child: Text(
+        LoginPageText.LOGIN_TITLE,
+        style: Theme.of(context).textTheme.headline1,
+      ),
     );
   }
 }

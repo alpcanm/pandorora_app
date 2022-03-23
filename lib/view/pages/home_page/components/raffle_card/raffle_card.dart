@@ -27,7 +27,6 @@ class RaffleCard extends StatelessWidget {
     return SizedBox(
       height: _height,
       child: Card(
-          color: Colors.purple,
           margin: _cardMargin,
           child: Column(
             children: [

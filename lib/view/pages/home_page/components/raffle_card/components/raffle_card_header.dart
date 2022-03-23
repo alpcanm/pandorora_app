@@ -16,20 +16,48 @@ class _RaffleCardHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              raffle.tag ?? "",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(fontSize: 14, color: Colors.yellow),
-            ),
-            Text(
-              _isActive ? "Katıldın" : "",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline4!
-                  .copyWith(color: Colors.yellow),
-            )
+            Text(raffle.tag ?? "",
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                  shadows: const [
+                    Shadow(
+                        // bottomLeft
+                        offset: Offset(-1.5, -1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // bottomRight
+                        offset: Offset(1.5, -1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // topRight
+                        offset: Offset(1.5, 1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // topLeft
+                        offset: Offset(-1.5, 1.5),
+                        color: Colors.white),
+                  ],
+                )),
+            Text(_isActive ? "Katıldın" : "",
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                  shadows: const [
+                    Shadow(
+                        // bottomLeft
+                        offset: Offset(-1.5, -1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // bottomRight
+                        offset: Offset(1.5, -1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // topRight
+                        offset: Offset(1.5, 1.5),
+                        color: Colors.white),
+                    Shadow(
+                        // topLeft
+                        offset: Offset(-1.5, 1.5),
+                        color: Colors.white),
+                  ],
+                ))
           ],
         ),
       ),
