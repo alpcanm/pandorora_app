@@ -11,6 +11,7 @@ class _HomeFilters extends StatelessWidget {
       child: ExpansionTile(
         onExpansionChanged: (value) {},
         title: const Text('Filtreler'),
+        textColor: Theme.of(context).primaryColor,
         children: <Widget>[
           Wrap(
             children: TagList.tags.keys
@@ -60,7 +61,7 @@ class _TagCardState extends State<_TagCard> {
       }
     }
     return Card(
-      color: _isSelected ? Colors.purple : Colors.blueGrey,
+      color: _isSelected ? Theme.of(context).primaryColor : Colors.blueGrey,
       child: InkWell(
         onTap: () {
           bool _isInThere = false;

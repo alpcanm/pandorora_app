@@ -9,15 +9,12 @@ class _RaffleCardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 9,
-      child: InkWell(
-        onTap: () => context.router.push(RaffleRoute(raffle: raffle)),
-        child: Stack(
-          children: [
-            _PhotoStack(raffle: raffle),
-            _BottomCardStack(raffle: raffle),
-          ],
-        ),
+      flex: 16,
+      child: Column(
+        children: [
+          _PhotoStack(raffle: raffle),
+          _BottomCardStack(raffle: raffle),
+        ],
       ),
     );
   }
@@ -33,14 +30,23 @@ class _PhotoStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Image.network(
-          raffle.photoURL ?? "",
-          fit: BoxFit.cover,
-          height: double.infinity,
-          width: double.infinity,
+    const _borderRadius = BorderRadius.all(Radius.circular(15));
+    return Expanded(
+      flex: 4,
+      child: Card(
+        margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+        elevation: 1,
+        shape: const RoundedRectangleBorder(
+          borderRadius: _borderRadius,
+        ),
+        child: ClipRRect(
+          borderRadius: _borderRadius,
+          child: Image.network(
+            raffle.photoURL ?? "",
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+          ),
         ),
       ),
     );
@@ -57,44 +63,42 @@ class _BottomCardStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-          height: context.height * 0.1,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            elevation: 20,
+    // final _isActive = RaffleChecker.checker(raffle.raffleId!);
+    return Expanded(
+      flex: 1,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 18,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    flex: 15,
-                    child: Center(
-                      child: Text(
-                        raffle.title ?? "",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline4!
-                            .copyWith(color: Colors.black),
-                      ),
-                    ),
+                  Text(
+                    raffle.title ?? "",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline5!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 16,
+                        fontFamily: 'TechnaSans'),
                   ),
-                  Expanded(
-                    flex: 15,
-                    child: CountDownArea(
-                      dateTime: raffle.date!.toDate,
-                    ),
-                  )
+                  // Text(_isActive ? "Katıldın" : "",
+                  //     style: Theme.of(context).textTheme.headline6!.copyWith()),
                 ],
               ),
             ),
           ),
-        ),
+          Expanded(
+            flex: 10,
+            child: CountDownArea(
+              dateTime: raffle.date!.toDate,
+            ),
+          )
+        ],
       ),
     );
   }

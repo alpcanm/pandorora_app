@@ -14,7 +14,7 @@ class _RegisterAppBar extends StatelessWidget implements PreferredSize {
         centerTitle: true,
         title: Text(
           'Details',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline5,
         ),
 
         actions: [],

@@ -8,7 +8,6 @@ import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
 
 import '../../../../../core/navigation/navigation_manager.gr.dart';
-import '../../../../widgets/components/raffle_checker.dart';
 
 part 'components/raffle_card_body.dart';
 part 'components/raffle_card_header.dart';
@@ -23,18 +22,24 @@ class RaffleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _height = MediaQuery.of(context).size.height * 0.5;
     return SizedBox(
-      height: _height,
+      height: context.height * 0.5,
       child: Card(
-          margin: _cardMargin,
+        margin: _cardMargin,
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: GestureDetector(
+          onTap: () => context.router.push(RaffleRoute(raffle: _raffle)),
           child: Column(
             children: [
               _RaffleCardHeader(raffle: _raffle),
               _RaffleCardBody(raffle: _raffle),
             ],
           ),
-          elevation: 4),
+        ),
+      ),
     );
   }
 }

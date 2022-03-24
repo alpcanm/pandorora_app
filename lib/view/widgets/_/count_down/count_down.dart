@@ -27,6 +27,7 @@ class _CountDown extends StatelessWidget {
     return GestureDetector(
       onTap: () => _cubit.setTime(),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: const [_DayCard(), _HourCard(), _MinuteCard()],
       ),
     );
@@ -86,29 +87,19 @@ class _CountDownCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      color: Colors.purple,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0.0)),
-      ),
-      margin: const EdgeInsets.all(3),
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text.toString(),
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(text.toString(),
               style: Theme.of(context)
                   .textTheme
                   .bodyText1!
-                  .copyWith(color: Colors.yellow),
-            ),
-            titleSelector(timeKey, context),
-          ],
-        ),
+                  .copyWith(color: Theme.of(context).primaryColor)),
+          titleSelector(timeKey, context),
+        ],
       ),
     );
   }
@@ -123,7 +114,7 @@ class _CountDownCard extends StatelessWidget {
       style: Theme.of(context)
           .textTheme
           .bodyText1!
-          .copyWith(color: Colors.yellow, fontSize: 9),
+          .copyWith(color: Theme.of(context).primaryColor, fontSize: 9),
     );
   }
 }

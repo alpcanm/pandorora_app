@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+part of profile_page;
 
-class ProfilePageButton {
+class _ProfilePageButton {
   Widget iconButton(
       {required String text,
       required IconData icon,

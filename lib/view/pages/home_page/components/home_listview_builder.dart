@@ -12,13 +12,21 @@ class _HomeListViewBuilder extends StatelessWidget {
       shrinkWrap: true,
       itemCount: raffleList.length,
       itemBuilder: (context, index) {
-        final _currentRaffleCard = RaffleCard(raffle: raffleList[index]);
+        final _currentRaffleCard = RaffleCard(
+          raffle: raffleList[index],
+        );
         // 0. indexte filtreler ve _raffleCard var;
         if (index == 0) {
-          return Column(children: [const _HomeFilters(), _currentRaffleCard]);
+          return Column(
+            children: [const _HomeFilters(), _currentRaffleCard],
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+          );
         } else if (index >= raffleList.length - 1) {
           //son indexte _raffleCard ve MoreButton var;
-          return Column(children: [_currentRaffleCard, const _MoreButton()]);
+          return Column(
+            children: [_currentRaffleCard, const _MoreButton()],
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+          );
         }
         return _currentRaffleCard;
       },

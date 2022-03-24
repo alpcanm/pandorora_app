@@ -31,6 +31,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   bloc_concurrency: ^0.2.0
   stream_transform: ^2.0.0
+  connectivity_plus: ^2.2.1
   #state management
   flutter_bloc: ^8.0.1
 
@@ -46,6 +47,7 @@ dependencies:
     path: modules/country_phone_picker
 
   cupertino_icons: ^1.0.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +66,9 @@ flutter:
     - family: red-hat
       fonts:
         - asset: assets/fonts/red-hat-font.ttf 
+    - family: TechnaSans
+      fonts:
+        - asset: assets/fonts/TechnaSans-Regular.otf    
   assets:
  
     - .env

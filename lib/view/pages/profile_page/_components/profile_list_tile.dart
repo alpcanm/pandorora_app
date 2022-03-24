@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of profile_page;
 
-import '../../../../core/utils/locator_get_it.dart';
-import '../bloc/profilepage_bloc.dart';
-
-class ProfileExpansionTile extends StatelessWidget {
-  const ProfileExpansionTile({
+class _ProfileListTile extends StatelessWidget {
+  const _ProfileListTile({
     Key? key,
   }) : super(key: key);
 
