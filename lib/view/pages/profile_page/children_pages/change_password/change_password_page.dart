@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../_components/profile_child_app_bar.dart';
 import 'bloc/changepassword_bloc.dart';
 import '../../../../widgets/_/_custom_text_form_field.dart';
 import '../../../../widgets/_/_print_message.dart';
@@ -12,9 +13,7 @@ class ChangePasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.widget.toString()),
-      ),
+      appBar: ProfileChildAppBar(context),
       body: BlocProvider(
         create: (context) => ChangepasswordBloc(),
         child: const _CurrentPasswordForm(),

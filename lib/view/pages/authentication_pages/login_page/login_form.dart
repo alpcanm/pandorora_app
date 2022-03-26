@@ -11,6 +11,7 @@ import '../../../../core/constants/navigation_consts.dart';
 
 import '../../../constants/view_texts.dart';
 
+import '../../../widgets/components/app_bar_title.dart';
 import '../../splash_page/auth_bloc/auth_bloc.dart';
 import 'cubit/loginpage_cubit.dart';
 
@@ -38,7 +39,7 @@ class LoginForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _Head(),
+                const AppBarTitle(titleText: LoginPageText.LOGIN_TITLE),
                 _transparentDivider,
                 CustomTextFormField(
                   customValidator: Validators.mailValidator,
@@ -108,17 +109,5 @@ class _SignUpButton extends StatelessWidget {
         onPressed: () =>
             context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
         child: const Text(LoginPageText.SIGN_UP));
-  }
-}
-
-class _Head extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        LoginPageText.LOGIN_TITLE,
-        style: Theme.of(context).textTheme.headline1,
-      ),
-    );
   }
 }

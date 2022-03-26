@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/core/utils/locator_get_it.dart';
 import 'package:pandorora_app/view/pages/home_page/bloc/pagination_bloc.dart';
+import 'package:pandorora_app/view/widgets/components/app_bar_title.dart';
 
 import '../../../core/navigation/navigation_manager.gr.dart';
 import '../../constants/view_texts.dart';
-import '../../widgets/components/rounded_rectangle_car.dart';
-import 'tools/filter_repository.dart';
+import '../../widgets/components/custom_rounded_rectangle_card.dart';
+import 'repo/filter_repository.dart';
 import 'components/raffle_card/raffle_card.dart';
 part 'components/home_filters/home_filters.dart';
 part 'components/home_body.dart';

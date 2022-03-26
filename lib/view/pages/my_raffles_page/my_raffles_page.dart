@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/view/pages/profile_page/_components/profile_child_app_bar.dart';
 import 'my_raffles_body.dart';
-import '../../widgets/components/custom_app_bar.dart';
 
 class MyRafflesPage extends StatelessWidget {
   const MyRafflesPage({Key? key}) : super(key: key);
@@ -8,7 +8,7 @@ class MyRafflesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(context),
+      appBar: ProfileChildAppBar(context),
       body: MyRafflesBody(),
     );
   }

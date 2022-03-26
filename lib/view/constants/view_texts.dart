@@ -3,6 +3,7 @@ class LoginPageText {
   static const String LOGIN_TITLE = 'PANDORORA';
   static const String SIGN_IN = 'Sıgn In';
   static const String SIGN_UP = 'Sıgn Up';
+  static const String PROFILE_TITLE = 'Profil';
 }
 
 class RegisterPageText {

@@ -28,7 +28,7 @@ class _HomeAppBarrState extends State<_HomeAppBarr> {
           });
         },
       ),
-      title: _Head(),
+      title: const AppBarTitle(titleText: LoginPageText.LOGIN_TITLE),
       backgroundColor: Colors.transparent,
       actions: [
         RoundedRectangleCardIcon(
@@ -38,18 +38,6 @@ class _HomeAppBarrState extends State<_HomeAppBarr> {
           },
         )
       ],
-    );
-  }
-}
-
-class _Head extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        LoginPageText.LOGIN_TITLE,
-        style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 28),
-      ),
     );
   }
 }

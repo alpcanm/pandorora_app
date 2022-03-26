@@ -46,7 +46,9 @@ import '../../view/pages/profile_page/profile_page.dart';
         guards: [AuthGuard]),
     AutoRoute(page: RafflePage, path: RouteConsts.RAFFLE_PAGE),
     AutoRoute(
-        page: MyRafflesPage, path: RouteConsts.CONSOLE_PAGE, guards: [AuthGuard]),
+        page: MyRafflesPage,
+        path: RouteConsts.CONSOLE_PAGE,
+        guards: [AuthGuard]),
     AutoRoute(
         page: AuthController,
         path: RouteConsts.CONTROLLER_PAGE,

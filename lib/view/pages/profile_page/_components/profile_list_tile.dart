@@ -20,7 +20,6 @@ class _ProfileListTile extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1,
           ),
           subtitle: Text(state.user?.mail ?? "boş"),
-          trailing: const Icon(Icons.settings),
         );
       },
     );
