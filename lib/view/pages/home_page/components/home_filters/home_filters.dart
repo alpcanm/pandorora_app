@@ -1,4 +1,4 @@
-part of home_body;
+part of home_page;
 
 class _HomeFilters extends StatelessWidget {
   const _HomeFilters({
@@ -7,33 +7,28 @@ class _HomeFilters extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ExpansionTile(
-        onExpansionChanged: (value) {},
-        title: const Text('Filtreler'),
-        textColor: Theme.of(context).primaryColor,
-        children: <Widget>[
-          Wrap(
-            children: TagList.tags.keys
-                .map((key) => _TagCard(
-                      TagList.tags[key],
-                      key,
-                    ))
-                .toList(),
-          ),
-          TextButton.icon(
-              onPressed: () {
-                final _bloc = getIt<PaginationBloc>();
-                _bloc.add(
-                  PaginationAllFetched(
-                      filters: getIt<TagList>().filters,
-                      status: PaginationStatus.initial),
-                );
-              },
-              icon: const Icon(Icons.search),
-              label: const Text('Ara'))
-        ],
-      ),
+    return Column(
+      children: <Widget>[
+        Wrap(
+          children: TagList.tags.keys
+              .map((key) => _TagCard(
+                    TagList.tags[key],
+                    key,
+                  ))
+              .toList(),
+        ),
+        TextButton.icon(
+            onPressed: () {
+              final _bloc = getIt<PaginationBloc>();
+              _bloc.add(
+                PaginationAllFetched(
+                    filters: getIt<TagList>().filters,
+                    status: PaginationStatus.initial),
+              );
+            },
+            icon: const Icon(Icons.search),
+            label: const Text('Ara'))
+      ],
     );
   }
 }

@@ -65,18 +65,6 @@ class LoginForm extends StatelessWidget {
   }
 }
 
-class _Head extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        LoginPageText.LOGIN_TITLE,
-        style: Theme.of(context).textTheme.headline1,
-      ),
-    );
-  }
-}
-
 class _SignInButton extends StatelessWidget {
   final LoginpageCubit loginpageCubit;
 
@@ -120,5 +108,17 @@ class _SignUpButton extends StatelessWidget {
         onPressed: () =>
             context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
         child: const Text(LoginPageText.SIGN_UP));
+  }
+}
+
+class _Head extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        LoginPageText.LOGIN_TITLE,
+        style: Theme.of(context).textTheme.headline1,
+      ),
+    );
   }
 }

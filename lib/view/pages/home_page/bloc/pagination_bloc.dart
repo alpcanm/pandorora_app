@@ -49,7 +49,6 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
     if (state.status == PaginationStatus.initial) {
       final _raffles = await _raffleRepo.getRaffles(state.lastRaffleTime,
           filters: event.filters);
-
       if (_raffles != null && _raffles.isNotEmpty) {
         //gelen verileri içeriye atacak ve metodu sonlandıracak.
         return emit(

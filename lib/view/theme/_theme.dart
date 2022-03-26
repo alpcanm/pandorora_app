@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ToDoTheme {
   static TextTheme lightTextTheme = const TextTheme(
-    headline1: TextStyle(fontFamily: "red-hat", fontSize: 36),
+    headline1: TextStyle(fontFamily: "red-hat", fontSize: 36, color: _primary),
     headline6: TextStyle(fontSize: 12, color: _primary),
     headline5: TextStyle(fontSize: 24, color: Color.fromRGBO(255, 255, 255, 1)),
     headline4: TextStyle(fontSize: 24, color: _primary),
