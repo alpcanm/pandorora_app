@@ -13,7 +13,7 @@ class _MoreButton extends StatelessWidget {
       builder: (context, PaginationState state) {
         return TextButton(
           onPressed: () {
-            _bloc.add(PaginationAllFetched(filters: getIt<TagList>().filters));
+            _bloc.add(PaginationAllFetched(filters: getIt<FilterRepository>().filters));
           },
           child: const Text('Daha fazla'),
         );

@@ -10,19 +10,22 @@ class _HomeFilters extends StatelessWidget {
     return Column(
       children: <Widget>[
         Wrap(
-          children: TagList.tags.keys
+          children: FilterRepository.tags.keys
               .map((key) => _TagCard(
-                    TagList.tags[key],
+                    FilterRepository.tags[key],
                     key,
                   ))
               .toList(),
         ),
         TextButton.icon(
             onPressed: () {
+              final _filterREpo = getIt<FilterRepository>();
               final _bloc = getIt<PaginationBloc>();
+              _filterREpo.remove(const _HomeFilters());
+              _filterREpo.isTagListOpen = false;
               _bloc.add(
                 PaginationAllFetched(
-                    filters: getIt<TagList>().filters,
+                    filters: getIt<FilterRepository>().filters,
                     status: PaginationStatus.initial),
               );
             },
@@ -50,7 +53,7 @@ class _TagCardState extends State<_TagCard> {
   @override
   Widget build(BuildContext context) {
     bool _isSelected = false;
-    for (String element in getIt<TagList>().filters) {
+    for (String element in getIt<FilterRepository>().filters) {
       if (element == widget.tagKey) {
         _isSelected = true;
       }
@@ -60,15 +63,15 @@ class _TagCardState extends State<_TagCard> {
       child: InkWell(
         onTap: () {
           bool _isInThere = false;
-          for (String element in getIt<TagList>().filters) {
+          for (String element in getIt<FilterRepository>().filters) {
             if (element == widget.tagKey) {
               _isInThere = true;
             }
           }
           if (_isInThere) {
-            getIt<TagList>().filters.remove(widget.tagKey);
+            getIt<FilterRepository>().filters.remove(widget.tagKey);
           } else {
-            getIt<TagList>().filters.add(widget.tagKey);
+            getIt<FilterRepository>().filters.add(widget.tagKey);
           }
           setState(() {});
         },

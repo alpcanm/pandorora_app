@@ -11,10 +11,10 @@ import 'package:pandorora_app/view/pages/home_page/bloc/pagination_bloc.dart';
 import '../../../core/navigation/navigation_manager.gr.dart';
 import '../../constants/view_texts.dart';
 import '../../widgets/components/rounded_rectangle_car.dart';
-import 'components/home_filters/tag_list.dart';
+import 'tools/filter_repository.dart';
 import 'components/raffle_card/raffle_card.dart';
 part 'components/home_filters/home_filters.dart';
-part 'components/sliver_app_bar.dart';
+part 'components/home_body.dart';
 part 'components/more_button.dart';
 part 'components/home_app_bar.dart';
 
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
         bloc: getIt<PaginationBloc>(),
         buildWhen: (previous, current) => previous != current,
         builder: (context, PaginationState state) =>
-            _HomeSliver(raffleList: state.raffles),
+            _HomeBody(raffleList: state.raffles),
       ),
     );
   }

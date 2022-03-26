@@ -3,28 +3,28 @@ part of home_page;
 class _HomeAppBarr extends StatefulWidget {
   const _HomeAppBarr({
     Key? key,
-    required this.insert,
-    required this.remove,
   }) : super(key: key);
-  final VoidCallback insert;
-  final VoidCallback remove;
 
   @override
   State<_HomeAppBarr> createState() => _HomeAppBarrState();
 }
 
 class _HomeAppBarrState extends State<_HomeAppBarr> {
-  bool _filterIsActive = false;
+  final _filterREpo = getIt<FilterRepository>();
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       leading: RoundedRectangleCardIcon(
-        color: _filterIsActive ? null : Colors.grey,
+        color: _filterREpo.isTagListOpen ? null : Colors.grey,
         iconData: Icons.tune,
         onPressed: () {
-          _filterIsActive ? widget.remove.call() : widget.insert.call();
+          _filterREpo.isTagListOpen
+              ? _filterREpo.remove(
+                  const _HomeFilters(), // Kapanırken gösterilecek widget DÜZELTİLMELİ
+                )
+              : _filterREpo.insert();
           setState(() {
-            _filterIsActive = !_filterIsActive;
+            _filterREpo.isTagListOpen = !_filterREpo.isTagListOpen;
           });
         },
       ),

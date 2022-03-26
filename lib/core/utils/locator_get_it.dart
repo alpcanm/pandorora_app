@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:pandorora_app/core/network/raffle_service.dart';
 import 'package:pandorora_app/core/network/user_service.dart';
-import 'package:pandorora_app/view/pages/home_page/components/home_filters/tag_list.dart';
+import 'package:pandorora_app/view/pages/home_page/tools/filter_repository.dart';
 import '../../feature/repositories/raffle_repository.dart';
 import '../../feature/repositories/user_operations_repository.dart';
 import '../../view/pages/home_page/bloc/pagination_bloc.dart';
@@ -22,7 +22,7 @@ void setupGetIt() async {
     return _result;
   });
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
-  getIt.registerLazySingleton<TagList>(() => TagList());
+  getIt.registerLazySingleton<FilterRepository>(() => FilterRepository());
   getIt.registerLazySingleton<RaffleRepository>(() => RaffleRepository());
   getIt.registerLazySingleton<ProfilepageBloc>(() => ProfilepageBloc());
   getIt.registerLazySingleton<PaginationBloc>(() => PaginationBloc());
