@@ -5,7 +5,6 @@ import 'package:pandorora_app/view/pages/home_page/repo/filter_repository.dart';
 import '../../feature/repositories/raffle_repository.dart';
 import '../../feature/repositories/user_operations_repository.dart';
 import '../../view/pages/home_page/bloc/pagination_bloc.dart';
-import '../../view/pages/profile_page/bloc/profilepage_bloc.dart';
 
 import '../../feature/repositories/auth_repository.dart';
 import '../../feature/repositories/global_repository.dart';
@@ -24,7 +23,7 @@ void setupGetIt() async {
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
   getIt.registerLazySingleton<FilterRepository>(() => FilterRepository());
   getIt.registerLazySingleton<RaffleRepository>(() => RaffleRepository());
-  getIt.registerLazySingleton<ProfilepageBloc>(() => ProfilepageBloc());
+
   getIt.registerLazySingleton<PaginationBloc>(() => PaginationBloc());
   getIt.registerLazySingleton<RaffleService>(() => RaffleService());
   getIt.registerLazySingleton<UserService>(() => UserService());

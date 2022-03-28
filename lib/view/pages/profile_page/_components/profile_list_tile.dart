@@ -7,21 +7,16 @@ class _ProfileListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _bloc = getIt<ProfilepageBloc>();
-    return BlocBuilder<ProfilepageBloc, ProfilepageState>(
-      bloc: _bloc,
-      builder: (context, state) {
-        return ListTile(
-          leading: const CircleAvatar(
-            child: FlutterLogo(),
-          ),
-          title: Text(
-            state.user?.name ?? "boş",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          subtitle: Text(state.user?.mail ?? "boş"),
-        );
-      },
+    final _user = getIt<GlobalRepository>().user;
+    return ListTile(
+      leading: const CircleAvatar(
+        child: FlutterLogo(),
+      ),
+      title: Text(
+        _user?.name ?? "boş",
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
+      subtitle: Text(_user?.mail ?? "boş"),
     );
   }
 }

@@ -7,7 +7,7 @@ import '../../core/utils/locator_get_it.dart';
 
 abstract class IRaffleRepository {
   Future<List<Raffle>?> getRaffles(int startIndex, {Set<String>? filters});
-  Future<UsersRaffleList> myRaffles();
+  Future<UsersRaffleList?> myRaffles();
   Future<bool> subscribeARaffle(String raffleId, int date);
 }
 
@@ -32,18 +32,21 @@ class RaffleRepository implements IRaffleRepository {
   }
 
   @override
-  Future<UsersRaffleList> myRaffles() async {
+  Future<UsersRaffleList?> myRaffles() async {
     var _response = await _raffleService.myRaffles(_globalRepo.user!.uid!);
-    _globalRepo.usersRaffleList = UsersRaffleList.fromMap(_response);
-    for (Raffle item in _globalRepo.usersRaffleList.raffleList!) {
-      if (item.date! > DateTime.now().millisecondsSinceEpoch) {
-        _globalRepo.usersRaffleList.futureRaffleList.add(item);
-      } else {
-        _globalRepo.usersRaffleList.pastRaffleList.add(item);
+    if (_response != null) {
+      _globalRepo.usersRaffleList = UsersRaffleList.fromMap(_response);
+      for (Raffle item in _globalRepo.usersRaffleList.raffleList!) {
+        if (item.date! > DateTime.now().millisecondsSinceEpoch) {
+          _globalRepo.usersRaffleList.futureRaffleList.add(item);
+        } else {
+          _globalRepo.usersRaffleList.pastRaffleList.add(item);
+        }
       }
+      return _globalRepo.usersRaffleList;
+    } else {
+      return null;
     }
-
-    return _globalRepo.usersRaffleList;
   }
 
   @override

@@ -6,14 +6,13 @@ import '../../../../../../core/models/user_model.dart';
 import '../../../../../../core/utils/locator_get_it.dart';
 import '../../../../../../feature/repositories/global_repository.dart';
 import '../../../../../../feature/repositories/user_operations_repository.dart';
-import '../../../bloc/profilepage_bloc.dart';
 
 part 'updateprofile_state.dart';
 
 class UpdateprofileCubit extends Cubit<UpdateprofileState> {
   static final User _user = getIt<GlobalRepository>().user!;
   final _userOperationRepo = getIt<UserOperationsRepository>();
-  final _profilePageBloc = getIt<ProfilepageBloc>();
+
   UpdateprofileCubit() : super(UpdateprofileInitial());
 
   final TextEditingController nameController =
@@ -55,7 +54,7 @@ class UpdateprofileCubit extends Cubit<UpdateprofileState> {
           name: nameController.text.trim(),
           surname: surnameController.text.trim());
       if (_result) {
-        _profilePageBloc.add(ProfilepageGetUpdatedUser());
+        await getIt<GlobalRepository>().tryGetCurrentUser();
         emit(UpdateprofileCompleted());
       } else {
         emit(UpdateprofileError(errorMessage: _userOperationRepo.errorMessage));

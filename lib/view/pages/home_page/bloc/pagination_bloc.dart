@@ -24,11 +24,12 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       _onPaginationFetch,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
-
+    //katıldığın raffle ları göstermesi için
     getIt<RaffleRepository>().myRaffles().then((e) {
       add(const PaginationAllFetched());
     });
   }
+
   Future<void> _onPaginationFetch(
       PaginationAllFetched event, Emitter<PaginationState> emit) async {
     // eğer filtreli arama yaparsak her şeyi sıfırlamamız gerekiyor bu yüzden event.status=initial veriyoruz.

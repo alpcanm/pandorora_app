@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pandorora_app/feature/repositories/raffle_repository.dart';
+import 'package:pandorora_app/view/pages/home_page/bloc/pagination_bloc.dart';
 
 import '../../../core/models/raffle.dart';
 import '../../../core/utils/locator_get_it.dart';
@@ -21,7 +23,13 @@ class RafflePage extends StatelessWidget {
             ? null
             : () {
                 getIt<RaffleRepository>()
-                    .subscribeARaffle(_raffle.raffleId!, _raffle.date!);
+                    .subscribeARaffle(_raffle.raffleId!, _raffle.date!)
+                    .then((_) {
+                  getIt<RaffleRepository>().myRaffles().then((e) {
+                    getIt<PaginationBloc>().add(const PaginationAllFetched(
+                        status: PaginationStatus.initial));
+                  });
+                });
               },
         child: const Text(
           'Katıl',

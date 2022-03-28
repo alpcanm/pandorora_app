@@ -12,6 +12,10 @@ class _RegisterAppBar extends StatelessWidget implements PreferredSize {
         // backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
+        leading: RoundedRectangleCardIcon(
+            iconData: Icons.arrow_back_ios_outlined,
+            onPressed: () =>
+                context.router.replaceAll([const AuthControllerRoute()])),
         title: Text(
           'Details',
           style: Theme.of(context).textTheme.headline5,

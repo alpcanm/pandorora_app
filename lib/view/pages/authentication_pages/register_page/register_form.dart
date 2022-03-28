@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:country_phone_picker/country_phone_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/core/navigation/navigation_manager.gr.dart';
 import '../../../widgets/_/_custom_text_form_field.dart';
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
@@ -111,6 +113,9 @@ class _SubmitButton extends StatelessWidget {
           PrintMessage.showFailed(context, state.errorMessage);
         } else if (state is RegisterpageCompleted) {
           PrintMessage.showSucces(context);
+          
+          Future.delayed(const Duration(milliseconds: 500))
+              .then((value) =>context.router.replaceAll([const AuthControllerRoute()]));
         }
       },
       child: ElevatedButton(

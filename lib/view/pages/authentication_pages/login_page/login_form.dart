@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pandorora_app/core/navigation/navigation_manager.gr.dart';
 import '../../../widgets/_/_custom_text_form_field.dart';
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
@@ -39,7 +40,8 @@ class LoginForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const AppBarTitle(titleText: LoginPageText.LOGIN_TITLE),
+                const Center(
+                    child: AppBarTitle(titleText: LoginPageText.LOGIN_TITLE)),
                 _transparentDivider,
                 CustomTextFormField(
                   customValidator: Validators.mailValidator,
@@ -51,7 +53,7 @@ class LoginForm extends StatelessWidget {
                   customValidator: Validators.passwordValidator,
                   controller: _loginpageCubit.passwordController,
                 ),
-                _transparentDivider,
+                const _CheckBox(),
                 _SignInButton(
                   loginpageCubit: _loginpageCubit,
                 ),
@@ -62,6 +64,37 @@ class LoginForm extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _CheckBox extends StatefulWidget {
+  const _CheckBox({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_CheckBox> createState() => _CheckBoxState();
+}
+
+class _CheckBoxState extends State<_CheckBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text("Giriş bilgilerini kaydet."),
+        Checkbox(
+          checkColor: Colors.white,
+          value: context.read<LoginpageCubit>().isChecked,
+          fillColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+          onChanged: (bool? value) {
+            setState(() {
+              context.read<LoginpageCubit>().isChecked = value!;
+            });
+          },
+        ),
+      ],
     );
   }
 }
@@ -106,8 +139,7 @@ class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () =>
-            context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
+        onPressed: () => context.router.replaceAll([const RegisterRoute()]),
         child: const Text(LoginPageText.SIGN_UP));
   }
 }

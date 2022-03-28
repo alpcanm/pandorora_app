@@ -1,26 +1,28 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-abstract class DBManager {
+abstract class ICacheManager {
   Box<String>? _box;
   final String key;
-  DBManager(this.key);
+  ICacheManager(this.key);
   Future<void> init() async {
     if (!(_box?.isOpen ?? false)) {
       _box = await Hive.openBox<String>(key);
     }
   }
 
-  Iterable<String>? getValues(String key);
+  Box<String>? get box => _box;
+  Iterable<String>? getValues();
+  String? getAValue(String key);
   Future<void> addToBox(String value);
   Future<void> putToBox(String key, String value);
-  bool? isNotEmpty(String key);
+  bool? isNotEmpty();
   Future<void> clearBox() async {
     await _box?.clear();
   }
 }
 
-class TokenCacheManager extends DBManager {
-  TokenCacheManager(String key) : super(key);
+class CacheManager extends ICacheManager {
+  CacheManager(String key) : super(key);
 
   @override
   Future<void> addToBox(String value) async {
@@ -33,12 +35,17 @@ class TokenCacheManager extends DBManager {
   }
 
   @override
-  Iterable<String>? getValues(String key) {
+  Iterable<String>? getValues() {
     return _box?.values;
   }
 
   @override
-  bool? isNotEmpty(String key) {
+  bool? isNotEmpty() {
     return _box?.isNotEmpty;
+  }
+
+  @override
+  String? getAValue(String key) {
+    return _box?.get(key);
   }
 }

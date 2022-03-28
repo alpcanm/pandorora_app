@@ -41,17 +41,20 @@ class MyRafflesBody extends StatelessWidget {
         ),
         Expanded(
           flex: 18,
-          child: CustomFutureBuilder<UsersRaffleList>(
+          child: CustomFutureBuilder<UsersRaffleList?>(
               future: getIt<RaffleRepository>().myRaffles(),
-              widget: (context, AsyncSnapshot<UsersRaffleList> snapshot) {
+              widget: (context, AsyncSnapshot<UsersRaffleList?> snapshot) {
                 return PageView(
                   controller: _pageViewController,
                   scrollDirection: Axis.horizontal,
                   children: [
                     ListView.builder(
                       itemBuilder: (context, index) {
-                        return MyRafflesCard(
-                            snapshot.data!.futureRaffleList.elementAt(index));
+                        if (snapshot.data != null) {
+                          return MyRafflesCard(
+                              snapshot.data!.futureRaffleList.elementAt(index));
+                        }
+                        return const SizedBox();
                       },
                       itemCount: snapshot.data!.futureRaffleList.length,
                       shrinkWrap: true,

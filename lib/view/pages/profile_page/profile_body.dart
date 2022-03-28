@@ -9,11 +9,6 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   @override
-  void dispose() {
-    getIt<ProfilepageBloc>().close();
-    super.dispose();
-  }
-
   final _button = _ProfilePageButton();
   @override
   Widget build(BuildContext context) {

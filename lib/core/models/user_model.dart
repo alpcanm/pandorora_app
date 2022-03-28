@@ -54,4 +54,9 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'User(uid: $uid, name: $name, surname: $surname, mail: $mail, phoneNumber: $phoneNumber, photoURL: $photoURL, password: $password, mailVerified: $mailVerified, raffleNickName: $raffleNickName)';
+  }
 }

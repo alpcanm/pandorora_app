@@ -27,8 +27,8 @@ class AuthRepository implements IAuthRepository {
   Future<User?> tryGetCurrentUser() async {
     String? _token;
 
-    if (_globalRepo.tokenCache.isNotEmpty(Keys.token) == true) {
-      _token = _globalRepo.tokenCache.getValues(Keys.token)?.first;
+    if (_globalRepo.tokenCache.isNotEmpty() == true) {
+      _token = _globalRepo.tokenCache.getValues()?.first;
     }
 
     if (_token != null) {

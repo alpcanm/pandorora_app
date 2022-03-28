@@ -2,7 +2,8 @@ library profile_page;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:pandorora_app/feature/repositories/global_repository.dart';
 
 import '../../../core/constants/navigation_consts.dart';
 import '../../../core/navigation/navigation_manager.gr.dart';
@@ -11,7 +12,6 @@ import '../../constants/view_texts.dart';
 import '../../widgets/components/app_bar_title.dart';
 import '../../widgets/components/custom_rounded_rectangle_card.dart';
 import '../../widgets/components/log_out_button.dart';
-import 'bloc/profilepage_bloc.dart';
 
 part 'profile_body.dart';
 part '_components/profile_page_button.dart';

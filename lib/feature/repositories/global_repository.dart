@@ -1,4 +1,5 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
+import 'package:flutter/animation.dart';
 import 'package:pandorora_app/core/models/users_raffle_list.dart';
 import '../../core/utils/locator_get_it.dart';
 import 'auth_repository.dart';
@@ -16,16 +17,20 @@ class GlobalRepository {
   User? _user;
   User? get user => _user;
 
-  UsersRaffleList usersRaffleList=UsersRaffleList();
+  UsersRaffleList usersRaffleList = UsersRaffleList();
 
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();
   }
 
-  final DBManager tokenCache = TokenCacheManager(Keys.token);
+  final ICacheManager tokenCache = CacheManager(Keys.token);
+  final ICacheManager signInCache = CacheManager(Keys.singIn);
 
   Future<void> tokenInit() async {
-    await tokenCache.init();
+    await Future.wait([
+      signInCache.init(),
+      tokenCache.init(),
+    ]);
   }
 
   late AuthService authService;
@@ -35,5 +40,6 @@ class GlobalRepository {
 
   Future<void> tryGetCurrentUser() async {
     _user = await getIt<AuthRepository>().tryGetCurrentUser();
+    print(_user.toString());
   }
 }
