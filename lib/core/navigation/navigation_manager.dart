@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import '../../view/pages/raffle_page/raffle_page.dart';
+import '../../view/pages/raffle_detail_page/raffle_detail_page.dart';
 import '../../view/pages/my_raffles_page/my_raffles_page.dart';
 
 import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart';

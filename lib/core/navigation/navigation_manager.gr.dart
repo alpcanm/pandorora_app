@@ -29,7 +29,7 @@ import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_ver
 import '../../view/pages/profile_page/children_pages/update_profile/update_profile_page.dart'
     as _i11;
 import '../../view/pages/profile_page/profile_page.dart' as _i10;
-import '../../view/pages/raffle_page/raffle_page.dart' as _i4;
+import '../../view/pages/raffle_detail_page/raffle_detail_page.dart' as _i4;
 import '../../view/pages/splash_page/splash_body.dart' as _i6;
 import '../../view/pages/splash_page/splash_page.dart' as _i1;
 import '../models/raffle.dart' as _i17;

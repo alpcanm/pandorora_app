@@ -81,10 +81,10 @@ class _BottomCardStack extends StatelessWidget {
                     raffle.title ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: Theme.of(context).primaryColor,
-                        fontSize: 16,
-                        fontFamily: 'TechnaSans'),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(fontSize: 16),
                   ),
                   // Text(_isActive ? "Katıldın" : "",
                   //     style: Theme.of(context).textTheme.headline6!.copyWith()),

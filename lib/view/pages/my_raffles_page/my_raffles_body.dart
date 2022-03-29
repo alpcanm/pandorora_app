@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pandorora_app/core/utils/locator_get_it.dart';
 import 'package:pandorora_app/feature/repositories/raffle_repository.dart';
 import 'package:pandorora_app/view/widgets/components/my_future_builder.dart';
-import '../../../core/models/raffle.dart';
 import '../../../core/models/users_raffle_list.dart';
 import 'components/my_raffles_card.dart';
 

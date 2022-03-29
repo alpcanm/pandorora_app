@@ -40,6 +40,5 @@ class GlobalRepository {
 
   Future<void> tryGetCurrentUser() async {
     _user = await getIt<AuthRepository>().tryGetCurrentUser();
-    print(_user.toString());
   }
 }

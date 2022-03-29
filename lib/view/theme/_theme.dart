@@ -5,7 +5,8 @@ class ToDoTheme {
     headline1: TextStyle(fontFamily: "red-hat", fontSize: 36, color: _primary),
     headline6: TextStyle(fontSize: 12, color: _primary),
     headline5: TextStyle(fontSize: 24, color: Color.fromRGBO(255, 255, 255, 1)),
-    headline4: TextStyle(fontSize: 24, color: _primary),
+    headline4:
+        TextStyle(fontSize: 24, color: _primary, fontFamily: 'TechnaSans'),
   );
 
   static const Color _primary = Color.fromRGBO(188, 36, 60, 1);

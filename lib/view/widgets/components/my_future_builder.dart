@@ -20,6 +20,12 @@ class CustomFutureBuilder<T> extends StatelessWidget {
             padding: const EdgeInsets.only(top: 16),
             child: Text('Error: ${snapshot.error}'),
           );
+        } else if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data == null) {
+          return const Padding(
+            padding: EdgeInsets.only(top: 16),
+            child: Text('Hiç yok'),
+          );
         } else {
           return const Padding(
             padding: EdgeInsets.only(top: 16),
