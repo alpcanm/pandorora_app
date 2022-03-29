@@ -1,5 +1,5 @@
-import 'package:pandorora_app/core/network/raffle_service.dart';
-import 'package:pandorora_app/feature/repositories/global_repository.dart';
+import '../../core/network/raffle_service.dart';
+import 'global_repository.dart';
 
 import '../../core/models/raffle.dart';
 import '../../core/models/users_raffle_list.dart';

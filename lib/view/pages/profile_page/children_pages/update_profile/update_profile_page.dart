@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pandorora_app/view/pages/profile_page/_components/profile_child_app_bar.dart';
+import '../../_components/profile_child_app_bar.dart';
 
 import '../../../../widgets/_/_custom_text_form_field.dart';
 import '../../../../widgets/_/_widget_consts.dart';

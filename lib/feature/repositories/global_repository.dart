@@ -1,6 +1,6 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
 import 'package:flutter/animation.dart';
-import 'package:pandorora_app/core/models/users_raffle_list.dart';
+import '../../core/models/users_raffle_list.dart';
 import '../../core/utils/locator_get_it.dart';
 import 'auth_repository.dart';
 

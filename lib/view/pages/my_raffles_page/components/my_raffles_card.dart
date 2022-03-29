@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pandorora_app/core/extension/int_extension.dart';
+import '../../../../core/extension/int_extension.dart';
 
 import '../../../../core/models/raffle.dart';
 import '../../../widgets/_/count_down/count_down.dart';

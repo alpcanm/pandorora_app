@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:pandorora_app/core/models/raffle.dart';
+import 'raffle.dart';
 
 class UsersRaffleList {
   Set<Raffle>? raffleList;

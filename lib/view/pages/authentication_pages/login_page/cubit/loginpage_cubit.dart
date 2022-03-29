@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pandorora_app/feature/repositories/global_repository.dart';
+import '../../../../../feature/repositories/global_repository.dart';
 import '../../../../../core/utils/locator_get_it.dart';
 import '../../../../../feature/repositories/auth_repository.dart';
 
