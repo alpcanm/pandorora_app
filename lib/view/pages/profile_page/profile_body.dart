@@ -1,14 +1,8 @@
 part of profile_page;
 
-class ProfileBody extends StatefulWidget {
-  const ProfileBody({Key? key}) : super(key: key);
+class ProfileBody extends StatelessWidget {
+  ProfileBody({Key? key}) : super(key: key);
 
-  @override
-  State<ProfileBody> createState() => _ProfileBodyState();
-}
-
-class _ProfileBodyState extends State<ProfileBody> {
-  @override
   final _button = _ProfilePageButton();
   @override
   Widget build(BuildContext context) {

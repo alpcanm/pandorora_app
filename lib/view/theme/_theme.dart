@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/view/constants/const_font_name.dart';
 
 class ToDoTheme {
   static TextTheme lightTextTheme = const TextTheme(
-    headline1: TextStyle(fontFamily: "red-hat", fontSize: 36, color: _primary),
+    headline1: TextStyle(
+        fontFamily: ConstFontName.redHat,
+        fontSize: 36,
+        color: _primary,
+        fontWeight: FontWeight.bold),
     headline6: TextStyle(fontSize: 12, color: _primary),
     headline5: TextStyle(fontSize: 24, color: Color.fromRGBO(255, 255, 255, 1)),
     headline4:
@@ -24,9 +29,13 @@ class ToDoTheme {
         ),
         textTheme: lightTextTheme,
         elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(primary: _primary)),
-        textButtonTheme:
-            TextButtonThemeData(style: TextButton.styleFrom(primary: _primary)),
+            style: ElevatedButton.styleFrom(
+          primary: _primary,
+        )),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+          primary: _primary,
+        )),
         inputDecorationTheme: const InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.grey),
           focusedBorder: OutlineInputBorder(

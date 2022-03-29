@@ -9,8 +9,12 @@ class _RaffleDetailFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _isActive = RaffleChecker.checker(raffle.raffleId!);
-    return FloatingActionButton(
-      backgroundColor: _isActive == true ? Colors.grey : null,
+    return FloatingActionButton.extended(
+      elevation: 2,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
+      backgroundColor: !_isActive == true ? Colors.grey : null,
       onPressed: _isActive
           ? null
           : () {
@@ -23,9 +27,14 @@ class _RaffleDetailFAB extends StatelessWidget {
                 });
               });
             },
-      child: const Text(
-        'Katıl',
-        style: TextStyle(color: Colors.yellow),
+      label: SizedBox(
+        width: context.width * 0.8,
+        child: const Text('çekilişe katıl',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontFamily: ConstFontName.redHat,
+                fontSize: 20,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }

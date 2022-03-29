@@ -28,6 +28,7 @@ class _HomeAppBarrState extends State<_HomeAppBarr> {
           });
         },
       ),
+      centerTitle: true,
       title: const AppBarTitle(titleText: LoginPageText.LOGIN_TITLE),
       backgroundColor: Colors.transparent,
       actions: [

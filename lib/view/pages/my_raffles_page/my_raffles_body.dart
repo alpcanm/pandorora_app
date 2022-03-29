@@ -22,7 +22,7 @@ class MyRafflesBody extends StatelessWidget {
                         duration: const Duration(seconds: 1),
                         curve: Curves.easeOutSine);
                   },
-                  child: const Text("Gelecek"),
+                  child: const Text("gelecek"),
                 ),
               ),
               Expanded(
@@ -32,7 +32,7 @@ class MyRafflesBody extends StatelessWidget {
                         duration: const Duration(seconds: 1),
                         curve: Curves.easeOutSine);
                   },
-                  child: const Text("Geçmiş"),
+                  child: const Text("geçmiş"),
                 ),
               )
             ],

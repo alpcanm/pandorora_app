@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:pandorora_app/view/constants/consts_size.dart';
 
 import '../../../widgets/components/custom_rounded_rectangle_card.dart';
 
@@ -11,7 +12,7 @@ class ProfileChildAppBar extends StatelessWidget
   }) : super(key: key);
   final BuildContext context;
   @override
-  Size get preferredSize => const Size.fromHeight(55);
+  Size get preferredSize => const Size.fromHeight(ConstSize.appBarpreferredSize);
 
   @override
   Widget build(BuildContext context) {

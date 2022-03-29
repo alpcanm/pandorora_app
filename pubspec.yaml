@@ -65,7 +65,10 @@ flutter:
   fonts:
     - family: red-hat
       fonts:
-        - asset: assets/fonts/red-hat-font.ttf 
+        - asset: assets/fonts/RedHatMono-VariableFont_wght.ttf
+    - family: inter
+      fonts:
+        - asset: assets/fonts/Inter-VariableFont_slnt,wght.ttf
     - family: TechnaSans
       fonts:
         - asset: assets/fonts/TechnaSans-Regular.otf    

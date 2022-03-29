@@ -33,12 +33,8 @@ class _PhotoStack extends StatelessWidget {
     const _borderRadius = BorderRadius.all(Radius.circular(15));
     return Expanded(
       flex: 4,
-      child: Card(
-        margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
-        elevation: 1,
-        shape: const RoundedRectangleBorder(
-          borderRadius: _borderRadius,
-        ),
+      child: Container(
+        margin: const EdgeInsets.only(left: 1, right: 1, bottom: 8),
         child: ClipRRect(
           borderRadius: _borderRadius,
           child: Image.network(

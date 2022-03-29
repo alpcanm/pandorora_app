@@ -8,7 +8,8 @@ class _RaffleDetailAppBar extends StatelessWidget
   }) : super(key: key);
   final BuildContext context;
   @override
-  Size get preferredSize => const Size.fromHeight(55);
+  Size get preferredSize =>
+      const Size.fromHeight(ConstSize.appBarpreferredSize);
 
   @override
   Widget build(BuildContext context) {

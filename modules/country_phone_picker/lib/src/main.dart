@@ -30,23 +30,22 @@ class _PhoneCodePickerDropDown extends StatelessWidget {
       buildWhen: (previous, current) =>
           previous.countryName != current.countryName,
       builder: (context, state) {
-        return DropdownButton<String>(
-          value: state.countryName,
-          elevation: 4,
-          onChanged: bloc.onChanged,
-          items: PhoneChecker.countries
-              .map<DropdownMenuItem<String>>(
+        return DropdownButtonHideUnderline(
+          child: DropdownButton<String>(
+            value: state.countryName,
+            elevation: 4,
+            onChanged: bloc.onChanged,
+            items: PhoneChecker.countries
+                .map<DropdownMenuItem<String>>(
                   (String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Colors.black),
-                        ),
-                      ))
-              .toList(),
+                    value: value,
+                    child: Text(
+                      value,
+                    ),
+                  ),
+                )
+                .toList(),
+          ),
         );
       },
     );

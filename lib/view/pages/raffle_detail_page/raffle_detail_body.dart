@@ -12,17 +12,25 @@ class _RaffleDetailBody extends StatelessWidget {
       children: [
         _RaffleDetailHeader(raffle.title ?? ""),
         _RaffleDetailPhotoCard(raffle.photoURL ?? ""),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text(
-              'İzle',
-              style: TextStyle(color: Colors.purple),
+        Row(
+          children: [
+            SizedBox(
+              width: context.height * 0.1,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.unarchive,
+                  size: 36,
+                  color: Theme.of(context).primaryColor,
+                ),
+                style: ElevatedButton.styleFrom(
+                  elevation: 1,
+                  primary: Colors.yellow,
+                ),
+              ),
             ),
-            style: ElevatedButton.styleFrom(primary: Colors.yellow),
-          ),
-        )
+          ],
+        ),
       ],
     );
   }

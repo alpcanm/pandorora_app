@@ -1,17 +1,17 @@
 // ignore_for_file:  constant_identifier_names
 class LoginPageText {
-  static const String LOGIN_TITLE = 'PANDORORA';
-  static const String SIGN_IN = 'Sıgn In';
-  static const String SIGN_UP = 'Sıgn Up';
-  static const String PROFILE_TITLE = 'Profil';
+  static const String LOGIN_TITLE = 'pandorora';
+  static const String SIGN_IN = 'Giriş yap';
+  static const String SIGN_UP = 'Kayıt ol';
+  static const String PROFILE_TITLE = 'profil';
 }
 
 class RegisterPageText {
-  static const String NAME = 'Name';
-  static const String SURNAME = 'Surname';
-  static const String MAIL = 'Mail';
-  static const String PHONE = 'Phone';
-  static const String PASSWORD = 'Password';
-  static const String CONFIRM_PASSWORD = 'Confirm password';
-  static const String SUBMIT = 'Submit';
+  static const String NAME = 'İsim';
+  static const String SURNAME = 'Soyisim';
+  static const String MAIL = 'E-posta';
+  static const String PHONE = 'Telefon';
+  static const String PASSWORD = 'Şifre';
+  static const String CONFIRM_PASSWORD = 'Şifre doğrulama';
+  static const String SUBMIT = 'Kayıt ol';
 }
