@@ -13,9 +13,10 @@ class _RegisterAppBar extends StatelessWidget implements PreferredSize {
         elevation: 0,
         centerTitle: true,
         leading: RoundedRectangleCardIcon(
-            iconData: Icons.arrow_back_ios_outlined,
-            onPressed: () =>
-                context.router.replaceAll([const AuthControllerRoute()])),
+          iconData: Icons.arrow_back_ios_outlined,
+          onPressed: () =>
+              context.router.replaceAll([const AuthControllerRoute()]),
+        ),
         title: const AppBarTitle(titleText: "kayıt ol"),
       ),
     );

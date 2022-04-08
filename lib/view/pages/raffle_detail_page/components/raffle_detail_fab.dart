@@ -14,7 +14,7 @@ class _RaffleDetailFAB extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
       ),
-      backgroundColor: !_isActive == true ? Colors.grey : null,
+      backgroundColor: _isActive == true ? Colors.grey : null,
       onPressed: _isActive
           ? null
           : () {

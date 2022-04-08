@@ -17,7 +17,6 @@ class LoginpageCubit extends Cubit<LoginpageState> {
   }
 
   setControllerValues() {
-    print("object");
     String? mail, password;
     if (_globalRepo.signInCache.isNotEmpty() == true) {
       mail = _globalRepo.signInCache.getAValue("mail");

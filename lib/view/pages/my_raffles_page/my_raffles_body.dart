@@ -13,6 +13,7 @@ class MyRafflesBody extends StatelessWidget {
     return Column(
       children: [
         Expanded(
+          flex: 3,
           child: Row(
             children: [
               Expanded(
