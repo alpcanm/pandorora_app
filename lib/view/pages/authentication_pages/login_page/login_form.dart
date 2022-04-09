@@ -55,11 +55,22 @@ class LoginForm extends StatelessWidget {
                   controller: _loginpageCubit.passwordController,
                 ),
                 const _CheckBox(),
-                _SignInButton(
-                  loginpageCubit: _loginpageCubit,
+                Row(
+                  children: [
+                    Expanded(
+                      child: _SignInButton(
+                        loginpageCubit: _loginpageCubit,
+                      ),
+                    ),
+                    const VerticalDivider(),
+                    Expanded(child: _SignUpButton())
+                  ],
                 ),
-                _transparentDivider,
-                _SignUpButton()
+                TextButton(
+                    onPressed: () {
+                      context.router.replaceNamed(RouteConsts.HOME_PAGE);
+                    },
+                    child: const Text("Giriş yapmadan devam et"))
               ],
             ),
           ),
@@ -141,7 +152,7 @@ class _SignInButton extends StatelessWidget {
 class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
         onPressed: () => context.router.replaceAll([const RegisterRoute()]),
         child: const Text(LoginPageText.SIGN_UP));
   }

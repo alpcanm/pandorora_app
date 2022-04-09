@@ -16,7 +16,7 @@ class MyRafflesCard extends StatelessWidget {
       elevation: 5,
       child: ListTile(
         onTap: (() {
-          context.router.push(RaffleRoute(raffle: raffle));
+          context.router.push(RaffleDetailRoute(raffle: raffle));
         }),
         leading: Image.network(raffle.photoURL ?? ""),
         title: Text(raffle.title ?? ""),
@@ -24,7 +24,8 @@ class MyRafflesCard extends StatelessWidget {
             maxLines: 1, overflow: TextOverflow.ellipsis),
         trailing: SizedBox(
             width: 100,
-            child: CountDownArea(dateTime: raffle.date?.toDate ?? DateTime.now())),
+            child:
+                CountDownArea(dateTime: raffle.date?.toDate ?? DateTime.now())),
       ),
     );
   }

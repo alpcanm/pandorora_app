@@ -8,7 +8,10 @@ import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/view/widgets/_/count_down/count_down.dart';
 
 import '../../../../../core/navigation/navigation_manager.gr.dart';
-import '../../../../widgets/components/raffle_checker.dart';
+
+import '../../../../../core/utils/locator_get_it.dart';
+import '../../../../../feature/repositories/global_repository.dart';
+import '../../repo/filter_repository.dart';
 
 part 'components/raffle_card_body.dart';
 part 'components/raffle_card_header.dart';
@@ -38,7 +41,7 @@ class RaffleCard extends StatelessWidget {
           ),
         ),
         child: GestureDetector(
-          onTap: () => context.router.push(RaffleRoute(raffle: _raffle)),
+          onTap: () => context.router.push(RaffleDetailRoute(raffle: _raffle)),
           child: Column(
             children: [
               _RaffleCardHeader(raffle: _raffle),

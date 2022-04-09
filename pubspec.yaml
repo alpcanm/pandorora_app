@@ -1,8 +1,7 @@
 name: pandorora_app
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -15,7 +14,7 @@ dependencies:
 
   #navigation
   auto_route: ^3.2.4
-  
+
   #network
   dio: ^4.0.4
 
@@ -36,9 +35,10 @@ dependencies:
   flutter_bloc: ^8.0.1
 
   #UI
-  
+
+  flutter_svg: ^1.0.3
   #MY_MODULES---------------------
-  
+
   #firebase_auth_rest
   firebase_auth_rest:
     path: modules/firebase_auth_rest
@@ -47,7 +47,6 @@ dependencies:
     path: modules/country_phone_picker
 
   cupertino_icons: ^1.0.2
-  
 
 dev_dependencies:
   flutter_test:
@@ -59,9 +58,7 @@ dev_dependencies:
   #linter
   flutter_lints: ^1.0.0
 
-
 flutter:
-
   fonts:
     - family: red-hat
       fonts:
@@ -71,9 +68,8 @@ flutter:
         - asset: assets/fonts/Inter-VariableFont_slnt,wght.ttf
     - family: TechnaSans
       fonts:
-        - asset: assets/fonts/TechnaSans-Regular.otf    
+        - asset: assets/fonts/TechnaSans-Regular.otf
   assets:
- 
     - .env
-
+    - assets/icons/
   uses-material-design: true

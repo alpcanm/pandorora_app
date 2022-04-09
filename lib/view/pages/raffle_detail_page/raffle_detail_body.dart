@@ -12,25 +12,6 @@ class _RaffleDetailBody extends StatelessWidget {
       children: [
         _RaffleDetailHeader(raffle.title ?? ""),
         _RaffleDetailPhotoCard(raffle.photoURL ?? ""),
-        Row(
-          children: [
-            SizedBox(
-              width: context.height * 0.1,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.unarchive,
-                  size: 36,
-                  color: Theme.of(context).primaryColor,
-                ),
-                style: ElevatedButton.styleFrom(
-                  elevation: 1,
-                  primary: Colors.yellow,
-                ),
-              ),
-            ),
-          ],
-        ),
       ],
     );
   }

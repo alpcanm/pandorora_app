@@ -9,10 +9,13 @@ class _HomeFilters extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Wrap(
+        GridView(
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4),
           children: FilterRepository.tags.keys
               .map((key) => _TagCard(
-                    FilterRepository.tags[key],
+                    FilterRepository.tags[key] ?? "",
                     key,
                   ))
               .toList(),
@@ -52,37 +55,56 @@ class _TagCard extends StatefulWidget {
 class _TagCardState extends State<_TagCard> {
   @override
   Widget build(BuildContext context) {
+    final _filterRepo = getIt<FilterRepository>();
     bool _isSelected = false;
-    for (String element in getIt<FilterRepository>().filters) {
+    for (String element in _filterRepo.filters) {
       if (element == widget.tagKey) {
         _isSelected = true;
       }
     }
     return Card(
-      color: _isSelected ? Theme.of(context).primaryColor : Colors.blueGrey,
+      color: _isSelected ? Colors.white70 : Colors.white,
       child: InkWell(
         onTap: () {
           bool _isInThere = false;
-          for (String element in getIt<FilterRepository>().filters) {
+          for (String element in _filterRepo.filters) {
             if (element == widget.tagKey) {
               _isInThere = true;
             }
           }
           if (_isInThere) {
-            getIt<FilterRepository>().filters.remove(widget.tagKey);
+            _filterRepo.filters.remove(widget.tagKey);
           } else {
-            getIt<FilterRepository>().filters.add(widget.tagKey);
+            _filterRepo.filters.add(widget.tagKey);
           }
           setState(() {});
         },
-        child: Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: Text(
-            widget.tagValue,
-            style: const TextStyle(color: Colors.white),
-          ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: SvgPicture.asset(
+                  FilterRepository.tagIcons[widget.tagKey] ?? "",
+                  semanticsLabel: 'Acme Logo',
+                  color: FilterRepository.tagColors[widget.tagKey],
+                  height: heightChecker),
+            ),
+            Expanded(
+              child: Text(
+                widget.tagValue,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.blueGrey, fontSize: 12),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+
+  double get heightChecker => widget.tagKey == "tag6" || widget.tagKey == "tag8"
+      ? 30
+      : widget.tagKey == "tag1"
+          ? 40
+          : 50;
 }

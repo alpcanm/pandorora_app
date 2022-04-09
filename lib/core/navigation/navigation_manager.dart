@@ -15,7 +15,7 @@ import '../../view/pages/splash_page/splash_page.dart';
 import '../constants/navigation_consts.dart';
 import 'auth_guard.dart';
 import '../../view/pages/authentication_pages/login_page/login_page.dart';
-import '../../view/pages/authentication_pages/not_login_page.dart';
+
 import '../../view/pages/authentication_pages/register_page/register_page.dart';
 import '../../view/pages/profile_page/profile_page.dart';
 
@@ -40,11 +40,11 @@ import '../../view/pages/profile_page/profile_page.dart';
           AutoRoute(page: PhoneVerifyPage, path: RouteConsts.VERIFY_PHONE_PAGE)
         ]),
     AutoRoute(
-        page: HomePage,
-        name: RouteConsts.HOME_MAIN_ROUTE,
-        path: RouteConsts.HOME_PAGE,
-        guards: [AuthGuard]),
-    AutoRoute(page: RafflePage, path: RouteConsts.RAFFLE_PAGE),
+      page: HomePage,
+      name: RouteConsts.HOME_MAIN_ROUTE,
+      path: RouteConsts.HOME_PAGE,
+    ),
+    AutoRoute(page: RaffleDetailPage, path: RouteConsts.RAFFLE_PAGE),
     AutoRoute(
         page: MyRafflesPage,
         path: RouteConsts.CONSOLE_PAGE,
@@ -54,7 +54,6 @@ import '../../view/pages/profile_page/profile_page.dart';
         path: RouteConsts.CONTROLLER_PAGE,
         name: RouteConsts.AUTH_CONTROLLER_ROUTE),
     AutoRoute(page: LoginPage, path: RouteConsts.LOGIN_PAGE),
-    AutoRoute(page: NotLoginPage, path: RouteConsts.NOT_LOGIN_PAGE),
     AutoRoute(page: RegisterPage, path: RouteConsts.REGISTER_PAGE),
   ],
 )

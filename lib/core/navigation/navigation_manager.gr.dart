@@ -11,37 +11,36 @@
 // ignore_for_file: type=lint
 
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/material.dart' as _i15;
+import 'package:flutter/material.dart' as _i14;
 
 import '../../view/pages/authentication_pages/login_page/login_page.dart'
     as _i7;
-import '../../view/pages/authentication_pages/not_login_page.dart' as _i8;
 import '../../view/pages/authentication_pages/register_page/register_page.dart'
-    as _i9;
+    as _i8;
 import '../../view/pages/home_page/home_page.dart' as _i3;
 import '../../view/pages/my_raffles_page/my_raffles_page.dart' as _i5;
 import '../../view/pages/profile_page/children_pages/change_password/change_password_page.dart'
-    as _i13;
-import '../../view/pages/profile_page/children_pages/contact_us/contact_us_page.dart'
     as _i12;
-import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart'
-    as _i14;
-import '../../view/pages/profile_page/children_pages/update_profile/update_profile_page.dart'
+import '../../view/pages/profile_page/children_pages/contact_us/contact_us_page.dart'
     as _i11;
-import '../../view/pages/profile_page/profile_page.dart' as _i10;
+import '../../view/pages/profile_page/children_pages/phone_verify_page/phone_verify_page.dart'
+    as _i13;
+import '../../view/pages/profile_page/children_pages/update_profile/update_profile_page.dart'
+    as _i10;
+import '../../view/pages/profile_page/profile_page.dart' as _i9;
 import '../../view/pages/raffle_detail_page/raffle_detail_page.dart' as _i4;
 import '../../view/pages/splash_page/splash_body.dart' as _i6;
 import '../../view/pages/splash_page/splash_page.dart' as _i1;
-import '../models/raffle.dart' as _i17;
-import 'auth_guard.dart' as _i16;
+import '../models/raffle.dart' as _i16;
+import 'auth_guard.dart' as _i15;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter(
-      {_i15.GlobalKey<_i15.NavigatorState>? navigatorKey,
+      {_i14.GlobalKey<_i14.NavigatorState>? navigatorKey,
       required this.authGuard})
       : super(navigatorKey);
 
-  final _i16.AuthGuard authGuard;
+  final _i15.AuthGuard authGuard;
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
@@ -57,11 +56,11 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i3.HomePage());
     },
-    RaffleRoute.name: (routeData) {
-      final args = routeData.argsAs<RaffleRouteArgs>();
+    RaffleDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<RaffleDetailRouteArgs>();
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i4.RafflePage(args.raffle, key: args.key));
+          child: _i4.RaffleDetailPage(args.raffle, key: args.key));
     },
     MyRafflesRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
@@ -75,33 +74,29 @@ class AppRouter extends _i2.RootStackRouter {
       return _i2.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i7.LoginPage());
     },
-    NotLoginRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.NotLoginPage());
-    },
     RegisterRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.RegisterPage());
+          routeData: routeData, child: const _i8.RegisterPage());
     },
     ProfileRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.ProfilePage());
+          routeData: routeData, child: const _i9.ProfilePage());
     },
     UpdateProfileRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i11.UpdateProfilePage());
+          routeData: routeData, child: const _i10.UpdateProfilePage());
     },
     ContactUsRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i12.ContactUsPage());
+          routeData: routeData, child: const _i11.ContactUsPage());
     },
     ChangePasswordRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i13.ChangePasswordPage());
+          routeData: routeData, child: const _i12.ChangePasswordPage());
     },
     PhoneVerifyRoute.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i14.PhoneVerifyPage());
+          routeData: routeData, child: const _i13.PhoneVerifyPage());
     }
   };
 
@@ -122,14 +117,12 @@ class AppRouter extends _i2.RootStackRouter {
           _i2.RouteConfig(PhoneVerifyRoute.name,
               path: 'verify-phone-page', parent: ProfileMainRoute.name)
         ]),
-        _i2.RouteConfig(HomeMainRoute.name,
-            path: '/home-page', guards: [authGuard]),
-        _i2.RouteConfig(RaffleRoute.name, path: '/raffle-page'),
+        _i2.RouteConfig(HomeMainRoute.name, path: '/home-page'),
+        _i2.RouteConfig(RaffleDetailRoute.name, path: '/raffle-page'),
         _i2.RouteConfig(MyRafflesRoute.name,
             path: '/console-page', guards: [authGuard]),
         _i2.RouteConfig(AuthControllerRoute.name, path: '/controller-page'),
         _i2.RouteConfig(LoginRoute.name, path: '/login-page'),
-        _i2.RouteConfig(NotLoginRoute.name, path: '/not-login-page'),
         _i2.RouteConfig(RegisterRoute.name, path: '/register-page')
       ];
 }
@@ -161,26 +154,26 @@ class HomeMainRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.RafflePage]
-class RaffleRoute extends _i2.PageRouteInfo<RaffleRouteArgs> {
-  RaffleRoute({required _i17.Raffle raffle, _i15.Key? key})
-      : super(RaffleRoute.name,
+/// [_i4.RaffleDetailPage]
+class RaffleDetailRoute extends _i2.PageRouteInfo<RaffleDetailRouteArgs> {
+  RaffleDetailRoute({required _i16.Raffle raffle, _i14.Key? key})
+      : super(RaffleDetailRoute.name,
             path: '/raffle-page',
-            args: RaffleRouteArgs(raffle: raffle, key: key));
+            args: RaffleDetailRouteArgs(raffle: raffle, key: key));
 
-  static const String name = 'RaffleRoute';
+  static const String name = 'RaffleDetailRoute';
 }
 
-class RaffleRouteArgs {
-  const RaffleRouteArgs({required this.raffle, this.key});
+class RaffleDetailRouteArgs {
+  const RaffleDetailRouteArgs({required this.raffle, this.key});
 
-  final _i17.Raffle raffle;
+  final _i16.Raffle raffle;
 
-  final _i15.Key? key;
+  final _i14.Key? key;
 
   @override
   String toString() {
-    return 'RaffleRouteArgs{raffle: $raffle, key: $key}';
+    return 'RaffleDetailRouteArgs{raffle: $raffle, key: $key}';
   }
 }
 
@@ -210,15 +203,7 @@ class LoginRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.NotLoginPage]
-class NotLoginRoute extends _i2.PageRouteInfo<void> {
-  const NotLoginRoute() : super(NotLoginRoute.name, path: '/not-login-page');
-
-  static const String name = 'NotLoginRoute';
-}
-
-/// generated route for
-/// [_i9.RegisterPage]
+/// [_i8.RegisterPage]
 class RegisterRoute extends _i2.PageRouteInfo<void> {
   const RegisterRoute() : super(RegisterRoute.name, path: '/register-page');
 
@@ -226,7 +211,7 @@ class RegisterRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i10.ProfilePage]
+/// [_i9.ProfilePage]
 class ProfileRoute extends _i2.PageRouteInfo<void> {
   const ProfileRoute() : super(ProfileRoute.name, path: '');
 
@@ -234,7 +219,7 @@ class ProfileRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i11.UpdateProfilePage]
+/// [_i10.UpdateProfilePage]
 class UpdateProfileRoute extends _i2.PageRouteInfo<void> {
   const UpdateProfileRoute()
       : super(UpdateProfileRoute.name, path: 'update-profile-page');
@@ -243,7 +228,7 @@ class UpdateProfileRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i12.ContactUsPage]
+/// [_i11.ContactUsPage]
 class ContactUsRoute extends _i2.PageRouteInfo<void> {
   const ContactUsRoute() : super(ContactUsRoute.name, path: 'contact-us-page');
 
@@ -251,7 +236,7 @@ class ContactUsRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.ChangePasswordPage]
+/// [_i12.ChangePasswordPage]
 class ChangePasswordRoute extends _i2.PageRouteInfo<void> {
   const ChangePasswordRoute()
       : super(ChangePasswordRoute.name, path: 'change-password-page');
@@ -260,7 +245,7 @@ class ChangePasswordRoute extends _i2.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i14.PhoneVerifyPage]
+/// [_i13.PhoneVerifyPage]
 class PhoneVerifyRoute extends _i2.PageRouteInfo<void> {
   const PhoneVerifyRoute()
       : super(PhoneVerifyRoute.name, path: 'verify-phone-page');

@@ -3,6 +3,7 @@ library home_page;
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:pandorora_app/core/models/raffle.dart';
 import 'package:pandorora_app/core/utils/locator_get_it.dart';

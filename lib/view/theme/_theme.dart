@@ -10,8 +10,8 @@ class ToDoTheme {
         fontWeight: FontWeight.bold),
     headline6: TextStyle(fontSize: 12, color: _primary),
     headline5: TextStyle(fontSize: 24, color: Color.fromRGBO(255, 255, 255, 1)),
-    headline4:
-        TextStyle(fontSize: 24, color: _primary, fontFamily: 'TechnaSans'),
+    headline4: TextStyle(
+        fontSize: 24, color: _primary, fontFamily: ConstFontName.technaSans),
   );
 
   static const Color _primary = Color.fromRGBO(188, 36, 60, 1);

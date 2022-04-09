@@ -8,7 +8,7 @@ class _RaffleCardHeader extends StatelessWidget {
   final Raffle raffle;
   @override
   Widget build(BuildContext context) {
-    final _subscribed = RaffleChecker.checker(raffle.raffleId!);
+    final _subscribed = getIt<GlobalRepository>().checker(raffle.raffleId!);
     final _color = Theme.of(context).primaryColor;
     return Padding(
       padding: const EdgeInsets.all(2.0),
@@ -16,7 +16,7 @@ class _RaffleCardHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("#${raffle.tag}",
+          Text("#${FilterRepository.tags[raffle.tag]}",
               style: Theme.of(context).textTheme.headline6!.copyWith()),
           _subscribed
               ? Icon(
