@@ -25,6 +25,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
     //katıldığın raffle ları göstermesi için
+
     getIt<RaffleRepository>().myRaffles().then((e) {
       add(const PaginationAllFetched());
     });
@@ -88,5 +89,10 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
             isFiltered: true),
       );
     }
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }

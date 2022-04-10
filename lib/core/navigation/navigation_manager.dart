@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:pandorora_app/view/pages/profile_page/children_pages/change_raflle_nick_name/change_raffle_nick_name_page.dart';
+import 'package:pandorora_app/view/pages/profile_page/children_pages/mail_verify/mail_verify_page.dart';
 import '../../view/pages/raffle_detail_page/raffle_detail_page.dart';
 import '../../view/pages/my_raffles_page/my_raffles_page.dart';
 
@@ -33,11 +35,32 @@ import '../../view/pages/profile_page/profile_page.dart';
         children: [
           AutoRoute(page: ProfilePage, path: ''),
           AutoRoute(
-              page: UpdateProfilePage, path: RouteConsts.UPDATE_PROFILE_PAGE),
+            page: EmptyRouterPage,
+            path: RouteConsts.UPDATE_PROFILE_PAGE,
+            children: [
+              AutoRoute(
+                page: UpdateProfilePage,
+                path: '',
+              ),
+              AutoRoute(
+                page: ChangePasswordPage,
+                path: RouteConsts.CHANGE_PASSWORD_PAGE,
+              ),
+              AutoRoute(
+                page: PhoneVerifyPage,
+                path: RouteConsts.PHONE_VERIFY_PAGE,
+              ),
+              AutoRoute(
+                page: ChangeRaffleNickNamePage,
+                path: RouteConsts.CHANGE_RAFFLE_NICK_NAME_PAGE,
+              ),
+              AutoRoute(
+                page: MailVerifyPage,
+                path: RouteConsts.MAIL_VERIFY_PAGE,
+              ),
+            ],
+          ),
           AutoRoute(page: ContactUsPage, path: RouteConsts.CONTACT_US_PAGE),
-          AutoRoute(
-              page: ChangePasswordPage, path: RouteConsts.CHANGE_PASSWORD_PAGE),
-          AutoRoute(page: PhoneVerifyPage, path: RouteConsts.VERIFY_PHONE_PAGE)
         ]),
     AutoRoute(
       page: HomePage,

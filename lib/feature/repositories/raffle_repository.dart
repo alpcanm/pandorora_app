@@ -33,7 +33,8 @@ class RaffleRepository implements IRaffleRepository {
 
   @override
   Future<UsersRaffleList?> myRaffles() async {
-    if (_globalRepo.user == null) return null;// eğer oturum açmadan giriş yapmışsa direkt fonksiyondan çıkacak.
+    if (_globalRepo.user == null)
+      return null; // eğer oturum açmadan giriş yapmışsa direkt fonksiyondan çıkacak.
     var _response = await _raffleService.myRaffles(_globalRepo.user?.uid);
     if (_response != null) {
       _globalRepo.usersRaffleList = UsersRaffleList.fromMap(_response);

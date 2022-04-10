@@ -1,11 +1,13 @@
-part of profile_page;
+import 'package:flutter/material.dart';
 
-class _ProfilePageButton {
-  Widget iconButton(
+class ProfilePageButton {
+  static Widget iconButton(
       {required String text,
       required IconData icon,
-      required VoidCallback onPressed}) {
-    return TextButton(
+      required VoidCallback onPressed,
+      Color? iconColor}) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(primary: Colors.blueGrey),
       onPressed: () => onPressed(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -13,14 +15,17 @@ class _ProfilePageButton {
         children: [
           Row(
             children: [
-              Icon(icon),
+              Icon(icon, color: iconColor),
               const VerticalDivider(),
               Text(
                 text,
               ),
             ],
           ),
-          const Icon(Icons.arrow_forward_ios_rounded)
+          const Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Colors.blueGrey,
+          )
         ],
       ),
     );

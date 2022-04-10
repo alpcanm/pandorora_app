@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import '../../core/constants/keys.dart';
 import '../../core/models/user_model.dart';
 import '../../core/network/user_service.dart';
 import '../../core/utils/json_webtoken.dart';
@@ -11,7 +10,7 @@ enum AuthStatus { unknown, authenticated, unauthenticated }
 
 abstract class IAuthRepository {
   Future<User?> tryGetCurrentUser();
-  Future<bool> signOut();
+  Future<bool> logOut();
   Future<bool> signIn({required String mail, required String password});
 }
 
@@ -71,7 +70,7 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
-  Future<bool> signOut() async {
+  Future<bool> logOut() async {
     _statusLogger(AuthStatus.unauthenticated);
     await _globalRepo.tokenCache.clearBox();
     return true;

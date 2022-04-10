@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
 import '../../feature/repositories/auth_repository.dart';
+import '../../view/pages/home_page/bloc/pagination_bloc.dart';
 import '../utils/locator_get_it.dart';
 import 'navigation_manager.gr.dart';
 
@@ -15,6 +16,7 @@ class AuthGuard extends AutoRouteGuard {
     if (_result) {
       resolver.next(true);
     } else {
+      getIt.resetLazySingleton<PaginationBloc>();// my Raffles yüklenmesi için.
       router.push(const AuthControllerRoute());
     }
   }

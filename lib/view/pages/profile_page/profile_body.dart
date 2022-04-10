@@ -1,48 +1,50 @@
 part of profile_page;
 
 class ProfileBody extends StatelessWidget {
-  ProfileBody({Key? key}) : super(key: key);
+  const ProfileBody({Key? key}) : super(key: key);
 
-  final _button = _ProfilePageButton();
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         const _ProfileListTile(),
-        ElevatedButton.icon(
-            onPressed: () {
-              context.router.navigate(const MyRafflesRoute());
-            },
-            icon: const Icon(Icons.queue_music_outlined),
-            label: const Text("Katıldığın Çekilişler")),
-        _button.iconButton(
+        const Divider(),
+        const _ShowNickName(),
+        const Divider(),
+        ProfilePageButton.iconButton(
+          text: "Katıldığın Çekilişler",
+          icon: Icons.airplane_ticket,
+          iconColor: Theme.of(context).primaryColor,
+          onPressed: () => context.router.navigate(const MyRafflesRoute()),
+        ),
+        ProfilePageButton.iconButton(
           text: 'Bilgileri güncelle',
           icon: Icons.person,
+          iconColor: Colors.purple,
           onPressed: () => context.router.navigateNamed(
               RouteConsts.PROFILE_PAGE + "/" + RouteConsts.UPDATE_PROFILE_PAGE),
         ),
-        _button.iconButton(
-          text: 'Şifreyi değiştir',
-          icon: Icons.password,
-          onPressed: () => context.router.navigateNamed(
-              RouteConsts.PROFILE_PAGE +
-                  "/" +
-                  RouteConsts.CHANGE_PASSWORD_PAGE),
-        ),
-        _button.iconButton(
-          text: 'Telefonu Doğrula',
-          icon: Icons.phone,
-          onPressed: () => context.router.navigateNamed(
-              RouteConsts.PROFILE_PAGE + "/" + RouteConsts.VERIFY_PHONE_PAGE),
-        ),
-        _button.iconButton(
+        ProfilePageButton.iconButton(
           text: 'Bize ulaş',
           icon: Icons.chat,
+          iconColor: Colors.green,
           onPressed: () => context.router.navigateNamed(
               RouteConsts.PROFILE_PAGE + "/" + RouteConsts.CONTACT_US_PAGE),
         ),
-        const LogOutButton()
+        ProfilePageButton.iconButton(
+          text: 'Çıkış yap',
+          icon: Icons.exit_to_app,
+          iconColor: Colors.red,
+          onPressed: () => _logOut(context),
+        ),
       ],
     );
+  }
+
+  void _logOut(BuildContext context) {
+    getIt<GlobalRepository>().logOut();
+    getIt.resetLazySingleton<PaginationBloc>();
+    getIt<AuthRepository>().logOut().then(
+        (value) => context.router.replaceAll([const AuthControllerRoute()]));
   }
 }
