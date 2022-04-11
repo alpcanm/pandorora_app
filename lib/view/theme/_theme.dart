@@ -19,32 +19,33 @@ class ToDoTheme {
 
   static ThemeData light() {
     return ThemeData(
-        primaryColor: _primary,
-        secondaryHeaderColor: _secondary,
-        floatingActionButtonTheme:
-            const FloatingActionButtonThemeData(backgroundColor: _primary),
-        appBarTheme: const AppBarTheme(
-          foregroundColor: _secondary,
-          backgroundColor: _primary,
-        ),
-        textTheme: lightTextTheme,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-          primary: _primary,
-        )),
-        textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-          primary: _primary,
-        )),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-          primary: _primary,
-        )),
-        inputDecorationTheme: const InputDecorationTheme(
-          labelStyle: TextStyle(color: Colors.grey),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: _primary),
-          ),
-        ));
+      primaryColor: _primary,
+      secondaryHeaderColor: _secondary,
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: _primary),
+      appBarTheme: const AppBarTheme(
+        foregroundColor: _secondary,
+        backgroundColor: _primary,
+      ),
+      textTheme: lightTextTheme,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        primary: _primary,
+      )),
+      textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+        primary: _primary,
+      )),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+        primary: _primary,
+      )),
+      // inputDecorationTheme: const InputDecorationTheme(
+      //   labelStyle: TextStyle(color: Colors.grey),
+      //   focusedBorder: OutlineInputBorder(
+      //     borderSide: BorderSide(color: _primary),
+      //   ),
+      // ),
+    );
   }
 }

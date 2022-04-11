@@ -53,13 +53,23 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<bool> signIn({required String mail, required String password}) async {
     try {
-      String? _localId = await _globalRepo.authService
-          .signInAndGetUid(mail: mail, password: password);
-      if (_localId != null) {
+      final _signInResponse = await _globalRepo.authService
+          .signInWithPassword(mail: mail, password: password);
+      bool mailVerifCheck = false;
+      if (_signInResponse != null) {
+        final _idToken = _signInResponse["idToken"];
+        mailVerifCheck =
+            await _globalRepo.authService.checkUserMailVerified(_idToken);
+      }
+      String? _localId = _signInResponse["localId"];
+      if (_localId != null && mailVerifCheck) {
         String _token = JwtManager({'uid': _localId}).signJwt();
         await _globalRepo.tokenCache.clearBox();
         await _globalRepo.tokenCache.addToBox(_token);
         return true;
+      } else if (!mailVerifCheck) {
+        _errorMessage = "Lütfen maili doğruladığınızdan emin olunuz.";
+        return false;
       } else {
         return false;
       }

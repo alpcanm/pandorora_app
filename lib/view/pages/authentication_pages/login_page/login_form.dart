@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/navigation/navigation_manager.gr.dart';
-import '../../../widgets/_/_custom_text_form_field.dart';
+
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
 
@@ -43,15 +43,17 @@ class LoginForm extends StatelessWidget {
                 const Center(
                     child: AppBarTitle(titleText: LoginPageText.LOGIN_TITLE)),
                 _transparentDivider,
-                CustomTextFormField(
-                  customValidator: Validators.mailValidator,
+                TextFormField(
+                  validator: Validators.mailValidator,
                   controller: _loginpageCubit.mailController,
+                  decoration: _inputDecoration(context, "Mail"),
                 ),
                 _transparentDivider,
-                CustomTextFormField(
+                TextFormField(
                   obscureText: true,
-                  customValidator: Validators.passwordValidator,
+                  validator: Validators.passwordValidator,
                   controller: _loginpageCubit.passwordController,
+                  decoration: _inputDecoration(context, "Şifre"),
                 ),
                 const _CheckBox(),
                 Row(
@@ -73,6 +75,24 @@ class LoginForm extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(BuildContext context, String labelText) {
+    return InputDecoration(
+      labelText: labelText,
+      labelStyle: const TextStyle(color: Colors.blueGrey),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(50),
+        ),
+      ),
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(50),
         ),
       ),
     );

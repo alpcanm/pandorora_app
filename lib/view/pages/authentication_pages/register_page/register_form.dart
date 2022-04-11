@@ -27,30 +27,50 @@ class RegisterForm extends StatelessWidget {
           shrinkWrap: true,
           children: [
             _space,
-            CustomTextFormField(
-                labelText: RegisterPageText.NAME,
-                controller: _registerpageCubit.nameController),
+            TextFormField(
+                decoration: _inputDecoration(context, RegisterPageText.NAME),
+                controller: _registerpageCubit.nameController,
+                validator: Validators.emptyValidator),
             _space,
-            CustomTextFormField(
-                labelText: RegisterPageText.MAIL,
-                customValidator: Validators.mailValidator,
+            TextFormField(
+                decoration: _inputDecoration(context, RegisterPageText.MAIL),
+                validator: Validators.mailValidator,
                 controller: _registerpageCubit.mailController),
             _space,
-            _space,
-            CustomTextFormField(
-                labelText: RegisterPageText.PASSWORD,
-                customValidator: Validators.passwordValidator,
+            TextFormField(
+                decoration:
+                    _inputDecoration(context, RegisterPageText.PASSWORD),
+                validator: Validators.passwordValidator,
                 obscureText: true,
                 controller: _registerpageCubit.passwordController),
             _space,
-            CustomTextFormField(
-                labelText: RegisterPageText.CONFIRM_PASSWORD,
+            TextFormField(
                 obscureText: true,
-                customValidator: _registerpageCubit.confirmPasswordValidator,
+                decoration: _inputDecoration(
+                    context, RegisterPageText.CONFIRM_PASSWORD),
+                validator: _registerpageCubit.confirmPasswordValidator,
                 controller: _registerpageCubit.confirmPassowrdController),
             _space,
             const _SubmitButton()
           ],
+        ),
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(BuildContext context, String labelText) {
+    return InputDecoration(
+      labelText: labelText,
+      labelStyle: const TextStyle(color: Colors.blueGrey),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(50),
+        ),
+      ),
+      border: const OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(50),
         ),
       ),
     );

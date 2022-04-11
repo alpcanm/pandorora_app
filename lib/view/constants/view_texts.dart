@@ -7,8 +7,8 @@ class LoginPageText {
 }
 
 class RegisterPageText {
-  static const String NAME = 'İsim';
-  static const String SURNAME = 'Soyisim';
+  static const String NAME = 'İsim soyisim';
+
   static const String MAIL = 'E-posta';
   static const String PHONE = 'Telefon';
   static const String PASSWORD = 'Şifre';

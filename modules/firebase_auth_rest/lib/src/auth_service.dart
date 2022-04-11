@@ -13,7 +13,7 @@ class AuthService {
     _dio.options = _baseOptions;
   }
 
-  Future<String?> signInAndGetUid(
+  Future<dynamic> signInWithPassword(
       {required String mail, required String password}) async {
     try {
       Map _data = {
@@ -23,7 +23,7 @@ class AuthService {
       };
       Response _response = await _dio.post(_restURI.signInUri, data: _data);
       if (_response.statusCode == 200) {
-        return _response.data['localId'];
+        return _response.data;
       } else {
         return null;
       }
@@ -32,23 +32,21 @@ class AuthService {
     }
   }
 
-  Future<String?> signInAndGetIdToken(
-      {required String mail, required String password}) async {
+  Future<bool> checkUserMailVerified(String idToken) async {
     try {
       Map _data = {
-        "email": mail,
-        "password": password,
-        "returnSecureToken": true
+        "idToken": idToken,
       };
-      Response _response = await _dio.post(_restURI.signInUri, data: _data);
+      Response _response = await _dio.post(_restURI.getUserData, data: _data);
+
       if (_response.statusCode == 200) {
-        return _response.data['idToken'];
-      } else {
-        return null;
+        // response içerisindeki veri true mu değil mi kontrol ediyor.
+        if (_response.data["users"][0]["emailVerified"] == true) return true;
       }
     } catch (e) {
-      rethrow;
+      return false;
     }
+    return false;
   }
 
   Future<bool> changePassword(
@@ -71,6 +69,15 @@ class AuthService {
     }
   }
 
+  Future<bool> _sendVerificationMail(String idtoken) async {
+    // Doğrulama maili gönderir.
+    Map _mailVerifyData = {"requestType": "VERIFY_EMAIL", "idToken": idtoken};
+    Response _mailVerifyResponse =
+        await _dio.post(_restURI.sendVerifyMail, data: _mailVerifyData);
+    if (_mailVerifyResponse.statusCode == 200) return true;
+    return false;
+  }
+
   Future<String?> signUpAndGetUid(
       {required String mail, required String password}) async {
     try {
@@ -79,12 +86,16 @@ class AuthService {
         "password": password,
         "returnSecureToken": true
       };
-      Response _response = await _dio.post(_restURI.signUpUri, data: _data);
-      if (_response.statusCode == 200) {
-        return _response.data['localId'];
-      } else {
+      Response _signUpResponse =
+          await _dio.post(_restURI.signUpUri, data: _data);
+      if (_signUpResponse.statusCode == 200) {
+        if (await _sendVerificationMail(
+            _signUpResponse.data['idToken'] as String)) {
+          return _signUpResponse.data['localId'];
+        }
         return null;
       }
+      return null;
     } catch (e) {
       rethrow;
     }

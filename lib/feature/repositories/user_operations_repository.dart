@@ -80,8 +80,11 @@ class UserOperationsRepository implements IUserOperationsRepository {
 
   @override
   Future<String?> signInAndGetIdToken(
-      {required String mail, required String password}) async {
-    return await _globalRepo.authService
-        .signInAndGetIdToken(mail: mail, password: password);
+      // Şifre değiştirme kontrolünde kullanılıyor.
+      {required String mail,
+      required String password}) async {
+    final _result = await _globalRepo.authService
+        .signInWithPassword(mail: mail, password: password);
+    return _result["idToken"];
   }
 }

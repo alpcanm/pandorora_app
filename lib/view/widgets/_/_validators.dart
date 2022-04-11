@@ -30,4 +30,12 @@ class Validators {
       return null;
     }
   }
+
+  static String? emptyValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return "Alan boş olamaz.";
+    } else {
+      return null;
+    }
+  }
 }
