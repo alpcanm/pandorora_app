@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:country_phone_picker/country_phone_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/navigation/navigation_manager.gr.dart';
+import '../../../theme/decorations.dart';
 import '../../../widgets/_/_custom_text_form_field.dart';
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
@@ -28,49 +29,33 @@ class RegisterForm extends StatelessWidget {
           children: [
             _space,
             TextFormField(
-                decoration: _inputDecoration(context, RegisterPageText.NAME),
+                decoration:
+                    Decorations.inputDecoration(context, RegisterPageText.NAME),
                 controller: _registerpageCubit.nameController,
                 validator: Validators.emptyValidator),
             _space,
             TextFormField(
-                decoration: _inputDecoration(context, RegisterPageText.MAIL),
+                decoration:
+                    Decorations.inputDecoration(context, RegisterPageText.MAIL),
                 validator: Validators.mailValidator,
                 controller: _registerpageCubit.mailController),
             _space,
             TextFormField(
-                decoration:
-                    _inputDecoration(context, RegisterPageText.PASSWORD),
+                decoration: Decorations.inputDecoration(
+                    context, RegisterPageText.PASSWORD),
                 validator: Validators.passwordValidator,
                 obscureText: true,
                 controller: _registerpageCubit.passwordController),
             _space,
             TextFormField(
                 obscureText: true,
-                decoration: _inputDecoration(
+                decoration: Decorations.inputDecoration(
                     context, RegisterPageText.CONFIRM_PASSWORD),
                 validator: _registerpageCubit.confirmPasswordValidator,
                 controller: _registerpageCubit.confirmPassowrdController),
             _space,
             const _SubmitButton()
           ],
-        ),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(BuildContext context, String labelText) {
-    return InputDecoration(
-      labelText: labelText,
-      labelStyle: const TextStyle(color: Colors.blueGrey),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).primaryColor),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(50),
-        ),
-      ),
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(50),
         ),
       ),
     );

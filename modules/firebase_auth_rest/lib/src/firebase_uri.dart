@@ -4,12 +4,12 @@ class FirebaseURI {
   late String signInUri;
   late String signUpUri;
   late String changePassword;
-  late String sendVerifyMail;
+  late String mailSender;
   late String getUserData;
   FirebaseURI(this._firebaseApiKey) {
     signInUri = '/accounts:signInWithPassword?key=$_firebaseApiKey';
     signUpUri = '/accounts:signUp?key=$_firebaseApiKey';
-    sendVerifyMail = '/accounts:sendOobCode?key=$_firebaseApiKey';
+    mailSender = '/accounts:sendOobCode?key=$_firebaseApiKey';
     changePassword = '/accounts:update?key=$_firebaseApiKey';
     getUserData = '/accounts:lookup?key=$_firebaseApiKey';
   }

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:pandorora_app/view/pages/authentication_pages/reset_password_page/reset_password_page.dart';
 import '../../view/pages/raffle_detail_page/raffle_detail_page.dart';
 import '../../view/pages/my_raffles_page/my_raffles_page.dart';
 
@@ -61,6 +62,7 @@ import '../../view/pages/profile_page/profile_page.dart';
         path: RouteConsts.CONTROLLER_PAGE,
         name: RouteConsts.AUTH_CONTROLLER_ROUTE),
     AutoRoute(page: LoginPage, path: RouteConsts.LOGIN_PAGE),
+    AutoRoute(page: ResetPasswordPage, path: RouteConsts.RESET_PASSWORD_PAGE),
     AutoRoute(page: RegisterPage, path: RouteConsts.REGISTER_PAGE),
   ],
 )

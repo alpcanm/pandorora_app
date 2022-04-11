@@ -73,9 +73,22 @@ class AuthService {
     // Doğrulama maili gönderir.
     Map _mailVerifyData = {"requestType": "VERIFY_EMAIL", "idToken": idtoken};
     Response _mailVerifyResponse =
-        await _dio.post(_restURI.sendVerifyMail, data: _mailVerifyData);
+        await _dio.post(_restURI.mailSender, data: _mailVerifyData);
     if (_mailVerifyResponse.statusCode == 200) return true;
     return false;
+  }
+
+  Future<bool> sendResetPasswordMail(String mail) async {
+    // Doğrulama maili gönderir.
+    try {
+      Map _resetPasswordData = {"requestType": "PASSWORD_RESET", "email": mail};
+      Response _resetPasswordResponnse =
+          await _dio.post(_restURI.mailSender, data: _resetPasswordData);
+      if (_resetPasswordResponnse.statusCode == 200) return true;
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future<String?> signUpAndGetUid(

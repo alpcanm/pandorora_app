@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/navigation/navigation_manager.gr.dart';
 
+import '../../../theme/decorations.dart';
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';
 
@@ -46,14 +47,14 @@ class LoginForm extends StatelessWidget {
                 TextFormField(
                   validator: Validators.mailValidator,
                   controller: _loginpageCubit.mailController,
-                  decoration: _inputDecoration(context, "Mail"),
+                  decoration: Decorations.inputDecoration(context, "Mail"),
                 ),
                 _transparentDivider,
                 TextFormField(
                   obscureText: true,
                   validator: Validators.passwordValidator,
                   controller: _loginpageCubit.passwordController,
-                  decoration: _inputDecoration(context, "Şifre"),
+                  decoration: Decorations.inputDecoration(context, "Şifre"),
                 ),
                 const _CheckBox(),
                 Row(
@@ -67,32 +68,39 @@ class LoginForm extends StatelessWidget {
                     Expanded(child: _SignUpButton())
                   ],
                 ),
-                TextButton(
-                    onPressed: () {
-                      context.router.replaceNamed(RouteConsts.HOME_PAGE);
-                    },
-                    child: const Text("Giriş yapmadan devam et"))
+                _transparentDivider,
+                GestureDetector(
+                  onTap: () {
+                    context.router
+                        .navigateNamed(RouteConsts.RESET_PASSWORD_PAGE);
+                  },
+                  child: Text("Şifremi unuttum",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(color: Theme.of(context).primaryColor)),
+                ),
+                _transparentDivider,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        context.router.replaceNamed(RouteConsts.HOME_PAGE);
+                      },
+                      child: Text("Giriş yapmadan devam et",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              ?.copyWith(
+                                  color: Theme.of(context).primaryColor)),
+                    ),
+                    _transparentDivider,
+                  ],
+                )
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(BuildContext context, String labelText) {
-    return InputDecoration(
-      labelText: labelText,
-      labelStyle: const TextStyle(color: Colors.blueGrey),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).primaryColor),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(50),
-        ),
-      ),
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(50),
         ),
       ),
     );
