@@ -24,29 +24,27 @@ class ChangePasswordPage extends StatelessWidget {
 
 class _CurrentPasswordForm extends StatelessWidget {
   const _CurrentPasswordForm({Key? key}) : super(key: key);
-  final _tpDivider = WC.tpDivider;
+
   @override
   Widget build(BuildContext context) {
     final _bloc = context.read<ChangepasswordBloc>();
     return WC.paddingAll(
       child: Form(
         key: _bloc.formKeyCurrentPassword,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
           children: [
             CustomTextFormField(
               controller: _bloc.currentPasswordController,
-              labelText: "Current Password",
+              labelText: "Şifre",
               obscureText: true,
               customValidator: Validators.passwordValidator,
             ),
-            _tpDivider,
-            ElevatedButton(
-                onPressed: () =>
-                    _bloc.add(ChangepasswordConfirmCurrentPasswordRequest()),
-                child: const Text('Submit')),
-            _tpDivider,
+            OutlinedButton.icon(
+              onPressed: () =>
+                  _bloc.add(ChangepasswordConfirmCurrentPasswordRequest()),
+              icon: const Icon(Icons.send),
+              label: const Text('Gönder'),
+            ),
             BlocBuilder<ChangepasswordBloc, ChangepasswordState>(
               buildWhen: (previous, current) =>
                   current is ChangepasswordCurrentPasswordVerified,
@@ -77,14 +75,14 @@ class _NewPasswordForm extends StatelessWidget {
       children: [
         CustomTextFormField(
           controller: _bloc.newPasswordController,
-          labelText: "New Password",
+          labelText: "Yeni şifre",
           obscureText: true,
           customValidator: Validators.passwordValidator,
         ),
         _tpDivider,
         CustomTextFormField(
           controller: _bloc.confirmNewPasswordController,
-          labelText: "Confirm New Password",
+          labelText: "Yeni şifre tekrar",
           obscureText: true,
           customValidator: _bloc.confirmPasswordValidator,
         ),
@@ -101,10 +99,11 @@ class _NewPasswordForm extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else {
-              return ElevatedButton(
+              return OutlinedButton.icon(
+                  icon: const Icon(Icons.send),
                   onPressed: () =>
                       _bloc.add(ChangepasswordChangeNewPasswordRequest()),
-                  child: const Text('Change password'));
+                  label: const Text('Şifreyi değiştir.'));
             }
           },
         ),

@@ -4,14 +4,10 @@ import '../../core/utils/locator_get_it.dart';
 import 'global_repository.dart';
 
 abstract class IUserOperationsRepository {
-  Future<bool> update(
-      {String? name, String? surname, String? mail, String? raffleNickName});
   Future<bool> signUp({
     required String name,
-    required String surname,
     required String mail,
     required String password,
-    required String phoneNumber,
   });
   Future<bool> updateMail({
     required String uid,
@@ -20,7 +16,6 @@ abstract class IUserOperationsRepository {
   Future<bool> updateUserData({
     required String uid,
     String? name,
-    String? surname,
     String? raffleNickName,
   });
 
@@ -35,34 +30,21 @@ class UserOperationsRepository implements IUserOperationsRepository {
   final _userDBService = getIt<UserService>();
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
-  @override
-  Future<bool> update(
-      {String? name,
-      String? surname,
-      String? mail,
-      String? raffleNickName}) async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    return true;
-  }
 
   @override
   Future<bool> signUp(
       {required String name,
-      required String surname,
       required String mail,
-      required String phoneNumber,
       required String password}) async {
     try {
       String? _loacalId = await _globalRepo.authService
           .signUpAndGetUid(mail: mail, password: password);
       if (_loacalId != null) {
         bool _dbSignUp = await _userDBService.signUp(
-            uid: _loacalId,
-            name: name,
-            surname: surname,
-            mail: mail,
-            phoneNumber: phoneNumber);
+          uid: _loacalId,
+          name: name,
+          mail: mail,
+        );
         if (_dbSignUp) {
           return true;
         } else {
@@ -79,18 +61,14 @@ class UserOperationsRepository implements IUserOperationsRepository {
 
   @override
   Future<bool> updateMail({required String uid, required String mail}) {
-    // TODO: implement updateMail
     throw UnimplementedError();
   }
 
   @override
   Future<bool> updateUserData(
-      {required String uid,
-      String? name,
-      String? surname,
-      String? raffleNickName}) {
-    // TODO: implement updateUserData
-    throw UnimplementedError();
+      {required String uid, String? name, String? raffleNickName}) async {
+    return _userDBService.updateUserData(
+        uid: uid, name: name, raffleNickName: raffleNickName);
   }
 
   @override

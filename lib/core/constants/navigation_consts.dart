@@ -18,10 +18,7 @@ class RouteConsts {
   static const String PROFILE_MAIN_ROUTE = 'ProfileMainRoute';
 
   static const String UPDATE_PROFILE_PAGE = 'update-profile-page';
-  static const String PHONE_VERIFY_PAGE = 'verify-phone-page';
   static const String CONTACT_US_PAGE = 'contact-us-page';
   static const String CHANGE_PASSWORD_PAGE = 'change-password-page';
-  static const String MAIL_VERIFY_PAGE = 'verify-mail-page';
-  static const String CHANGE_RAFFLE_NICK_NAME_PAGE =
-      'change-raffle-nick-name-page';
+ 
 }

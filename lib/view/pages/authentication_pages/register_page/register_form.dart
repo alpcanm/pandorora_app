@@ -12,22 +12,10 @@ import 'cubit/registerpage_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../widgets/_/_widget_consts.dart';
 
-class RegisterForm extends StatefulWidget {
+class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
 
-  @override
-  State<RegisterForm> createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<RegisterForm> {
   final _space = const SizedBox(height: 10);
-  final _countryPhonePicker = CountryPhonePicker();
-
-  @override
-  void dispose() {
-    _countryPhonePicker.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,25 +26,16 @@ class _RegisterFormState extends State<RegisterForm> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            _countryPhonePicker.dropdownWidget,
             _space,
             CustomTextFormField(
                 labelText: RegisterPageText.NAME,
                 controller: _registerpageCubit.nameController),
             _space,
             CustomTextFormField(
-                labelText: RegisterPageText.SURNAME,
-                controller: _registerpageCubit.surnameController),
-            _space,
-            CustomTextFormField(
                 labelText: RegisterPageText.MAIL,
                 customValidator: Validators.mailValidator,
                 controller: _registerpageCubit.mailController),
             _space,
-            _PhoneCode(
-              _countryPhonePicker.valueTextWidget,
-              registerpageCubit: _registerpageCubit,
-            ),
             _space,
             CustomTextFormField(
                 labelText: RegisterPageText.PASSWORD,
@@ -78,29 +57,6 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 }
 
-class _PhoneCode extends StatelessWidget {
-  const _PhoneCode(this.phoneCode, {Key? key, required this.registerpageCubit})
-      : super(key: key);
-  final Widget phoneCode;
-  final RegisterpageCubit registerpageCubit;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        phoneCode,
-        const VerticalDivider(),
-        Flexible(
-          child: CustomTextFormField(
-              labelText: RegisterPageText.PHONE,
-              maxLengt: 10,
-              customValidator: Validators.phoneValidator,
-              controller: registerpageCubit.phoneController),
-        )
-      ],
-    );
-  }
-}
-
 class _SubmitButton extends StatelessWidget {
   const _SubmitButton({Key? key}) : super(key: key);
 
@@ -113,9 +69,9 @@ class _SubmitButton extends StatelessWidget {
           PrintMessage.showFailed(context, state.errorMessage);
         } else if (state is RegisterpageCompleted) {
           PrintMessage.showSucces(context);
-          
-          Future.delayed(const Duration(milliseconds: 500))
-              .then((value) =>context.router.replaceAll([const AuthControllerRoute()]));
+
+          Future.delayed(const Duration(milliseconds: 500)).then((value) =>
+              context.router.replaceAll([const AuthControllerRoute()]));
         }
       },
       child: ElevatedButton(

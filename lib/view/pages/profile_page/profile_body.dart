@@ -7,9 +7,24 @@ class ProfileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const _ProfileListTile(),
+        BlocBuilder<UpdateprofileCubit, UpdateprofileState>(
+          buildWhen: (previous, current) => current is UpdateprofileCompleted,
+          bloc: getIt<UpdateprofileCubit>(),
+          builder: (context, state) {
+            return _ProfileListTile();
+          },
+        ),
         const Divider(),
-        const _ShowNickName(),
+        BlocBuilder<UpdateprofileCubit, UpdateprofileState>(
+          buildWhen: (previous, current) => current is UpdateprofileCompleted,
+          bloc: getIt<UpdateprofileCubit>(),
+          builder: (context, state) {
+            final _user = getIt<GlobalRepository>().user;
+            return _ShowNickName(
+              user: _user!,
+            );
+          },
+        ),
         const Divider(),
         ProfilePageButton.iconButton(
           text: "Katıldığın Çekilişler",

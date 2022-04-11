@@ -11,6 +11,8 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.customValidator,
     this.maxLengt,
+    this.readOnly,
+    this.style,
   }) : super(key: key);
   final TextEditingController controller;
   final String? labelText;
@@ -19,10 +21,14 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String? value)? onChanged;
   final String? Function(String? value)? customValidator;
   final int? maxLengt;
+  final bool? readOnly;
+  final TextStyle? style;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly ?? false,
       maxLength: maxLengt,
+      style: style,
       onChanged: onChanged,
       obscureText: obscureText ?? false,
       controller: controller,
@@ -38,7 +44,10 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         icon: icon != null ? Icon(icon) : null,
         label: labelText != null ? Text(labelText!) : null,
-        border: const OutlineInputBorder(),
+        border: const UnderlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: UnderlineInputBorder(
+            borderSide:
+                readOnly == true ? BorderSide.none : const BorderSide(),),
       ),
     );
   }

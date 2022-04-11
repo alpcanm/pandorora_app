@@ -8,18 +8,12 @@ abstract class IUserService {
   Future<bool> signUp({
     required String uid,
     required String name,
-    required String surname,
-    required String mail,
-    required String phoneNumber,
-  });
-  Future<bool> updateMail({
-    required String uid,
     required String mail,
   });
+
   Future<bool> updateUserData({
     required String uid,
     String? name,
-    String? surname,
     String? raffleNickName,
   });
 }
@@ -45,18 +39,9 @@ class UserService implements IUserService {
 
   @override
   Future<bool> signUp(
-      {required String uid,
-      required String name,
-      required String surname,
-      required String mail,
-      required String phoneNumber}) async {
+      {required String uid, required String name, required String mail}) async {
     try {
-      User _data = User(
-          name: name,
-          surname: surname,
-          mail: mail,
-          uid: uid,
-          phoneNumber: phoneNumber);
+      User _data = User(name: name, mail: mail, uid: uid);
       Response _response =
           await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
       if (_response.statusCode == 201) {
@@ -70,18 +55,15 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<bool> updateMail({required String uid, required String mail}) {
-    // TODO: implement updateMail
-    throw UnimplementedError();
-  }
-
-  @override
   Future<bool> updateUserData(
-      {required String uid,
-      String? name,
-      String? surname,
-      String? raffleNickName}) {
-    // TODO: implement updateUserData
-    throw UnimplementedError();
+      {required String? uid, String? name, String? raffleNickName}) async {
+    Map _data = {"raffle_nick_name": raffleNickName, "name": name};
+    Response _response =
+        await _dio.post(ServerConsts.USERS_PATH + "/$uid", data: _data);
+    if (_response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

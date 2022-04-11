@@ -36,6 +36,10 @@ class ToDoTheme {
             style: TextButton.styleFrom(
           primary: _primary,
         )),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          primary: _primary,
+        )),
         inputDecorationTheme: const InputDecorationTheme(
           labelStyle: TextStyle(color: Colors.grey),
           focusedBorder: OutlineInputBorder(

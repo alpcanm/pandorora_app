@@ -13,9 +13,9 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
   final _globalRepo = getIt<GlobalRepository>();
   final _userOperationRepo = getIt<UserOperationsRepository>();
   final nameController = TextEditingController();
-  final surnameController = TextEditingController();
+
   final mailController = TextEditingController();
-  final phoneController = TextEditingController();
+
   final passwordController = TextEditingController();
   final confirmPassowrdController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -24,10 +24,8 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
     emit(RegisterpageLoading());
     bool _result = await _userOperationRepo.signUp(
         name: nameController.text,
-        surname: surnameController.text,
         mail: mailController.text,
-        password: passwordController.text,
-        phoneNumber: phoneController.text);
+        password: passwordController.text);
     if (_result) {
       await _globalRepo.signInCache.clearBox();
       await Future.wait([

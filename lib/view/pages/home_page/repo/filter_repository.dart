@@ -32,9 +32,9 @@ class FilterRepository {
       "tag1": Colors.blue,
       "tag2": Colors.green,
       "tag3": Colors.orange,
-      "tag4": Color(0xFFC1134E),
-      "tag5": Color(0xFFFF4F04),
-      "tag6": Color(0xFF128EF2),
+      "tag4": const Color(0xFFC1134E),
+      "tag5": const Color(0xFFFF4F04),
+      "tag6": const Color(0xFF128EF2),
       "tag7": Colors.purple,
       "tag8": Colors.lime,
     };

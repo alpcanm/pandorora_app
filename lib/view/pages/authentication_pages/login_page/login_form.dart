@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/navigation/navigation_manager.gr.dart';
-import '../../../constants/const_font_name.dart';
 import '../../../widgets/_/_custom_text_form_field.dart';
 import '../../../widgets/_/_print_message.dart';
 import '../../../widgets/_/_validators.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pandorora_app/core/navigation/navigation_manager.gr.dart';
 
-import '../../../core/constants/navigation_consts.dart';
 import '../authentication_pages/login_page/login_page.dart';
 import 'auth_bloc/auth_bloc.dart';
 import 'cubit/splash_cubit.dart';
@@ -37,7 +36,7 @@ class AuthController extends StatelessWidget {
         listenWhen: (previous, current) => previous.status != current.status,
         listener: (context, state) {
           if (state is AuthAuthenticated) {
-            context.router.replace(HomeMainRoute());
+            context.router.replace(const HomeMainRoute());
           }
         },
         builder: (context, state) {
