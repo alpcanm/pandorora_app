@@ -22,7 +22,16 @@ class _RaffleDetailFAB extends StatelessWidget {
   SlideAction joinRaffle(BuildContext context) {
     return SlideAction(
       alignment: Alignment.bottomCenter,
-      onSubmit: () {},
+      onSubmit: () {
+        getIt<RaffleRepository>()
+            .subscribeARaffle(raffle.raffleId!, DateTime.now().millisecond)
+            .then((_) {
+          getIt<RaffleRepository>().myRaffles().then((e) {
+            getIt<PaginationBloc>().add(
+                const PaginationAllFetched(status: PaginationStatus.initial));
+          });
+        });
+      },
       text: "Çekilişe katıl",
       innerColor: Theme.of(context).secondaryHeaderColor,
       outerColor: Theme.of(context).primaryColor,

@@ -8,7 +8,6 @@ class _ProfileListTile extends StatelessWidget {
   final _user = getIt<GlobalRepository>().user;
   @override
   Widget build(BuildContext context) {
-    print(context.widget);
     return ListTile(
       leading: Icon(
         Icons.person,

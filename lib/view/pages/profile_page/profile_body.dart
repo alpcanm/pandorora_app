@@ -28,7 +28,7 @@ class ProfileBody extends StatelessWidget {
         const Divider(),
         ProfilePageButton.iconButton(
           text: "Katıldığın Çekilişler",
-          icon: Icons.airplane_ticket,
+          icon: Icons.account_balance_wallet,
           iconColor: Theme.of(context).primaryColor,
           onPressed: () => context.router.navigate(const MyRafflesRoute()),
         ),

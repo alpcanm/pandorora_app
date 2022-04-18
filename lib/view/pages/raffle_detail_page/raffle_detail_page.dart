@@ -11,9 +11,11 @@ import 'package:pandorora_app/view/constants/consts_size.dart';
 import '../../../core/models/raffle.dart';
 import '../../../core/utils/locator_get_it.dart';
 
+import '../../../feature/repositories/raffle_repository.dart';
 import '../../widgets/components/custom_rounded_rectangle_card.dart';
 
 import '../../widgets/components/swipe_button.dart';
+import '../home_page/bloc/pagination_bloc.dart';
 part 'components/raffle_detail_fab.dart';
 part 'components/raffle_detail_app_bar.dart';
 part 'components/raffle_detail_photo_card.dart';
