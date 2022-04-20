@@ -17,6 +17,8 @@ dependencies:
 
   #network
   dio: ^4.0.4
+  url_launcher: ^6.0.20
+  connectivity_plus: ^2.2.1
 
   #service locator
   get_it: ^7.2.0
@@ -30,13 +32,14 @@ dependencies:
   flutter_dotenv: ^5.0.2
   bloc_concurrency: ^0.2.0
   stream_transform: ^2.0.0
-  connectivity_plus: ^2.2.1
   #state management
   flutter_bloc: ^8.0.1
 
   #UI
-
   flutter_svg: ^1.0.3
+
+  #admob
+  google_mobile_ads: ^1.2.0
   #MY_MODULES---------------------
 
   #firebase_auth_rest

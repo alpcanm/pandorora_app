@@ -42,7 +42,9 @@ class _RaffleDetailFAB extends StatelessWidget {
     return SlideAction(
       text: "Giriş yap",
       alignment: Alignment.bottomCenter,
-      onSubmit: () {},
+      onSubmit: () {
+        AdMobClass().showRewardedAd();
+      },
       outerColor: Theme.of(context).primaryColor,
     );
   }
@@ -52,9 +54,94 @@ class _RaffleDetailFAB extends StatelessWidget {
       text: "Çekiliş izle",
       reversed: true,
       alignment: Alignment.bottomCenter,
-      onSubmit: () {},
+      onSubmit: () {
+        String uri =
+            "https://localhost/raffles/${raffle.raffleId}"; // Product mode
+        // String uri = "https://pub.dev/packages/url_launcher";    // Developer mode
+        canLaunch(uri).then((value) async {
+          if (value) {
+            if (!await launch(uri)) {
+              throw 'Could not launch $uri';
+            }
+          } else {
+            PrintMessage.showFailed(context, "Bir hata oluştu");
+          }
+        });
+      },
       innerColor: Theme.of(context).primaryColor,
       outerColor: Theme.of(context).secondaryHeaderColor,
     );
+  }
+}
+
+class AdMobClass {
+  AdMobClass() {
+    _createRewardedAd();
+  }
+
+  static const AdRequest _request = AdRequest(
+    keywords: <String>['foo', 'bar'],
+    contentUrl: 'http://foo.com/bar.html',
+    nonPersonalizedAds: true,
+  );
+
+  int _maxFailedLoadAttempts = 3;
+  int _numRewardedLoadAttempts = 0;
+
+  RewardedAd? _rewardedAd;
+
+  void _createRewardedAd() {
+    RewardedAd.load(
+        adUnitId: Platform.isAndroid
+            ? 'ca-app-pub-3940256099942544/5224354917'
+            : 'ca-app-pub-3940256099942544/1712485313',
+        request: _request,
+        rewardedAdLoadCallback: RewardedAdLoadCallback(
+          onAdLoaded: (RewardedAd ad) {
+            print('$ad loaded.');
+            _rewardedAd = ad;
+            _numRewardedLoadAttempts = 0;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('RewardedAd failed to load: $error');
+            _rewardedAd = null;
+            _numRewardedLoadAttempts += 1;
+            if (_numRewardedLoadAttempts < _maxFailedLoadAttempts) {
+              _createRewardedAd();
+            }
+          },
+        ));
+  }
+
+  void showRewardedAd() {
+    if (_rewardedAd == null) {
+      print('Warning: attempt to show rewarded before loaded.');
+      return;
+    }
+    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (RewardedAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (RewardedAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        _createRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        _createRewardedAd();
+      },
+    );
+
+    _rewardedAd!.setImmersiveMode(true);
+    _rewardedAd!.show(
+        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+    });
+    _rewardedAd = null;
+  }
+
+  close() {
+    _rewardedAd?.dispose();
   }
 }

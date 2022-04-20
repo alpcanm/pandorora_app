@@ -1,12 +1,17 @@
 library raffle_detail_page;
 
 
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pandorora_app/core/extension/context_extension.dart';
 import 'package:pandorora_app/feature/repositories/global_repository.dart';
 
 import 'package:pandorora_app/view/constants/consts_size.dart';
+import 'package:pandorora_app/view/widgets/_/_print_message.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/raffle.dart';
 import '../../../core/utils/locator_get_it.dart';

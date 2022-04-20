@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'view/theme/_theme.dart';
 import 'core/navigation/auth_guard.dart';
 import 'core/navigation/navigation_manager.gr.dart';
 
 main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   runApp(PandororaApp());
 }
 
@@ -15,7 +18,6 @@ class PandororaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         theme: ToDoTheme.light(),
-        debugShowCheckedModeBanner: false,
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: AutoRouterDelegate(_appRouter,
             initialRoutes: [const SplashRoute()]));
