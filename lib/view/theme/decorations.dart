@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Decorations {
   static InputDecoration inputDecoration(
-      BuildContext context, String labelText) {
+      BuildContext context, String labelText ,{String? helperText}) {
     return InputDecoration(
       labelText: labelText,
       labelStyle: const TextStyle(color: Colors.blueGrey),
@@ -12,6 +12,7 @@ class Decorations {
           Radius.circular(50),
         ),
       ),
+      helperText: helperText,
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(50),

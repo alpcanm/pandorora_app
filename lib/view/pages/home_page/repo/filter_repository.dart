@@ -3,40 +3,40 @@ import 'package:flutter/material.dart';
 class FilterRepository {
   static Map<String, String> get tags {
     return {
-      "tag1": "Kozmetik",
-      "tag4": "Giyim",
-      "tag5": "Ev eşyası",
-      "tag3": "Gıda,mutfak",
-      "tag8": "Hediyelik",
-      "tag6": "Kırtasiye",
-      "tag7": "Müzik",
-      "tag2": "Elektronik",
+      "kozmetik": "Kozmetik",
+      "giyim": "Giyim",
+      "ev_esyasi": "Ev eşyası",
+      "gida_mutfak": "Gıda,mutfak",
+      "hediyelik": "Hediyelik",
+      "kirtasiye": "Kırtasiye",
+      "muzik": "Müzik",
+      "elektronik": "Elektronik",
     };
   }
 
   static Map<String, String> get tagIcons {
     return {
-      "tag1": "assets/icons/cosmetic.svg",
-      "tag2": "assets/icons/keyboard.svg",
-      "tag3": "assets/icons/food.svg",
-      "tag4": "assets/icons/clothes.svg",
-      "tag5": "assets/icons/furniture.svg",
-      "tag6": "assets/icons/book.svg",
-      "tag7": "assets/icons/guitar.svg",
-      "tag8": "assets/icons/gift.svg",
+      "kozmetik": "assets/icons/cosmetic.svg",
+      "elektronik": "assets/icons/keyboard.svg",
+      "gida_mutfak": "assets/icons/food.svg",
+      "giyim": "assets/icons/clothes.svg",
+      "ev_esyasi": "assets/icons/furniture.svg",
+      "kirtasiye": "assets/icons/book.svg",
+      "muzik": "assets/icons/guitar.svg",
+      "hediyelik": "assets/icons/gift.svg",
     };
   }
 
   static Map<String, Color> get tagColors {
     return {
-      "tag1": Colors.blue,
-      "tag2": Colors.green,
-      "tag3": Colors.orange,
-      "tag4": const Color(0xFFC1134E),
-      "tag5": const Color(0xFFFF4F04),
-      "tag6": const Color(0xFF128EF2),
-      "tag7": Colors.purple,
-      "tag8": Colors.lime,
+      "kozmetik": Colors.blue,
+      "elektronik": Colors.green,
+      "gida_mutfak": Colors.orange,
+      "giyim": const Color(0xFFC1134E),
+      "ev_esyasi": const Color(0xFFFF4F04),
+      "kirtasiye": const Color(0xFF128EF2),
+      "muzik": Colors.purple,
+      "hediyelik": Colors.lime,
     };
   }
 

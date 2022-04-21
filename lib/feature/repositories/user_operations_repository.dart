@@ -4,11 +4,11 @@ import '../../core/utils/locator_get_it.dart';
 import 'global_repository.dart';
 
 abstract class IUserOperationsRepository {
-  Future<bool> signUp({
-    required String name,
-    required String mail,
-    required String password,
-  });
+  Future<bool> signUp(
+      {required String name,
+      required String mail,
+      required String password,
+      required String raffleNickName});
   Future<bool> updateMail({
     required String uid,
     required String mail,
@@ -35,12 +35,14 @@ class UserOperationsRepository implements IUserOperationsRepository {
   Future<bool> signUp(
       {required String name,
       required String mail,
+      required String raffleNickName,
       required String password}) async {
     try {
       String? _loacalId = await _globalRepo.authService
           .signUpAndGetUid(mail: mail, password: password);
       if (_loacalId != null) {
         bool _dbSignUp = await _userDBService.signUp(
+          raffleNickName: raffleNickName,
           uid: _loacalId,
           name: name,
           mail: mail,

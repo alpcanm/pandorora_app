@@ -5,11 +5,11 @@ import '../models/user_model.dart';
 
 abstract class IUserService {
   Future<User?> readUserData({required String token});
-  Future<bool> signUp({
-    required String uid,
-    required String name,
-    required String mail,
-  });
+  Future<bool> signUp(
+      {required String uid,
+      required String name,
+      required String mail,
+      required String raffleNickName});
 
   Future<bool> updateUserData({
     required String uid,
@@ -39,9 +39,13 @@ class UserService implements IUserService {
 
   @override
   Future<bool> signUp(
-      {required String uid, required String name, required String mail}) async {
+      {required String uid,
+      required String name,
+      required String mail,
+      required String raffleNickName}) async {
     try {
-      User _data = User(name: name, mail: mail, uid: uid);
+      User _data = User(
+          name: name, mail: mail, uid: uid, raffleNickName: raffleNickName);
       Response _response =
           await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
       if (_response.statusCode == 201) {

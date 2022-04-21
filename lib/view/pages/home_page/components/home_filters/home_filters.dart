@@ -102,9 +102,9 @@ class _TagCardState extends State<_TagCard> {
     );
   }
 
-  double get heightChecker => widget.tagKey == "tag6" || widget.tagKey == "tag8"
+  double get heightChecker => widget.tagKey == "kirtasiye" || widget.tagKey == "hediyelik"
       ? 30
-      : widget.tagKey == "tag1"
+      : widget.tagKey == "kozmetik"
           ? 40
           : 50;
 }

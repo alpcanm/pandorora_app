@@ -36,7 +36,7 @@ class RaffleService {
 
   Future<dynamic> myRaffles(String? userId) async {
     Response _response =
-        await _dio.get(ServerConsts.USERS_PATH + '/$userId?gt=0');
+        await _dio.get(ServerConsts.USERS_PATH + '/$userId/subscribed-raffles?gt=0');
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
     } else {

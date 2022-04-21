@@ -6,142 +6,155 @@ class _RaffleDetailFAB extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final Raffle raffle;
+
   @override
   Widget build(BuildContext context) {
     final _globarRepo = getIt<GlobalRepository>();
     final _haveSubscribe = _globarRepo.checker(raffle.raffleId!);
+
     if (_globarRepo.user == null) {
       return signForJoin(context);
     } else {
       return _haveSubscribe == false
-          ? joinRaffle(context)
+          ? _JoinRaffleButton(raffleId: raffle.raffleId ?? "")
           : watchRaffle(context);
     }
-  }
-
-  SlideAction joinRaffle(BuildContext context) {
-    return SlideAction(
-      alignment: Alignment.bottomCenter,
-      onSubmit: () {
-        getIt<RaffleRepository>()
-            .subscribeARaffle(raffle.raffleId!, DateTime.now().millisecond)
-            .then((_) {
-          getIt<RaffleRepository>().myRaffles().then((e) {
-            getIt<PaginationBloc>().add(
-                const PaginationAllFetched(status: PaginationStatus.initial));
-          });
-        });
-      },
-      text: "Çekilişe katıl",
-      innerColor: Theme.of(context).secondaryHeaderColor,
-      outerColor: Theme.of(context).primaryColor,
-    );
   }
 
   SlideAction signForJoin(BuildContext context) {
     return SlideAction(
       text: "Giriş yap",
       alignment: Alignment.bottomCenter,
-      onSubmit: () {
-        AdMobClass().showRewardedAd();
-      },
+      onSubmit: () {},
       outerColor: Theme.of(context).primaryColor,
     );
   }
 
-  SlideAction watchRaffle(BuildContext context) {
-    return SlideAction(
-      text: "Çekiliş izle",
-      reversed: true,
-      alignment: Alignment.bottomCenter,
-      onSubmit: () {
-        String uri =
-            "https://localhost/raffles/${raffle.raffleId}"; // Product mode
-        // String uri = "https://pub.dev/packages/url_launcher";    // Developer mode
-        canLaunch(uri).then((value) async {
-          if (value) {
-            if (!await launch(uri)) {
-              throw 'Could not launch $uri';
-            }
-          } else {
-            PrintMessage.showFailed(context, "Bir hata oluştu");
-          }
-        });
-      },
-      innerColor: Theme.of(context).primaryColor,
-      outerColor: Theme.of(context).secondaryHeaderColor,
+  Widget watchRaffle(BuildContext context) {
+    String? raffleNickName;
+
+    final _subscribedRaffles = // Çekiliş isim kontrolü.
+        getIt<GlobalRepository>().user?.subscribedRaffles;
+    if (_subscribedRaffles != null) {
+      for (MiniRaffleModel? item in _subscribedRaffles) {
+        if (item?.raffleId == raffle.raffleId) {
+          raffleNickName = item?.raffleNickName;
+        }
+      }
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SlideAction(
+          text: "Çekiliş izle",
+          reversed: true,
+          alignment: Alignment.bottomCenter,
+          onSubmit: () {
+            String uri =
+                "https://localhost/raffles/${raffle.raffleId}"; // Product mode
+            // String uri = "https://pub.dev/packages/url_launcher";    // Developer mode
+            canLaunch(uri).then((value) async {
+              if (value) {
+                if (!await launch(uri)) {
+                  throw 'Could not launch $uri';
+                }
+              } else {
+                PrintMessage.showFailed(context, "Bir hata oluştu");
+              }
+            });
+          },
+          innerColor: Theme.of(context).primaryColor,
+          outerColor: Theme.of(context).secondaryHeaderColor,
+        ),
+        Text("Çekiliş ismi:$raffleNickName")
+      ],
     );
   }
 }
 
-class AdMobClass {
-  AdMobClass() {
-    _createRewardedAd();
+class _JoinRaffleButton extends StatefulWidget {
+  const _JoinRaffleButton({
+    Key? key,
+    required this.raffleId,
+  }) : super(key: key);
+  final String raffleId;
+  @override
+  State<_JoinRaffleButton> createState() => __JoinRaffleButtonState();
+}
+
+class __JoinRaffleButtonState extends State<_JoinRaffleButton> {
+  late RewardedAdCubit _cubit;
+  @override
+  void initState() {
+    _cubit = RewardedAdCubit(widget.raffleId);
+    super.initState();
   }
 
-  static const AdRequest _request = AdRequest(
-    keywords: <String>['foo', 'bar'],
-    contentUrl: 'http://foo.com/bar.html',
-    nonPersonalizedAds: true,
-  );
-
-  int _maxFailedLoadAttempts = 3;
-  int _numRewardedLoadAttempts = 0;
-
-  RewardedAd? _rewardedAd;
-
-  void _createRewardedAd() {
-    RewardedAd.load(
-        adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/5224354917'
-            : 'ca-app-pub-3940256099942544/1712485313',
-        request: _request,
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
-            _rewardedAd = ad;
-            _numRewardedLoadAttempts = 0;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
-            _rewardedAd = null;
-            _numRewardedLoadAttempts += 1;
-            if (_numRewardedLoadAttempts < _maxFailedLoadAttempts) {
-              _createRewardedAd();
-            }
-          },
-        ));
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
   }
 
-  void showRewardedAd() {
-    if (_rewardedAd == null) {
-      print('Warning: attempt to show rewarded before loaded.');
-      return;
-    }
-    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
-          print('ad onAdShowedFullScreenContent.'),
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
-        print('$ad onAdDismissedFullScreenContent.');
-        ad.dispose();
-        _createRewardedAd();
-      },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
-        print('$ad onAdFailedToShowFullScreenContent: $error');
-        ad.dispose();
-        _createRewardedAd();
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RewardedAdCubit, RewardedAdState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      bloc: _cubit,
+      builder: (context, state) {
+        if (state is RewardedAdReady) {
+          return SlideAction(
+            alignment: Alignment.bottomCenter,
+            onSubmit: () {
+              _cubit.showRewardedAd();
+            },
+            text: "Çekilişe katıl",
+            innerColor: Theme.of(context).secondaryHeaderColor,
+            outerColor: Theme.of(context).primaryColor,
+          );
+        } else if (state is RewardedAdFailed) {
+          return const SizedBox();
+        } else if (state is RewardedAdRewardSucces) {
+          // PrintMessage.showSucces(context);
+          return const _RewardSuccesWidget();
+        } else {
+          return const SizedBox();
+        }
       },
     );
-
-    _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(
-        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-    });
-    _rewardedAd = null;
   }
+}
 
-  close() {
-    _rewardedAd?.dispose();
+class _RewardSuccesWidget extends StatelessWidget {
+  const _RewardSuccesWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 60,
+          constraints: const BoxConstraints.expand(height: 60),
+          child: Material(
+              elevation: 6,
+              borderRadius: BorderRadius.circular(52),
+              child: const Center(
+                child: Text(
+                  "Çekilişe Katıldın",
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontFamily: ConstFontName.inter,
+                    fontSize: 24,
+                  ),
+                ),
+              )),
+        ),
+      ),
+    );
   }
 }

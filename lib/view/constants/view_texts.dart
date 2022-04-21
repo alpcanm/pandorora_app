@@ -11,6 +11,7 @@ class RegisterPageText {
 
   static const String MAIL = 'E-posta';
   static const String PHONE = 'Telefon';
+  static const String RAFFLE_NICK_NAME = 'Çekiliş ismi';
   static const String PASSWORD = 'Şifre';
   static const String CONFIRM_PASSWORD = 'Şifre doğrulama';
   static const String SUBMIT = 'Kayıt ol';

@@ -15,6 +15,7 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
   final nameController = TextEditingController();
 
   final mailController = TextEditingController();
+  final raffleNickNameController = TextEditingController();
 
   final passwordController = TextEditingController();
   final confirmPassowrdController = TextEditingController();
@@ -23,9 +24,10 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
   Future<void> submit() async {
     emit(RegisterpageLoading());
     bool _result = await _userOperationRepo.signUp(
-        name: nameController.text,
-        mail: mailController.text,
-        password: passwordController.text);
+        name: nameController.text.trim(),
+        mail: mailController.text.trim(),
+        raffleNickName: raffleNickNameController.text.trim(),
+        password: passwordController.text.trim());
     if (_result) {
       await _globalRepo.signInCache.clearBox();
       await Future.wait([

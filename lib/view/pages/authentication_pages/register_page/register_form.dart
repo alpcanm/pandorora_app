@@ -39,6 +39,14 @@ class RegisterForm extends StatelessWidget {
                 controller: _registerpageCubit.mailController),
             _space,
             TextFormField(
+              decoration: Decorations.inputDecoration(
+                  context, RegisterPageText.RAFFLE_NICK_NAME,
+                  helperText: "Çekiliş ekranında görünecek isim. Sonradan değiştirilebilir."),
+              validator: Validators.emptyValidator,
+              controller: _registerpageCubit.raffleNickNameController,
+            ),
+            _space,
+            TextFormField(
                 decoration: Decorations.inputDecoration(
                     context, RegisterPageText.PASSWORD),
                 validator: Validators.passwordValidator,

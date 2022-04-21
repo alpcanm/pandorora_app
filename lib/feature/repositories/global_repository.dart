@@ -1,6 +1,6 @@
 import 'package:firebase_auth_rest/firebase_auth_rest.dart';
 import '../../core/models/raffle.dart';
-import '../../core/models/users_raffle_list.dart';
+import '../../core/models/subscribed_raffles_model.dart';
 import '../../core/utils/locator_get_it.dart';
 import 'auth_repository.dart';
 
@@ -17,7 +17,8 @@ class GlobalRepository {
   User? _user;
   User? get user => _user;
 
-  UsersRaffleList usersRaffleList = UsersRaffleList();
+  SubscribedRafflesModel usersRaffleList =
+      SubscribedRafflesModel(); // Bunun atama işlemi raffle repository de yapılıyor.
 
   Future getFirebaseApiKey() async {
     _firebaseApiKey = await _initService.getFirebaseApiKey();
@@ -34,8 +35,7 @@ class GlobalRepository {
   }
 
   bool checker(String raffleId) {
-    final Set<Raffle>? _raffleList =
-        getIt<GlobalRepository>().usersRaffleList.raffleList;
+    final Set<Raffle>? _raffleList = usersRaffleList.subscribedRaffles;
 
     for (Raffle item in _raffleList ?? {}) {
       if (item.raffleId == raffleId) {
@@ -47,7 +47,7 @@ class GlobalRepository {
 
   void logOut() {
     _user = null;
-    usersRaffleList = UsersRaffleList();
+    usersRaffleList = SubscribedRafflesModel();
   }
 
   late AuthService authService;

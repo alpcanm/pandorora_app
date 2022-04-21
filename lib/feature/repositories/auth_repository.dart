@@ -25,17 +25,14 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<User?> tryGetCurrentUser() async {
     String? _token;
-
     if (_globalRepo.tokenCache.isNotEmpty() == true) {
       _token = _globalRepo.tokenCache.getValues()?.first;
     }
-
     if (_token != null) {
       try {
         User? _result = await _userDBService.readUserData(token: _token);
         if (_result != null) {
           _statusLogger(AuthStatus.authenticated);
-
           return _result;
         } else {
           await _globalRepo.tokenCache.clearBox();
@@ -47,6 +44,7 @@ class AuthRepository implements IAuthRepository {
       }
     }
     _statusLogger(AuthStatus.unauthenticated);
+
     return null;
   }
 

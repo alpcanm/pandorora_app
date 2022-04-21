@@ -2,12 +2,12 @@ import '../../core/network/raffle_service.dart';
 import 'global_repository.dart';
 
 import '../../core/models/raffle.dart';
-import '../../core/models/users_raffle_list.dart';
+import '../../core/models/subscribed_raffles_model.dart';
 import '../../core/utils/locator_get_it.dart';
 
 abstract class IRaffleRepository {
   Future<List<Raffle>?> getRaffles(int startIndex, {Set<String>? filters});
-  Future<UsersRaffleList?> myRaffles();
+  Future<SubscribedRafflesModel?> getSubscribedRaffles();
   Future<bool> subscribeARaffle(String raffleId, int date);
 }
 
@@ -32,14 +32,15 @@ class RaffleRepository implements IRaffleRepository {
   }
 
   @override
-  Future<UsersRaffleList?> myRaffles() async {
+  Future<SubscribedRafflesModel?> getSubscribedRaffles() async {
     if (_globalRepo.user == null) {
       return null;
     } // eğer oturum açmadan giriş yapmışsa direkt fonksiyondan çıkacak.
     var _response = await _raffleService.myRaffles(_globalRepo.user?.uid);
     if (_response != null) {
-      _globalRepo.usersRaffleList = UsersRaffleList.fromMap(_response);
-      for (Raffle item in _globalRepo.usersRaffleList.raffleList!) {
+      // subscribe edilmiş raffller modele dönüştürüp global repository e bildiriyor.
+      _globalRepo.usersRaffleList = SubscribedRafflesModel.fromMap(_response);
+      for (Raffle item in _globalRepo.usersRaffleList.subscribedRaffles!) {
         if (item.date! > DateTime.now().millisecondsSinceEpoch) {
           _globalRepo.usersRaffleList.futureRaffleList.add(item);
         } else {

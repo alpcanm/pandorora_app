@@ -26,7 +26,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
     );
     //katıldığın raffle ları göstermesi için
 
-    getIt<RaffleRepository>().myRaffles().then((e) {
+    getIt<RaffleRepository>().getSubscribedRaffles().then((e) {
       add(const PaginationAllFetched());
     });
   }

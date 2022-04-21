@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../core/utils/locator_get_it.dart';
 import '../../../feature/repositories/raffle_repository.dart';
 import '../../widgets/components/my_future_builder.dart';
-import '../../../core/models/users_raffle_list.dart';
+import '../../../core/models/subscribed_raffles_model.dart';
 import 'components/my_raffles_card.dart';
 
 class MyRafflesBody extends StatelessWidget {
@@ -41,9 +41,9 @@ class MyRafflesBody extends StatelessWidget {
         ),
         Expanded(
           flex: 18,
-          child: CustomFutureBuilder<UsersRaffleList?>(
-              future: getIt<RaffleRepository>().myRaffles(),
-              widget: (context, AsyncSnapshot<UsersRaffleList?> snapshot) {
+          child: CustomFutureBuilder<SubscribedRafflesModel?>(
+              future: getIt<RaffleRepository>().getSubscribedRaffles(),
+              widget: (context, AsyncSnapshot<SubscribedRafflesModel?> snapshot) {
                 return PageView(
                   controller: _pageViewController,
                   scrollDirection: Axis.horizontal,
