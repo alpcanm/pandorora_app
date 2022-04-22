@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:dio/dio.dart';
 
 import '../constants/service_consts.dart';
@@ -20,9 +22,11 @@ abstract class IUserService {
 
 class UserService implements IUserService {
   final Dio _dio = Dio();
-  final BaseOptions _baseOptions =
-      BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
+  late BaseOptions _baseOptions;
   UserService() {
+    String _baseUrl =
+        Platform.isAndroid ? ServerConsts.ANDROID_URL : ServerConsts.IOS_URL;
+    _baseOptions = BaseOptions(baseUrl: _baseUrl);
     _dio.options = _baseOptions;
   }
   @override

@@ -1,13 +1,15 @@
 import 'package:dio/dio.dart';
-
+import 'dart:io' show Platform;
 import '../constants/service_consts.dart';
 import '../models/subscriber_model.dart';
 
 class RaffleService {
   final Dio _dio = Dio();
-  final BaseOptions _baseOptions =
-      BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
+  late BaseOptions _baseOptions;
   RaffleService() {
+    String _baseUrl =
+        Platform.isAndroid ? ServerConsts.ANDROID_URL : ServerConsts.IOS_URL;
+    _baseOptions = BaseOptions(baseUrl: _baseUrl);
     _dio.options = _baseOptions;
   }
 
@@ -35,8 +37,8 @@ class RaffleService {
   }
 
   Future<dynamic> myRaffles(String? userId) async {
-    Response _response =
-        await _dio.get(ServerConsts.USERS_PATH + '/$userId/subscribed-raffles?gt=0');
+    Response _response = await _dio
+        .get(ServerConsts.USERS_PATH + '/$userId/subscribed-raffles?gt=0');
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
     } else {
