@@ -14,27 +14,32 @@ class _HomeFilters extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4),
           children: FilterRepository.tags.keys
-              .map((key) => _TagCard(
-                    FilterRepository.tags[key] ?? "",
-                    key,
-                  ))
+              .map(
+                (key) => _TagCard(
+                  FilterRepository.tags[key] ?? "",
+                  key,
+                ),
+              )
               .toList(),
         ),
         TextButton.icon(
-            onPressed: () {
-              final _filterREpo = getIt<FilterRepository>();
-              final _bloc = getIt<PaginationBloc>();
-              _filterREpo.remove(const _HomeFilters());
-              _filterREpo.isTagListOpen = false;
-              _bloc.add(
-                PaginationAllFetched(
-                    filters: getIt<FilterRepository>().filters,
-                    status: PaginationStatus.initial),
-              );
-            },
-            icon: const Icon(Icons.search),
-            label: const Text('Ara'))
+          label: const Text('Ara'),
+          icon: const Icon(Icons.search),
+          onPressed: () => _onPressedSearchButton(),
+        )
       ],
+    );
+  }
+
+  void _onPressedSearchButton() {
+    final _filterREpo = getIt<FilterRepository>();
+    final _bloc = getIt<PaginationBloc>();
+    _filterREpo.remove(const _HomeFilters());
+    _filterREpo.isTagListOpen = false;
+    _bloc.add(
+      PaginationAllFetched(
+          filters: getIt<FilterRepository>().filters,
+          status: PaginationStatus.initial),
     );
   }
 }
@@ -53,9 +58,9 @@ class _TagCard extends StatefulWidget {
 }
 
 class _TagCardState extends State<_TagCard> {
+  final _filterRepo = getIt<FilterRepository>();
   @override
   Widget build(BuildContext context) {
-    final _filterRepo = getIt<FilterRepository>();
     bool _isSelected = false;
     for (String element in _filterRepo.filters) {
       if (element == widget.tagKey) {
@@ -65,27 +70,13 @@ class _TagCardState extends State<_TagCard> {
     return Card(
       color: _isSelected ? Colors.white70 : Colors.white,
       child: InkWell(
-        onTap: () {
-          bool _isInThere = false;
-          for (String element in _filterRepo.filters) {
-            if (element == widget.tagKey) {
-              _isInThere = true;
-            }
-          }
-          if (_isInThere) {
-            _filterRepo.filters.remove(widget.tagKey);
-          } else {
-            _filterRepo.filters.add(widget.tagKey);
-          }
-          setState(() {});
-        },
+        onTap: () => _onPressedFilter(),
         child: Column(
           children: [
             Expanded(
               flex: 2,
               child: SvgPicture.asset(
                   FilterRepository.tagIcons[widget.tagKey] ?? "",
-                  semanticsLabel: 'Acme Logo',
                   color: FilterRepository.tagColors[widget.tagKey],
                   height: heightChecker),
             ),
@@ -102,9 +93,26 @@ class _TagCardState extends State<_TagCard> {
     );
   }
 
-  double get heightChecker => widget.tagKey == "kirtasiye" || widget.tagKey == "hediyelik"
-      ? 30
-      : widget.tagKey == "kozmetik"
-          ? 40
-          : 50;
+  void _onPressedFilter() {
+    bool _isInThere = false;
+    for (String element in _filterRepo.filters) {
+      if (element == widget.tagKey) {
+        _isInThere = true;
+      }
+    }
+    if (_isInThere) {
+      _filterRepo.filters.remove(widget.tagKey);
+    } else {
+      _filterRepo.filters.add(widget.tagKey);
+    }
+    setState(() {});
+  }
+
+  //! Feature
+  double get heightChecker =>
+      widget.tagKey == "kirtasiye" || widget.tagKey == "hediyelik"
+          ? 30
+          : widget.tagKey == "kozmetik"
+              ? 40
+              : 50;
 }

@@ -59,7 +59,6 @@ class _BottomCardStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final _isActive = RaffleChecker.checker(raffle.raffleId!);
     return Expanded(
       flex: 1,
       child: Row(
@@ -82,8 +81,6 @@ class _BottomCardStack extends StatelessWidget {
                         .headline4!
                         .copyWith(fontSize: 16),
                   ),
-                  // Text(_isActive ? "Katıldın" : "",
-                  //     style: Theme.of(context).textTheme.headline6!.copyWith()),
                 ],
               ),
             ),
@@ -91,7 +88,7 @@ class _BottomCardStack extends StatelessWidget {
           Expanded(
             flex: 10,
             child: CountDownArea(
-              dateTime: raffle.date!.toDate,
+              dateTime: raffle.date?.toDate ?? DateTime.now(),
             ),
           )
         ],

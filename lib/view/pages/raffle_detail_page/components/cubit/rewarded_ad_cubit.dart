@@ -23,8 +23,9 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
     nonPersonalizedAds: true,
   );
 
-  final int _maxFailedLoadAttempts = 3;
-  int _numRewardedLoadAttempts = 0;
+  final int _maxFailedLoadAttempts =
+      3; // Reklamı yüklemeyi kaç defa deneyeceğinin sayısı.
+  int _numRewardedLoadAttempts = 0; // Kaçıncı yüklemede olduğunun sayısı
 
   RewardedAd? _rewardedAd;
 
@@ -45,7 +46,6 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
           _rewardedAd = null;
           _numRewardedLoadAttempts += 1;
           if (_numRewardedLoadAttempts < _maxFailedLoadAttempts) {
-            print("object");
             _createRewardedAd();
           }
           emit(const RewardedAdFailed(RewardedStatus.failed));
@@ -78,14 +78,6 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
     _rewardedAd!.show(
         onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-      getIt<RaffleRepository>()
-          .subscribeARaffle(raffleId, DateTime.now().millisecond)
-          .then((_) {
-        getIt<RaffleRepository>().getSubscribedRaffles().then((e) {
-          getIt<PaginationBloc>().add(
-              const PaginationAllFetched(status: PaginationStatus.initial));
-        });
-      });
 
       emit(const RewardedAdRewardSucces(RewardedStatus.rewardSucces));
     });
@@ -94,11 +86,28 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
 
   @override
   Future<void> close() async {
-    await getIt<GlobalRepository>()
-        .tryGetCurrentUser(); // ! TODO çekilişe katıldıktan sonra o çekilişe katıldığın
-                                //ismi yalnızca bu fonksyion ile güncelleyebiliyorsun.
-                                // Daha iyi bir çözüm bulunmalı!!
+    //TODO çekilişe katıldıktan sonra o çekilişe katıldığın
+    //ismi yalnızca bu fonksyion ile güncelleyebiliyorsun.
+    //Daha iyi bir çözüm bulunmalı!!
+    await getIt<GlobalRepository>().tryGetCurrentUser();
+
     _rewardedAd?.dispose();
     return super.close();
+  }
+
+  void _onUserEarnedReward() {
+    //! Feature Reklam izlendiğinde gerçekleştirilecek olan olaylar
+
+    getIt<RaffleRepository>()
+        .subscribeARaffle(
+            raffleId, DateTime.now().millisecond) //* Çekilişe katılır.
+        .then((_) {
+      getIt<RaffleRepository>()
+          .getSubscribedRaffles() //* Katıldığın çekilişleri getir. (çekilişe katıldığının güncellenmesi için)
+          .then((e) {
+        getIt<PaginationBloc>() //* Tüm çekilişleri tekrar getir. (güncellemelerin yansıması için.)
+            .add(const PaginationAllFetched(status: PaginationStatus.initial));
+      });
+    });
   }
 }

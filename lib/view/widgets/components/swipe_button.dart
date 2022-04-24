@@ -3,68 +3,44 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:pandorora_app/view/constants/const_font_name.dart';
 
-/// Slider call to action component
+// THIS FROM A PLUGIN
 class SlideAction extends StatefulWidget {
-  /// The size of the sliding icon
   final double sliderButtonIconSize;
 
-  /// Tha padding of the sliding icon
   final double sliderButtonIconPadding;
 
-  /// The offset on the y axis of the slider icon
   final double sliderButtonYOffset;
 
-  /// If the slider icon rotates
   final bool sliderRotate;
 
-  /// The child that is rendered instead of the default Text widget
   final Widget? child;
 
-  /// The height of the component
   final double height;
 
-  /// The color of the inner circular button, of the tick icon of the text.
-  /// If not set, this attribute defaults to primaryIconTheme.
   final Color? innerColor;
 
-  /// The color of the external area and of the arrow icon.
-  /// If not set, this attribute defaults to accentColor from your theme.
   final Color? outerColor;
 
-  /// The text showed in the default Text widget
   final String? text;
 
-  /// Text style which is applied on the Text widget.
-  ///
-  /// By default, the text is colored using [innerColor].
   final TextStyle? textStyle;
 
-  /// The borderRadius of the sliding icon and of the background
   final double borderRadius;
 
-  /// Callback called on submit
-  /// If this is null the component will not animate to complete
   final VoidCallback? onSubmit;
 
-  /// Elevation of the component
   final double elevation;
 
-  /// The widget to render instead of the default icon
   final Widget? sliderButtonIcon;
 
-  /// The widget to render instead of the default submitted icon
   final Widget? submittedIcon;
 
-  /// The duration of the animations
   final Duration animationDuration;
 
-  /// If true the widget will be reversed
   final bool reversed;
 
-  /// the alignment of the widget once it's submitted
   final Alignment alignment;
 
-  /// Create a new instance of the widget
   const SlideAction({
     Key? key,
     this.sliderButtonIconSize = 18,
@@ -90,7 +66,6 @@ class SlideAction extends StatefulWidget {
   SlideActionState createState() => SlideActionState();
 }
 
-/// Use a GlobalKey to access the state. This is the only way to call [SlideActionState.reset]
 class SlideActionState extends State<SlideAction>
     with TickerProviderStateMixin {
   final GlobalKey _containerKey = GlobalKey();
