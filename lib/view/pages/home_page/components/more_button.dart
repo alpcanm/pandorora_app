@@ -8,16 +8,13 @@ class _MoreButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _bloc = getIt<PaginationBloc>();
-    return BlocBuilder(
-      bloc: _bloc,
-      builder: (context, PaginationState state) {
-        return TextButton(
-          onPressed: () {
-            _bloc.add(PaginationAllFetched(filters: getIt<FilterRepository>().filters));
-          },
-          child: const Text('Daha fazla'),
-        );
+    return TextButton(
+      onPressed: () {
+        _bloc.add(
+            PaginationAllFetched(filters: getIt<FilterRepository>().filters));
       },
+      child: const Text('Daha fazla'),
     );
+    ;
   }
 }

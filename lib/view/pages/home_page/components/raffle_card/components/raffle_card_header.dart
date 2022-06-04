@@ -8,7 +8,6 @@ class _RaffleCardHeader extends StatelessWidget {
   final Raffle raffle;
   @override
   Widget build(BuildContext context) {
-    
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Row(
@@ -17,7 +16,6 @@ class _RaffleCardHeader extends StatelessWidget {
         children: [
           Text("#${FilterRepository.tags[raffle.tag]}",
               style: Theme.of(context).textTheme.headline6!.copyWith()),
-    
         ],
       ),
     );

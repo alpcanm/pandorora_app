@@ -10,13 +10,13 @@ import 'package:pandorora_app/feature/repositories/global_repository.dart';
 import 'package:pandorora_app/view/constants/consts_size.dart';
 import 'package:pandorora_app/view/pages/raffle_detail_page/components/cubit/rewarded_ad_cubit.dart';
 import 'package:pandorora_app/view/widgets/_/_print_message.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/mini_raffle_model.dart';
 import '../../../core/models/raffle.dart';
 import '../../../core/utils/locator_get_it.dart';
 
 import '../../constants/const_font_name.dart';
+import '../../widgets/_/_url_launcher.dart';
 import '../../widgets/components/custom_rounded_rectangle_card.dart';
 
 import '../../widgets/components/swipe_button.dart';
@@ -38,7 +38,6 @@ class RaffleDetailPage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: _RaffleDetailAppBar(context),
       body: _RaffleDetailBody(_raffle),
-
     );
   }
 }

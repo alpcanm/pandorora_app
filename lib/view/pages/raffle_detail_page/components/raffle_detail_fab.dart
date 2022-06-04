@@ -11,7 +11,6 @@ class _RaffleDetailFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     final _globarRepo = getIt<GlobalRepository>();
     final _haveSubscribe = _globarRepo.checker(raffle.raffleId!);
-
     if (_globarRepo.user == null) {
       return signForJoin(context);
     } else {
@@ -32,7 +31,6 @@ class _RaffleDetailFAB extends StatelessWidget {
 
   Widget watchRaffle(BuildContext context) {
     String? raffleNickName;
-
     final _subscribedRaffles = // Çekiliş isim kontrolü.
         getIt<GlobalRepository>().user?.subscribedRaffles;
     if (_subscribedRaffles != null) {
@@ -51,18 +49,11 @@ class _RaffleDetailFAB extends StatelessWidget {
           reversed: true,
           alignment: Alignment.bottomCenter,
           onSubmit: () {
-            String uri =
-                "https://localhost/raffles/${raffle.raffleId}"; // Product mode
-            // String uri = "https://pub.dev/packages/url_launcher";    // Developer mode
-            canLaunch(uri).then((value) async {
-              if (value) {
-                if (!await launch(uri)) {
-                  throw 'Could not launch $uri';
-                }
-              } else {
-                PrintMessage.showFailed(context, "Bir hata oluştu");
-              }
-            });
+            const _url = "https://pub.dev/packages/url_launcher"; // TEST MODE
+            // const _url = "https://localhost/raffles/${raffle.raffleId}"; //PRODUCT MODE
+            UrlLaucnherManager.launcHttp(_url).then((value) => !value
+                ? PrintMessage.showFailed(context, "Bir hata oluştu")
+                : null); //* TEST MODE
           },
           innerColor: Theme.of(context).primaryColor,
           outerColor: Theme.of(context).secondaryHeaderColor,

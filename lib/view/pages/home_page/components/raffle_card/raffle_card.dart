@@ -27,17 +27,21 @@ class RaffleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const _shape = RoundedRectangleBorder(
+      side: BorderSide(color: Colors.black38, width: 0.2),
+      borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      ),
+    );
+
+    final _height = context.height * 0.5;
+
     return Stack(
       children: [
         SizedBox(
-          height: context.height * 0.5,
+          height: _height,
           child: Card(
-            shape: const RoundedRectangleBorder(
-              side: BorderSide(color: Colors.black38, width: 0.2),
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
+            shape: _shape,
             margin: _cardMargin,
             child: GestureDetector(
               onTap: () =>

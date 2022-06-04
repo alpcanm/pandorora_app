@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
-
+import 'dart:io' show Platform;
 import '../constants/service_consts.dart';
 import '../models/subscriber_model.dart';
 
 class RaffleService {
   final Dio _dio = Dio();
-  final BaseOptions _baseOptions = BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
+  BaseOptions _baseOptions = BaseOptions(baseUrl: ServerConsts.ANDROID_URL);
   RaffleService() {
+    String _baseUrl = Platform.isAndroid ? ServerConsts.ANDROID_URL : ServerConsts.IOS_URL;
+    _baseOptions = BaseOptions(baseUrl: _baseUrl);
     _dio.options = _baseOptions;
   }
 

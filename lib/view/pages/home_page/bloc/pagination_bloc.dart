@@ -24,8 +24,12 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       _onPaginationFetch,
       transformer: throttleDroppable<PaginationAllFetched>(throttleDuration),
     );
-    //katıldığın raffle ları göstermesi için
 
+    _onInit();
+  }
+  _onInit() {
+    //! Feature
+    //katıldığın raffle ları göstermesi için
     getIt<RaffleRepository>().getSubscribedRaffles().then((e) {
       add(const PaginationAllFetched());
     });
@@ -34,7 +38,7 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
   Future<void> _onPaginationFetch(
       PaginationAllFetched event, Emitter<PaginationState> emit) async {
     // eğer filtreli arama yaparsak her şeyi sıfırlamamız gerekiyor bu yüzden event.status=initial veriyoruz.
-    //Bruası sadece filtreli aramalarda bir kere çalışacak.
+    //Burası sadece filtreli aramalarda bir kere çalışacak.
     if (event.status == PaginationStatus.initial) {
       emit(
         state.copyWith(
@@ -72,9 +76,9 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
       }
     }
     //verileri repodan istiyoruz.
-    final _products = await _raffleRepo.getRaffles(state.lastRaffleTime,
+    final _raffles = await _raffleRepo.getRaffles(state.lastRaffleTime,
         filters: event.filters);
-    if (_products == null || _products.isEmpty) {
+    if (_raffles == null || _raffles.isEmpty) {
       // Eğer gelen veri artık boşsa hasReachedMax=true olacak ve bundan sonra istek atmayacak.
       emit(state.copyWith(hasReachedMax: true));
     } else {
@@ -84,15 +88,10 @@ class PaginationBloc extends Bloc<PaginationEvent, PaginationState> {
             status: PaginationStatus.success,
             hasReachedMax: false,
             //gelen verileri elimizde olan listeye ekliyoruz.
-            raffles: List.of(state.raffles)..addAll(_products),
-            lastRaffleTime: _products.last.date,
+            raffles: List.of(state.raffles)..addAll(_raffles),
+            lastRaffleTime: _raffles.last.date,
             isFiltered: true),
       );
     }
-  }
-
-  @override
-  Future<void> close() {
-    return super.close();
   }
 }

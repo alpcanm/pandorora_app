@@ -17,7 +17,7 @@ dependencies:
 
   #network
   dio: ^4.0.4
-  url_launcher: ^6.0.20
+  url_launcher: ^6.1.2
   connectivity_plus: ^2.2.1
 
   #service locator
@@ -48,7 +48,7 @@ dependencies:
 
   # country_phone_picker:
   #   path: modules/country_phone_picker
-
+  
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
