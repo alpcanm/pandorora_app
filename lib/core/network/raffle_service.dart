@@ -5,8 +5,7 @@ import '../models/subscriber_model.dart';
 
 class RaffleService {
   final Dio _dio = Dio();
-  final BaseOptions _baseOptions =
-      BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
+  final BaseOptions _baseOptions = BaseOptions(baseUrl: ServerConsts.SERVER_BASE_URL);
   RaffleService() {
     _dio.options = _baseOptions;
   }
@@ -15,8 +14,7 @@ class RaffleService {
     //filtreyi replace ediyoruz.
     final String _query = _replaceFilter(filters);
     // queryParameters a parametrelerimizi atıyoruz. ve isteğimizi gönderiyoruz.
-    Response _response = await _dio.get(ServerConsts.RAFFLE_PATH,
-        queryParameters: {"gt": startIndex, "tags": _query});
+    Response _response = await _dio.get(ServerConsts.RAFFLE_PATH, queryParameters: {"gt": startIndex, "tags": _query});
     //Gelence cevap 200 status code ise response modelimize göre içindeki datayı çekiyoruz.
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
@@ -35,8 +33,7 @@ class RaffleService {
   }
 
   Future<dynamic> myRaffles(String? userId) async {
-    Response _response =
-        await _dio.get(ServerConsts.USERS_PATH + '/$userId/subscribed-raffles?gt=0');
+    Response _response = await _dio.get(ServerConsts.USERS_PATH + '/$userId/subscribed-raffles?gt=0');
     if (_response.statusCode == 200) {
       return _response.data["body"]["data"];
     } else {
@@ -44,18 +41,9 @@ class RaffleService {
     }
   }
 
-  Future<bool> subscribeARaffle(
-      {required String raffleId,
-      required String userId,
-      required String raffleNickName,
-      required int date}) async {
-    SubscriberModel _data = SubscriberModel(
-        subscribeDate: date,
-        subscriberId: userId,
-        raffleNickName: raffleNickName);
-    Response _response = await _dio.post(
-        ServerConsts.RAFFLE_PATH_ADDTO + '?rfid=$raffleId&uid=$userId',
-        data: _data.toJson());
+  Future<bool> subscribeARaffle({required String raffleId, required String userId, required String raffleNickName, required int date}) async {
+    SubscriberModel _data = SubscriberModel(subscribeDate: date, subscriberId: userId, raffleNickName: raffleNickName);
+    Response _response = await _dio.post(ServerConsts.RAFFLE_PATH_ADDTO + '?rfid=$raffleId&uid=$userId', data: _data.toJson());
     if (_response.statusCode == 200) {
       return true;
     } else {

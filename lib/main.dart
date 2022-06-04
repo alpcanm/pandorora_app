@@ -17,9 +17,14 @@ class PandororaApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        theme: ToDoTheme.light(),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: AutoRouterDelegate(_appRouter,
-            initialRoutes: [const SplashRoute()]));
+      theme: ToDoTheme.light(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      routerDelegate: AutoRouterDelegate(
+        _appRouter,
+        initialRoutes: [
+          const SplashRoute(),
+        ],
+      ),
+    );
   }
 }

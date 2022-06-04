@@ -15,12 +15,10 @@ class RaffleRepository implements IRaffleRepository {
   final RaffleService _raffleService = getIt<RaffleService>();
   final GlobalRepository _globalRepo = getIt<GlobalRepository>();
   @override
-  Future<List<Raffle>?> getRaffles(int startIndex,
-      {Set<String>? filters}) async {
+  Future<List<Raffle>?> getRaffles(int startIndex, {Set<String>? filters}) async {
     List<Raffle> _result = [];
     //productSerivce e istek gönderilir.
-    final _response =
-        await _raffleService.getRaffles(startIndex, filters: filters);
+    final _response = await _raffleService.getRaffles(startIndex, filters: filters);
     if (_response != null) {
       for (var item in _response) {
         //gelen cevap null değilse içerisindeki veriler ProductModele dönüştürülür ve liste içerisine atılır.
@@ -39,8 +37,10 @@ class RaffleRepository implements IRaffleRepository {
     var _response = await _raffleService.myRaffles(_globalRepo.user?.uid);
     if (_response != null) {
       // subscribe edilmiş raffller modele dönüştürüp global repository e bildiriyor.
+
       _globalRepo.usersRaffleList = SubscribedRafflesModel.fromMap(_response);
-      for (Raffle item in _globalRepo.usersRaffleList.subscribedRaffles!) {
+
+      for (Raffle item in _globalRepo.usersRaffleList.subscribedRaffles ?? []) {
         if (item.date! > DateTime.now().millisecondsSinceEpoch) {
           _globalRepo.usersRaffleList.futureRaffleList.add(item);
         } else {
@@ -55,10 +55,6 @@ class RaffleRepository implements IRaffleRepository {
 
   @override
   Future<bool> subscribeARaffle(String raffleId, int date) {
-    return _raffleService.subscribeARaffle(
-        raffleId: raffleId,
-        userId: _globalRepo.user!.uid!,
-        date: date,
-        raffleNickName: _globalRepo.user!.raffleNickName ?? "BOŞ ŞUAN");
+    return _raffleService.subscribeARaffle(raffleId: raffleId, userId: _globalRepo.user!.uid!, date: date, raffleNickName: _globalRepo.user!.raffleNickName ?? "BOŞ ŞUAN");
   }
 }

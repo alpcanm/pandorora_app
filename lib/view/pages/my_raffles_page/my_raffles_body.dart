@@ -19,9 +19,11 @@ class MyRafflesBody extends StatelessWidget {
               Expanded(
                 child: TextButton(
                   onPressed: () {
-                    _pageViewController.animateToPage(0,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeOutSine);
+                    WidgetsBinding.instance?.addPostFrameCallback((_) {
+                      if (_pageViewController.hasClients) {
+                        _pageViewController.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.easeOutSine);
+                      }
+                    });
                   },
                   child: const Text("gelecek"),
                 ),
@@ -29,9 +31,14 @@ class MyRafflesBody extends StatelessWidget {
               Expanded(
                 child: TextButton(
                   onPressed: () {
-                    _pageViewController.animateToPage(1,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeOutSine);
+                    WidgetsBinding.instance?.addPostFrameCallback((_) {
+                      if (_pageViewController.hasClients) {
+                        _pageViewController.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.easeOutSine);
+                      }
+                    });
+                    // if (_pageViewController.hasClients) {
+                    //   _pageViewController.animateToPage(1, duration: const Duration(seconds: 1), curve: Curves.easeOutSine);
+                    // }
                   },
                   child: const Text("geçmiş"),
                 ),
@@ -51,8 +58,7 @@ class MyRafflesBody extends StatelessWidget {
                     ListView.builder(
                       itemBuilder: (context, index) {
                         if (snapshot.data != null) {
-                          return MyRafflesCard(
-                              snapshot.data!.futureRaffleList.elementAt(index));
+                          return MyRafflesCard(snapshot.data!.futureRaffleList.elementAt(index));
                         }
                         return const SizedBox();
                       },
@@ -61,8 +67,7 @@ class MyRafflesBody extends StatelessWidget {
                     ),
                     ListView.builder(
                       itemBuilder: (context, index) {
-                        return MyRafflesCard(
-                            snapshot.data!.pastRaffleList.elementAt(index));
+                        return MyRafflesCard(snapshot.data!.pastRaffleList.elementAt(index));
                       },
                       itemCount: snapshot.data!.pastRaffleList.length,
                       shrinkWrap: true,
