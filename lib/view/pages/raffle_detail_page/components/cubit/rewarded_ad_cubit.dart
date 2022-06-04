@@ -23,8 +23,7 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
     nonPersonalizedAds: true,
   );
 
-  final int _maxFailedLoadAttempts =
-      3; // Reklamı yüklemeyi kaç defa deneyeceğinin sayısı.
+  final int _maxFailedLoadAttempts = 3; // Reklamı yüklemeyi kaç defa deneyeceğinin sayısı.
   int _numRewardedLoadAttempts = 0; // Kaçıncı yüklemede olduğunun sayısı
 
   RewardedAd? _rewardedAd;
@@ -60,8 +59,7 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
       return;
     }
     _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
-          print('ad onAdShowedFullScreenContent.'),
+      onAdShowedFullScreenContent: (RewardedAd ad) => print('ad onAdShowedFullScreenContent.'),
       onAdDismissedFullScreenContent: (RewardedAd ad) {
         print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
@@ -75,10 +73,9 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
     );
 
     _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(
-        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+    _rewardedAd!.show(onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
       print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-
+      _onUserEarnedReward();
       emit(const RewardedAdRewardSucces(RewardedStatus.rewardSucces));
     });
     _rewardedAd = null;
@@ -98,12 +95,9 @@ class RewardedAdCubit extends Cubit<RewardedAdState> {
   void _onUserEarnedReward() {
     //! Feature Reklam izlendiğinde gerçekleştirilecek olan olaylar
 
-    getIt<RaffleRepository>()
-        .subscribeARaffle(
-            raffleId, DateTime.now().millisecond) //* Çekilişe katılır.
+    getIt<RaffleRepository>().subscribeARaffle(raffleId, DateTime.now().millisecond) //* Çekilişe katılır.
         .then((_) {
-      getIt<RaffleRepository>()
-          .getSubscribedRaffles() //* Katıldığın çekilişleri getir. (çekilişe katıldığının güncellenmesi için)
+      getIt<RaffleRepository>().getSubscribedRaffles() //* Katıldığın çekilişleri getir. (çekilişe katıldığının güncellenmesi için)
           .then((e) {
         getIt<PaginationBloc>() //* Tüm çekilişleri tekrar getir. (güncellemelerin yansıması için.)
             .add(const PaginationAllFetched(status: PaginationStatus.initial));

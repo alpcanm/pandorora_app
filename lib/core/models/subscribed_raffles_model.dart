@@ -11,7 +11,7 @@ class SubscribedRafflesModel {
 
   factory SubscribedRafflesModel.fromMap(Map<String, dynamic> map) {
     return SubscribedRafflesModel(
-      subscribedRaffles: map['raffle_list'] != null ? Set<Raffle>.from(map['raffle_list']?.map((x) => Raffle.fromMap(x))) : null,
+      subscribedRaffles: map['subscribed_raffles'] != null ? Set<Raffle>.from(map['subscribed_raffles']?.map((x) => Raffle.fromMap(x))) : null,
     );
   }
 
