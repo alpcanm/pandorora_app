@@ -31,15 +31,12 @@ class LoginpageCubit extends Cubit<LoginpageState> {
 
   Future<void> signIn() async {
     emit(LoginpageLoading());
-    bool _result = await _authRepository.signIn(
-        mail: mailController.text, password: passwordController.text);
+    bool _result = await _authRepository.signIn(mail: mailController.text, password: passwordController.text);
     if (_result) {
       emit(LoginpageCompleted());
-      _globalRepo.signInCache
-          .clearBox()
-          .then((value) async => isChecked ? await setToCache() : null);
+      _globalRepo.signInCache.clearBox().then((value) async => isChecked ? await setToCache() : null);
     } else {
-      emit(LoginpageError(errorMessage: _authRepository.errorMessage));
+      emit(const LoginpageError(errorMessage: "Bir şeyler ters gitti."));
     }
   }
 

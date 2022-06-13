@@ -36,15 +36,25 @@ class ProfileBody extends StatelessWidget {
           text: 'Bilgileri güncelle',
           icon: Icons.person,
           iconColor: Colors.purple,
-          onPressed: () => context.router.navigateNamed(
-              RouteConsts.PROFILE_PAGE + "/" + RouteConsts.UPDATE_PROFILE_PAGE),
+          onPressed: () => context.router.navigateNamed(RouteConsts.PROFILE_PAGE + "/" + RouteConsts.UPDATE_PROFILE_PAGE),
         ),
         ProfilePageButton.iconButton(
           text: 'Bize ulaş',
           icon: Icons.chat,
           iconColor: Colors.green,
-          onPressed: () => context.router.navigateNamed(
-              RouteConsts.PROFILE_PAGE + "/" + RouteConsts.CONTACT_US_PAGE),
+          onPressed: () {
+            String? encodeQueryParameters(Map<String, String> params) {
+              return params.entries.map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}').join('&');
+            }
+
+            final Uri emailLaunchUri = Uri(
+              scheme: 'mailto',
+              path: 'alpcanm@gmail.com',
+              query: encodeQueryParameters(<String, String>{'subject': 'Merhaba Pandorora müşteri temsilcisi'}),
+            );
+
+            launchUrl(emailLaunchUri);
+          },
         ),
         ProfilePageButton.iconButton(
           text: 'Çıkış yap',
@@ -59,7 +69,6 @@ class ProfileBody extends StatelessWidget {
   void _logOut(BuildContext context) {
     getIt<GlobalRepository>().logOut();
     getIt.resetLazySingleton<PaginationBloc>();
-    getIt<AuthRepository>().logOut().then(
-        (value) => context.router.replaceAll([const AuthControllerRoute()]));
+    getIt<AuthRepository>().logOut().then((value) => context.router.replaceAll([const AuthControllerRoute()]));
   }
 }
