@@ -9,26 +9,21 @@ import '../../../../../../feature/repositories/user_operations_repository.dart';
 part 'changepassword_event.dart';
 part 'changepassword_state.dart';
 
-class ChangepasswordBloc
-    extends Bloc<ChangepasswordEvent, ChangepasswordState> {
+class ChangepasswordBloc extends Bloc<ChangepasswordEvent, ChangepasswordState> {
   final _userOperationRepo = getIt<UserOperationsRepository>();
   final _globalRepo = getIt<GlobalRepository>();
 
   String? _idtoken;
   ChangepasswordBloc() : super(ChangepasswordInitial()) {
-    on<ChangepasswordConfirmCurrentPasswordRequest>(
-        _confirmCurrentPasswordRequest);
+    on<ChangepasswordConfirmCurrentPasswordRequest>(_confirmCurrentPasswordRequest);
     on<ChangepasswordChangeNewPasswordRequest>(_changeNewPasswordRequest);
   }
 
-  _confirmCurrentPasswordRequest(
-      ChangepasswordConfirmCurrentPasswordRequest event,
-      Emitter<ChangepasswordState> emit) async {
+  _confirmCurrentPasswordRequest(ChangepasswordConfirmCurrentPasswordRequest event, Emitter<ChangepasswordState> emit) async {
     if (formKeyCurrentPassword.currentState!.validate()) {
       emit(ChangepasswordLoading());
       String _mail = _globalRepo.user?.mail ?? "";
-      _idtoken = await _userOperationRepo.signInAndGetIdToken(
-          mail: _mail, password: currentPasswordController.text);
+      _idtoken = await _userOperationRepo.signInAndGetIdToken(mail: _mail, password: currentPasswordController.text);
       if (_idtoken != null) {
         emit(ChangepasswordCurrentPasswordVerified());
       } else {
@@ -37,12 +32,10 @@ class ChangepasswordBloc
     }
   }
 
-  _changeNewPasswordRequest(ChangepasswordChangeNewPasswordRequest event,
-      Emitter<ChangepasswordState> emit) async {
+  _changeNewPasswordRequest(ChangepasswordChangeNewPasswordRequest event, Emitter<ChangepasswordState> emit) async {
     if (formKeyCurrentPassword.currentState!.validate()) {
       emit(ChangepasswordLoading());
-      bool _result = await _userOperationRepo.changePassword(
-          idToken: _idtoken ?? "", newPassword: newPasswordController.text);
+      bool _result = await _userOperationRepo.changePassword(idToken: _idtoken ?? "", newPassword: newPasswordController.text);
       if (_result) {
         emit(ChangepasswordNewPasswordVerified());
       } else {
@@ -54,9 +47,9 @@ class ChangepasswordBloc
 
   String? confirmPasswordValidator(String? value) {
     if (value != null && value.isEmpty) {
-      return 'Empty field';
+      return 'Alan boş olamaz.';
     } else if (value != newPasswordController.text) {
-      return 'Not matched';
+      return 'Eşleşmedi';
     } else {
       return null;
     }

@@ -42,6 +42,14 @@ class _PhotoStack extends StatelessWidget {
             fit: BoxFit.cover,
             height: double.infinity,
             width: double.infinity,
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -76,10 +84,7 @@ class _BottomCardStack extends StatelessWidget {
                     raffle.title ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(fontSize: 16),
+                    style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16),
                   ),
                 ],
               ),

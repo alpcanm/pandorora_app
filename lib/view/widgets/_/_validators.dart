@@ -1,13 +1,11 @@
 class Validators {
   static String? mailValidator(String? value) {
     if (value != null || value!.isNotEmpty) {
-      bool _check = RegExp(
-              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-          .hasMatch(value);
+      bool _check = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
       if (_check) {
         return null;
       } else {
-        return "It's not an email";
+        return "Lütfen gerçek bir e-posta giriniz.";
       }
     } else {
       return null;
@@ -23,9 +21,9 @@ class Validators {
 
   static String? passwordValidator(String? value) {
     if (value != null && value.isEmpty) {
-      return 'Empty field';
+      return 'Alan boş olamaz';
     } else if (value != null && value.length < 6) {
-      return 'Must be greated than 6';
+      return '6 karakterden büyük olmak zorundadır.';
     } else {
       return null;
     }

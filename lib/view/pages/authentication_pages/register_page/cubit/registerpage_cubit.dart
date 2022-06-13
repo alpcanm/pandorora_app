@@ -24,10 +24,7 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
   Future<void> submit() async {
     emit(RegisterpageLoading());
     bool _result = await _userOperationRepo.signUp(
-        name: nameController.text.trim(),
-        mail: mailController.text.trim(),
-        raffleNickName: raffleNickNameController.text.trim(),
-        password: passwordController.text.trim());
+        name: nameController.text.trim(), mail: mailController.text.trim(), raffleNickName: raffleNickNameController.text.trim(), password: passwordController.text.trim());
     if (_result) {
       await _globalRepo.signInCache.clearBox();
       await Future.wait([
@@ -43,9 +40,9 @@ class RegisterpageCubit extends Cubit<RegisterpageState> {
 
   String? confirmPasswordValidator(String? value) {
     if (value != null && value.isEmpty) {
-      return 'Empty field';
+      return 'Alan boş olamaz';
     } else if (value != passwordController.text) {
-      return 'Not matched';
+      return 'Eşlemşedi';
     } else {
       return null;
     }

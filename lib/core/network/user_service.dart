@@ -7,11 +7,7 @@ import '../models/user_model.dart';
 
 abstract class IUserService {
   Future<User?> readUserData({required String token});
-  Future<bool> signUp(
-      {required String uid,
-      required String name,
-      required String mail,
-      required String raffleNickName});
+  Future<bool> signUp({required String uid, required String name, required String mail, required String raffleNickName});
 
   Future<bool> updateUserData({
     required String uid,
@@ -24,8 +20,7 @@ class UserService implements IUserService {
   final Dio _dio = Dio();
   late BaseOptions _baseOptions;
   UserService() {
-    String _baseUrl =
-        Platform.isAndroid ? ServerConsts.ANDROID_URL : ServerConsts.IOS_URL;
+    String _baseUrl = Platform.isAndroid ? ServerConsts.ANDROID_URL : ServerConsts.IOS_URL;
     _baseOptions = BaseOptions(baseUrl: _baseUrl);
     _dio.options = _baseOptions;
   }
@@ -42,16 +37,10 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<bool> signUp(
-      {required String uid,
-      required String name,
-      required String mail,
-      required String raffleNickName}) async {
+  Future<bool> signUp({required String uid, required String name, required String mail, required String raffleNickName}) async {
     try {
-      User _data = User(
-          name: name, mail: mail, uid: uid, raffleNickName: raffleNickName);
-      Response _response =
-          await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
+      User _data = User(name: name, mail: mail, uid: uid, raffleNickName: raffleNickName);
+      Response _response = await _dio.post(ServerConsts.USERS_PATH, data: _data.toJson());
       if (_response.statusCode == 201) {
         return true;
       } else {
@@ -63,11 +52,9 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<bool> updateUserData(
-      {required String? uid, String? name, String? raffleNickName}) async {
+  Future<bool> updateUserData({required String? uid, String? name, String? raffleNickName}) async {
     Map _data = {"raffle_nick_name": raffleNickName, "name": name};
-    Response _response =
-        await _dio.post(ServerConsts.USERS_PATH + "/$uid", data: _data);
+    Response _response = await _dio.post(ServerConsts.USERS_PATH + "/$uid", data: _data);
     if (_response.statusCode == 200) {
       return true;
     } else {
